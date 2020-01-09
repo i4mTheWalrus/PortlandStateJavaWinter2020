@@ -17,13 +17,13 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-studentId=$1
+studentId=race3
 
 ./mvnw --batch-mode archetype:generate \
   -DinteractiveMode=false \
   -DarchetypeGroupId=edu.pdx.cs410J \
   -DarchetypeArtifactId=java-koans-archetype \
-  -DgroupId=edu.pdx.cs410J.${studentId} \
+  -DgroupId=edu.pdx.cs410J.race3 \
   -DartifactId=koans \
-  -Dpackage=edu.pdx.cs410J.${studentId} \
+  -Dpackage=edu.pdx.cs410J.race3 \
   -Dversion=Winter2020
