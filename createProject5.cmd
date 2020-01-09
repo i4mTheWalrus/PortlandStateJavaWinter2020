@@ -1,6 +1,6 @@
 
 
-set studentId=%1
+set studentId=race3
 
 mvnw.cmd --batch-mode archetype:generate ^
   -DinteractiveMode=false ^
