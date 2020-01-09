@@ -1,4 +1,4 @@
 #!/bin/bash
 
-studentId=$1
+studentId=race3
 source createSimpleProject.sh "student" $studentId

@@ -17,7 +17,7 @@ if [ "$#" -ne 1 ]; then
     exit 1
 fi
 
-studentId=$1
+studentId=race3
 
 ./mvnw --batch-mode archetype:generate \
   -DinteractiveMode=false \
