@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractFlight;
+import java.util.Date;
 
 public class Flight extends AbstractFlight {
   @Override

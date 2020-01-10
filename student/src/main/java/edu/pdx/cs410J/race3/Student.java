@@ -3,7 +3,7 @@ package edu.pdx.cs410J.race3;
 import edu.pdx.cs410J.lang.Human;
 
 import java.util.ArrayList;
-                                                                                    
+
 /**                                                                                 
  * This class is represents a <code>Student</code>.                                 
  */                                                                                 
@@ -48,7 +48,10 @@ public class Student extends Human {
    * standard out by invoking its <code>toString</code> method.
    */
   public static void main(String[] args) {
-    System.err.println("Missing command line arguments");
-    System.exit(1);
+    try {
+      String.format("%s %s %s", "a", "b");
+    } catch (Exception e) {
+      System.out.println(e.getMessage());
+    }
   }
 }
