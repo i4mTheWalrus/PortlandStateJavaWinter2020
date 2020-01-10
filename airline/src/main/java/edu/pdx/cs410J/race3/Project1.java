@@ -1,6 +1,7 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractAirline;
+import java.lang.*;
 
 /**
  * The main class for the CS410J airline Project
@@ -15,7 +16,7 @@ public class Project1 {
       System.err.println("Missing command line arguments");
       System.exit(1);
     }
-/*
+
     // Check if there is -print in first or second argument
     if(args[0].toLowerCase() == "-print" || args[1].toLowerCase() == "-print") {
 
@@ -25,7 +26,7 @@ public class Project1 {
     if(args[0].toLowerCase() == "-readme" || args[1].toLowerCase() == "-readme") {
 
     }
-*/
+
     // After options there should be: airline, flight #, src, depart date/time, dest, arrive date/time
 
     // If -print is specified, print the flight info to the console

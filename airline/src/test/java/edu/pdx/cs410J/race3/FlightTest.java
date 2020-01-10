@@ -9,7 +9,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Unit tests for the {@link Flight} class.
  */
 public class FlightTest {
-  
+  Flight constructedFlight = new Flight("Delta", 3021, "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
+
   @Test(expected = UnsupportedOperationException.class)
   public void getArrivalStringNeedsToBeImplemented() {
     Flight flight = new Flight();
@@ -30,14 +31,28 @@ public class FlightTest {
 
   @Test
   public void testParameterizedConstructor() {
-    var flight = new Flight("Delta", 3021, "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
-    assertThat(flight.airline, equalTo("Delta"));
-    assertThat(flight.flightNumber, equalTo(3021));
-    assertThat(flight.src, equalTo("PDX"));
-    assertThat(flight.dest, equalTo("BOI"));
-    assertThat(flight.departDate, equalTo("11/15/1986"));
-    assertThat(flight.departTime, equalTo("13:15"));
-    assertThat(flight.arriveDate, equalTo("11/16/1986"));
-    assertThat(flight.arriveTime, equalTo("15:17"));
+    assertThat(constructedFlight.airline, equalTo("Delta"));
+    assertThat(constructedFlight.flightNumber, equalTo(3021));
+    assertThat(constructedFlight.src, equalTo("PDX"));
+    assertThat(constructedFlight.dest, equalTo("BOI"));
+    assertThat(constructedFlight.departDate, equalTo("11/15/1986"));
+    assertThat(constructedFlight.departTime, equalTo("13:15"));
+    assertThat(constructedFlight.arriveDate, equalTo("11/16/1986"));
+    assertThat(constructedFlight.arriveTime, equalTo("15:17"));
+  }
+
+  @Test
+  public void testGetFlightNumberMethodAfterSettingIt() {
+    assertThat(constructedFlight.getNumber(), equalTo(3021));
+  }
+
+  @Test
+  public void testGetSourceMethod() {
+    assertThat(constructedFlight.getSource(), equalTo("PDX"));
+  }
+
+  @Test
+  public void testGetDestinationMethod() {
+    assertThat(constructedFlight.getDestination(), equalTo("BOI"));
   }
 }
