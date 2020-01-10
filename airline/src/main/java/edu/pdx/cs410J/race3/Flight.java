@@ -77,7 +77,7 @@ public class Flight extends AbstractFlight {
 
   @Override
   public String getSource() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.src;
   }
 
   @Override
@@ -87,7 +87,7 @@ public class Flight extends AbstractFlight {
 
   @Override
   public String getDestination() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.dest;
   }
 
   @Override
