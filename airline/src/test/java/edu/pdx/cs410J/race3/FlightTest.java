@@ -30,10 +30,15 @@ public class FlightTest {
 
   @Test
   public void testParameterizedConstructorExceptDepartureAndArrival() {
-    var flight = new Flight("Delta", 3021, "PDX", "", "BOI", "");
+    var flight = new Flight("Delta", 3021, "PDX", "", "", "BOI", "", "");
     assertThat(flight.airline, equalTo("Delta"));
     assertThat(flight.flightNumber, equalTo(3021));
     assertThat(flight.src, equalTo("PDX"));
     assertThat(flight.dest, equalTo("BOI"));
+  }
+
+  @Test
+  public void testParameterizedConstructorDepartAndArrive() {
+    var flight = new Flight("", 0, "", "11/15/1987", "14:25", "", "11/16/1987", "17:15");
   }
 }

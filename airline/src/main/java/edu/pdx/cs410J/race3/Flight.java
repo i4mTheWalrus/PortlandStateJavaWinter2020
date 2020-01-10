@@ -27,7 +27,7 @@ public class Flight extends AbstractFlight {
    * Date and time of flight departure. xx/xx/xxxx ##:##.
    * Will change to use Date class later
    */
-  String depart;
+  String departDate, departTime;
 
   /**
    * 3 letter destination airport code.
@@ -38,7 +38,7 @@ public class Flight extends AbstractFlight {
    * Date and time of flight arrival. xx/xx/xxxx ##:##.
    * Will change to use Date class later
    */
-  String arrive;
+  String arriveDate, arriveTime;
 
   /**
    * Default constructor
@@ -50,17 +50,21 @@ public class Flight extends AbstractFlight {
    * @param airline
    * @param flightNumber
    * @param src
-   * @param depart
+   * @param departDate
+   * @param departTime
    * @param dest
-   * @param arrive
+   * @param arriveDate
+   * @param arriveTime
    */
-  Flight(String airline, int flightNumber, String src, String depart, String dest, String arrive) {
+  Flight(String airline, int flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
     this.flightNumber = flightNumber;
     this.src = src;
-    this.depart = depart;
+    this.departDate = departDate;
+    this.departTime = departTime;
     this.dest = dest;
-    this.arrive = arrive;
+    this.arriveDate = arriveDate;
+    this.arriveTime = arriveTime;
   }
 
   @Override
