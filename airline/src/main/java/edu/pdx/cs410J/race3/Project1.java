@@ -10,6 +10,12 @@ public class Project1 {
   public static void main(String[] args) {
     Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
 
+    // Exit with error if no command line arguments are given
+    if(args.length == 0) {
+      System.err.println("Missing command line arguments");
+      System.exit(1);
+    }
+
     // Check if there is -print or -README as arguments
 
     // After options there should be: airline, flight #, src, depart date/time, dest, arrive date/time
