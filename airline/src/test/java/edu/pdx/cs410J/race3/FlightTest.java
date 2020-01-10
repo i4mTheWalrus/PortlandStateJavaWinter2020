@@ -27,5 +27,5 @@ public class FlightTest {
     Flight flight = new Flight();
     assertThat(flight.getDeparture(), is(nullValue()));
   }
-  
+
 }
