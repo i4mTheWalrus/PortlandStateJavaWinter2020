@@ -16,7 +16,15 @@ public class Project1 {
       System.exit(1);
     }
 
-    // Check if there is -print or -README as arguments
+    // Check if there is -print in first or second argument
+    if(args[0].toLowerCase() == "-print" || args[1].toLowerCase() == "-print") {
+
+    }
+
+    // Check if there is -README in the first or second argument
+    if(args[0].toLowerCase() == "-readme" || args[1].toLowerCase() == "-readme") {
+
+    }
 
     // After options there should be: airline, flight #, src, depart date/time, dest, arrive date/time
 
