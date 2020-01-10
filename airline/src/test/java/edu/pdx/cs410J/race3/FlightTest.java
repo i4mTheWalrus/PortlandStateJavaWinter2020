@@ -28,4 +28,12 @@ public class FlightTest {
     assertThat(flight.getDeparture(), is(nullValue()));
   }
 
+  @Test
+  public void testParameterizedConstructorExceptDepartureAndArrival() {
+    var flight = new Flight("Delta", 3021, "PDX", "", "BOI", "");
+    assertThat(flight.airline, equalTo("Delta"));
+    assertThat(flight.flightNumber, equalTo(3021));
+    assertThat(flight.src, equalTo("PDX"));
+    assertThat(flight.dest, equalTo("BOI"));
+  }
 }
