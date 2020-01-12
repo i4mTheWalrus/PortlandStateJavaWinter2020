@@ -71,4 +71,10 @@ public class FlightTest {
   public void testGetDestinationMethod() {
     assertThat(constructedFlight.getDestination(), equalTo("BOI"));
   }
+
+  @Test
+  public void testProject1CanBeCreated() {
+    Project1 testProj = new Project1();
+    assertThat(testProj, notNullValue());
+  }
 }
