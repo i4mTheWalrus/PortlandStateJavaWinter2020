@@ -75,6 +75,14 @@ public class Flight extends AbstractFlight {
       return flightNumber;
   }
 
+  public String getArriveTime() {
+    return arriveTime;
+  }
+
+  public String getDepartureTime() {
+    return departTime;
+  }
+
   @Override
   public String getSource() {
     return this.src;

@@ -17,6 +17,12 @@ public class Project1 {
       System.exit(1);
     }
 
+    // Exit with error if too many command line arguments are given
+    if(args.length > 8) {
+      System.err.println("Too many command line arguments");
+      System.exit(1);
+    }
+
     // Check if there is -print in first or second argument
     if(args[0].toLowerCase() == "-print" || args[1].toLowerCase() == "-print") {
 

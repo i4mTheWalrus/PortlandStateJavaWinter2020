@@ -17,6 +17,12 @@ public class FlightTest {
     flight.getArrivalString();
   }
 
+  @Test(expected = UnsupportedOperationException.class)
+  public void getDepartureStringNeedsToBeImplemented() {
+    Flight flight = new Flight();
+    flight.getDepartureString();
+  }
+
   @Test
   public void initiallyAllFlightsHaveTheSameNumber() {
     Flight flight = new Flight();
@@ -27,6 +33,16 @@ public class FlightTest {
   public void forProject1ItIsOkayIfGetDepartureTimeReturnsNull() {
     Flight flight = new Flight();
     assertThat(flight.getDeparture(), is(nullValue()));
+  }
+
+  @Test
+  public void testGetArrivalTime() {
+    assertThat(constructedFlight.arriveTime, equalTo(constructedFlight.getArriveTime()));
+  }
+
+  @Test
+  public void testGetDepartTime() {
+    assertThat(constructedFlight.departTime, equalTo(constructedFlight.getDepartureTime()));
   }
 
   @Test

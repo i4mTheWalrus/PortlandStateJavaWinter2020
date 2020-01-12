@@ -29,4 +29,10 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
   }
 
+  @Test
+  public void testTooManyArgs() {
+    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Too many command line arguments"));
+  }
 }
