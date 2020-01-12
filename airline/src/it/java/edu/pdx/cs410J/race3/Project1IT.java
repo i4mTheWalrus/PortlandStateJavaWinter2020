@@ -30,6 +30,20 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
+  public void testNoDuplicatePrintOption() {
+    MainMethodResult result = invokeMain("-print", "-print");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Duplicate option listed"));
+  }
+
+  @Test
+  public void testNoDuplicateReadmeOption() {
+    MainMethodResult result = invokeMain("-README", "-README");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Duplicate option listed"));
+  }
+
+  @Test
   public void testTooManyArgs() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));

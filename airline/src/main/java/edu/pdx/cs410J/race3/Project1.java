@@ -23,6 +23,13 @@ public class Project1 {
       System.exit(1);
     }
 
+    // Check that there are no duplicate options given
+    if((args[0].toLowerCase().equals("-print") && args[1].toLowerCase().equals("-print")) ||
+        (args[0].toLowerCase().equals("-readme") && args[1].toLowerCase().equals("-readme"))) {
+      System.err.println("Duplicate option listed");
+      System.exit(1);
+    }
+
     // Check if there is -print in first or second argument
     if(args[0].toLowerCase() == "-print" || args[1].toLowerCase() == "-print") {
 

@@ -41,6 +41,12 @@ public class Flight extends AbstractFlight {
   String arriveDate, arriveTime;
 
   /**
+   * Counts the number of options. 0, 1, or 2.
+   * Available options are -README and -print
+   */
+  int optionNum;
+
+  /**
    * Default constructor
    */
   Flight() {}
