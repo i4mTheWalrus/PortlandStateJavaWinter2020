@@ -70,7 +70,7 @@ public class Flight extends AbstractFlight {
     this.flightNumber = flightNumber;
 
     // src should be 3 characters! (no numbers or special characters)
-    if(src.length() != 3 || Pattern.compile( "[^a-zA-Z]" ).matcher(src).find() == true) {
+    if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
       System.err.println("Airport code is not a 3 character letter-only code");
       System.exit(1);
     }
@@ -80,7 +80,7 @@ public class Flight extends AbstractFlight {
     this.departTime = departTime;
 
     // src should be 3 characters! (no numbers or special characters)
-    if(dest.length() != 3 || Pattern.compile( "[^a-zA-Z]" ).matcher(dest).find() == true) {
+    if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
       System.err.println("Airport code is not a 3 character letter-only code");
       System.exit(1);
     }
