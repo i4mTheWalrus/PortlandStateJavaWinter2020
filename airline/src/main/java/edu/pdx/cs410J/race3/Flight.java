@@ -2,6 +2,7 @@ package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractFlight;
 import java.util.Date;
+import java.util.regex.Pattern;
 
 /**
  * This class is used to model a flight to and from an airport.
@@ -67,9 +68,21 @@ public class Flight extends AbstractFlight {
   Flight(String airline, int flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
     this.flightNumber = flightNumber;
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(src.length() != 3 || Pattern.compile( "[^a-zA-Z]" ).matcher( src ).find() == true) {
+      System.err.println("Airport code is not a 3 character letter-only code");
+      System.exit(1);
+    }
     this.src = src;
     this.departDate = departDate;
     this.departTime = departTime;
+
+    // dest should be 3 characters! (no numbers or special characters)
+    if(dest.length() != 3 || Pattern.compile( "[^a-zA-Z]" ).matcher( dest ).find() == true) {
+      System.err.println("Airport code is not a 3 character letter-only code");
+      System.exit(1);
+    }
     this.dest = dest;
     this.arriveDate = arriveDate;
     this.arriveTime = arriveTime;

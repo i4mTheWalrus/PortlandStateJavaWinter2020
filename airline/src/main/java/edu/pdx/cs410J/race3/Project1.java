@@ -20,33 +20,23 @@ public class Project1 {
     }
 
     // Exit with error if too many command line arguments are given
-    if(args.length > 8) {
+    if(args.length > 10) {
       System.err.println("Too many command line arguments");
       System.exit(1);
     }
-/*
-    // Check that there are no duplicate options given
-    if((args[0].toLowerCase().equals("-print") && args[1].toLowerCase().equals("-print")) ||
-        (args[0].toLowerCase().equals("-readme") && args[1].toLowerCase().equals("-readme"))) {
-      System.err.println("Duplicate option listed");
-      System.exit(1);
-    }
-*/
+
     // Check if there is -README in the first or second argument. If so, print the README and exit.
-    if(args[0].toLowerCase().equals("-readme") || args[1].toLowerCase().equals("-readme")) {
+    // Make sure to check that  second argument exists before checking that it is a readme
+    if(args[0].toLowerCase().equals("-readme") || (args.length > 1 && args[1].toLowerCase().equals("-readme"))) {
       System.out.println("About project 1:\n" +
               "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
               "The flight is currently not stored in any persistent capacicty, and is simply created using constructors from command\n" +
               "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
     }
-/*
-    // Check if there is -print in first or second argument
-    if(args[0].toLowerCase().equals("-print") || args[1].toLowerCase().equals("-print")) {
 
-    }
+    /* IF THIS POINT IS REACHED, NO -README HAS BEEN SPECIFIED */
 
- */
-    // After options there should be: airline, flight #, src, depart date/time, dest, arrive date/time
+
 
     // If -print is specified, print the flight info to the console
   }
