@@ -32,13 +32,18 @@ public class Project1 {
                 "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
                 "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
                 "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
+        System.exit(0);
       }
-      System.exit(0);
     }
 
     /* IF THIS POINT IS REACHED, NO -README HAS BEEN SPECIFIED */
 
-
+    // There should be 8 cmd line arguments, and possibly 1 option for -print (no readme by this point)
+    // Expected -print but it wasn't the first argument
+    if(args.length == 9 && !args[0].toLowerCase().contains("-print")) {
+      System.err.println("Nine arguments given, expected -print first but not found.");
+      System.exit(1);
+    }
 
     // If -print is specified, print the flight info to the console
 
