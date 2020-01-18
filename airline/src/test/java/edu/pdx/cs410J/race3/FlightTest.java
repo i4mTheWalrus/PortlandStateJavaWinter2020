@@ -9,7 +9,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Unit tests for the {@link Flight} class.
  */
 public class FlightTest {
-  Flight constructedFlight = new Flight("Delta", 3021, "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
+  Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
 
   @Test(expected = UnsupportedOperationException.class)
   public void getArrivalStringNeedsToBeImplemented() {
@@ -48,7 +48,7 @@ public class FlightTest {
   @Test
   public void testParameterizedConstructor() {
     assertThat(constructedFlight.airline, equalTo("Delta"));
-    assertThat(constructedFlight.flightNumber, equalTo(3021));
+    assertThat(constructedFlight.flightNumber, equalTo("3021"));
     assertThat(constructedFlight.src, equalTo("PDX"));
     assertThat(constructedFlight.dest, equalTo("BOI"));
     assertThat(constructedFlight.departDate, equalTo("11/15/1986"));

@@ -19,7 +19,7 @@ public class Flight extends AbstractFlight {
   /**
    * Flight number. Can contain both letters and numbers.
    */
-  int flightNumber;
+  String flightNumber;
 
   /**
    * 3 letter source airport code.
@@ -65,7 +65,7 @@ public class Flight extends AbstractFlight {
    * @param arriveDate
    * @param arriveTime
    */
-  Flight(String airline, int flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
+  Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
     this.flightNumber = flightNumber;
 
@@ -94,10 +94,10 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public int getNumber() {
-    if(flightNumber == 0)
+    if(flightNumber == null)
       return 42;
     else
-      return flightNumber;
+      return Integer.parseInt(flightNumber);
   }
 
   public String getArriveTime() {
