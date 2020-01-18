@@ -25,13 +25,15 @@ public class Project1 {
       System.exit(1);
     }
 
-    // Check if there is -README in the first or second argument. If so, print the README and exit.
-    // Make sure to check that  second argument exists before checking that it is a readme
-    if(args[0].toLowerCase().equals("-readme") || (args.length > 1 && args[1].toLowerCase().equals("-readme"))) {
-      System.out.println("About project 1:\n" +
-              "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
-              "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
-              "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
+    // If -readme is detected anywhere as an argument, print the readme.
+    for(String i : args) {
+      if(i.toLowerCase().contains("-readme")) {
+        System.out.println("About project 1:\n" +
+                "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
+                "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
+                "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
+      }
+      System.exit(0);
     }
 
     /* IF THIS POINT IS REACHED, NO -README HAS BEEN SPECIFIED */
@@ -44,6 +46,7 @@ public class Project1 {
     if(args.length == 8 && !args[0].toLowerCase().contains("-print") && !args[1].toLowerCase().contains("-print")) {
       Flight flight2 = new Flight(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
     }
+
   }
 
 }
