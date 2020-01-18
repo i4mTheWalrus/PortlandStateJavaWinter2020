@@ -30,16 +30,16 @@ public class Project1 {
       System.exit(1);
     }
 
+    // Check if there is -README in the first or second argument. If so, print the README and exit.
+    if(args[0].toLowerCase().equals("-readme") || args[1].toLowerCase().equals("-readme")) {
+      // print readme
+      System.exit(0);
+    }
+
     // Check if there is -print in first or second argument
     if(args[0].toLowerCase().equals("-print") || args[1].toLowerCase().equals("-print")) {
 
     }
-
-    // Check if there is -README in the first or second argument
-    if(args[0].toLowerCase().equals("-readme") || args[1].toLowerCase().equals("-readme")) {
-
-    }
-
     // After options there should be: airline, flight #, src, depart date/time, dest, arrive date/time
 
     // If -print is specified, print the flight info to the console

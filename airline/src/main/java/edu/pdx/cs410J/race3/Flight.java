@@ -5,6 +5,8 @@ import java.util.Date;
 
 /**
  * This class is used to model a flight to and from an airport.
+ * Flights are constructed using 6 arguments given on command line.
+ * The flight is created using a constructor.
  * @author Tyler Race
  */
 public class Flight extends AbstractFlight {
@@ -47,7 +49,7 @@ public class Flight extends AbstractFlight {
   int optionNum;
 
   /**
-   * Default constructor
+   * Default constructor. Does nothing.
    */
   Flight() {}
 
@@ -73,6 +75,10 @@ public class Flight extends AbstractFlight {
     this.arriveTime = arriveTime;
   }
 
+  /**
+   * Method for obtaining the flight number for the flight.
+   * @return The flight number, or the number 42 if none is specified.
+   */
   @Override
   public int getNumber() {
     if(flightNumber == 0)
