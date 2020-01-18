@@ -31,12 +31,12 @@ public class Project1 {
     }
 
     // Check if there is -print in first or second argument
-    if(args[0].toLowerCase() == "-print" || args[1].toLowerCase() == "-print") {
+    if(args[0].toLowerCase().equals("-print") || args[1].toLowerCase().equals("-print")) {
 
     }
 
     // Check if there is -README in the first or second argument
-    if(args[0].toLowerCase() == "-readme" || args[1].toLowerCase() == "-readme") {
+    if(args[0].toLowerCase().equals("-readme") || args[1].toLowerCase().equals("-readme")) {
 
     }
 
