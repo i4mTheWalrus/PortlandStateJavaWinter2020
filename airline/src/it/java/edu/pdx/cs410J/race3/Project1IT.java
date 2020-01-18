@@ -37,10 +37,16 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
-  public void testAirportCodesAre3Characters() {
+  public void testAirportCodesCantHaveNumbers() {
     MainMethodResult result = invokeMain(" ", " ", "555", " ", " ", "666", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
   }
 
+  @Test
+  public void testAirportCodesCantHaveMoreThan3Characters() {
+    MainMethodResult result = invokeMain(" ", " ", "BOOM", " ", " ", "KOANS", " ", " ");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
+  }
 }
