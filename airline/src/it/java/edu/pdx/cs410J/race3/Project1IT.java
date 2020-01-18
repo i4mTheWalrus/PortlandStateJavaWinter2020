@@ -28,7 +28,7 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments"));
   }
-
+/*
   @Test
   public void testNoDuplicatePrintOption() {
     MainMethodResult result = invokeMain("-print", "-print");
@@ -42,7 +42,7 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Duplicate option listed"));
   }
-
+*/
   @Test
   public void testTooManyArgs() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ");
