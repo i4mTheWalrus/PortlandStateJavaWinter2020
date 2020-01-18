@@ -6,19 +6,41 @@ import edu.pdx.cs410J.AbstractFlight;
 import java.util.Collection;
 
 public class Airline extends AbstractAirline {
+  /**
+   * Name of the airline.
+   */
+  String airlineName;
 
-    @Override
-    public String getName() {
-        return null;
-    }
+  /**
+   * Holds the collection of flights.
+   */
+  Collection<Flight> flights;
 
-    @Override
-    public void addFlight(AbstractFlight abstractFlight) {
+  /**
+   * Default constructor, does nothing special.
+   */
+  Airline() {};
 
-    }
+  /**
+   * Parameterized constructor. Takes a string a sets that as the airline's name.
+   * @param name
+   */
+  Airline(String name) {
+    airlineName = name;
+  }
 
-    @Override
-    public Collection getFlights() {
-        return null;
-    }
+  @Override
+  public String getName() {
+    return null;
+  }
+
+  @Override
+  public void addFlight(AbstractFlight abstractFlight) {
+    flights.add((Flight) abstractFlight);
+  }
+
+  @Override
+  public Collection getFlights() {
+    return flights;
+  }
 }

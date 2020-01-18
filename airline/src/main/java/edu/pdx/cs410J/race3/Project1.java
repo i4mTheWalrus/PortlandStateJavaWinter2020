@@ -49,7 +49,9 @@ public class Project1 {
 
     // No options given, create the flight and do nothing
     if(args.length == 8 && !args[0].toLowerCase().contains("-print") && !args[1].toLowerCase().contains("-print")) {
+      Airline airline = new Airline(args[0]);
       Flight flight2 = new Flight(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
+      airline.addFlight(flight2);
     }
   }
 }

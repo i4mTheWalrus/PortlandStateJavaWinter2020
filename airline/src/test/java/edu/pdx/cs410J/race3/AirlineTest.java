@@ -7,6 +7,8 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AirlineTest {
   Airline airline1 = new Airline();
+  Flight flight1 = new Flight();
 
+  //airline1.addFlight(flight1);
 
 }
