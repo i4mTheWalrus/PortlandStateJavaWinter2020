@@ -15,13 +15,7 @@ public class Project1 {
 
     // Exit with error if no command line arguments are given
     if(args.length == 0) {
-      System.err.println("Missing command line arguments");
-      System.exit(1);
-    }
-
-    // Exit with error if too many command line arguments are given
-    if(args.length > 10) {
-      System.err.println("Too many command line arguments");
+      System.err.println("Missing command line arguments.");
       System.exit(1);
     }
 
@@ -34,6 +28,13 @@ public class Project1 {
                 "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
         System.exit(0);
       }
+    }
+
+    // Exit with error if too many command line arguments are given.
+    // Readme is not present, so there should be no more than 9 args (1 for print, 8 for flight)
+    if(args.length > 9) {
+      System.err.println("Too many command line arguments.");
+      System.exit(1);
     }
 
     /* IF THIS POINT IS REACHED, NO -README HAS BEEN SPECIFIED */
