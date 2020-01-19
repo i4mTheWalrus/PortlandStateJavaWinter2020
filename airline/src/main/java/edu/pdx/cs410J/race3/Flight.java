@@ -117,7 +117,7 @@ public class Flight extends AbstractFlight {
 
   @Override
   public String getDepartureString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.departDate + " " + this.departTime;
   }
 
   @Override
@@ -127,6 +127,6 @@ public class Flight extends AbstractFlight {
 
   @Override
   public String getArrivalString() {
-    throw new UnsupportedOperationException("This method is not implemented yet");
+    return this.arriveDate + " " + this.arriveTime;
   }
 }

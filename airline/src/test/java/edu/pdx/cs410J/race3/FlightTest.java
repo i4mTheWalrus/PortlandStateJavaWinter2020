@@ -11,16 +11,14 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class FlightTest {
   Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void getArrivalStringNeedsToBeImplemented() {
-    Flight flight = new Flight();
-    flight.getArrivalString();
+  @Test
+  public void testGetDepartString() {
+    assertThat(constructedFlight.getDepartureString(), equalTo("11/15/1986 13:15"));
   }
 
-  @Test(expected = UnsupportedOperationException.class)
-  public void getDepartureStringNeedsToBeImplemented() {
-    Flight flight = new Flight();
-    flight.getDepartureString();
+  @Test
+  public void testGetArrivalString() {
+    assertThat(constructedFlight.getArrivalString(), equalTo("11/16/1986 15:17"));
   }
 
   @Test

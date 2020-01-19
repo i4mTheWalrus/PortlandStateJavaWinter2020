@@ -3,7 +3,9 @@ package edu.pdx.cs410J.race3;
 import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AbstractFlight;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class Airline extends AbstractAirline {
   /**
@@ -14,7 +16,7 @@ public class Airline extends AbstractAirline {
   /**
    * Holds the collection of flights.
    */
-  Collection<Flight> flights;
+  ArrayList<Flight> flights;
 
   /**
    * Default constructor, does nothing special.
@@ -26,6 +28,7 @@ public class Airline extends AbstractAirline {
    * @param name
    */
   Airline(String name) {
+    flights = new ArrayList<Flight>();
     airlineName = name;
   }
 
@@ -41,6 +44,6 @@ public class Airline extends AbstractAirline {
 
   @Override
   public Collection getFlights() {
-    return flights;
+    return null;
   }
 }
