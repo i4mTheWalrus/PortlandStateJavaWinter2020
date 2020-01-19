@@ -7,8 +7,12 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class AirlineTest {
   Airline airline1 = new Airline();
-  Flight flight1 = new Flight();
+  Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
 
-  //airline1.addFlight(flight1);
+  @Test
+  public void testAddingFlightToAirline() {
+    airline1.addFlight(constructedFlight);
+  }
+
 
 }

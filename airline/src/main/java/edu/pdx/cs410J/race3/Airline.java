@@ -21,7 +21,9 @@ public class Airline extends AbstractAirline {
   /**
    * Default constructor, does nothing special.
    */
-  Airline() {};
+  Airline() {
+    flights = new ArrayList<Flight>();
+  };
 
   /**
    * Parameterized constructor. Takes a string a sets that as the airline's name.

@@ -44,15 +44,29 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
-  public void testAirportCodesCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", " ", "555", " ", " ", "666", " ", " ");
+  public void testSrcAirportCodeCantHaveNumbers() {
+    MainMethodResult result = invokeMain(" ", " ", "555", " ", " ", "BOI", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
   }
 
   @Test
-  public void testAirportCodesCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", " ", "BOOM", " ", " ", "KOANS", " ", " ");
+  public void testDestAirportCodeCantHaveNumbers() {
+    MainMethodResult result = invokeMain(" ", " ", "PDX", " ", " ", "666", " ", " ");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
+  }
+
+  @Test
+  public void testSrcAirportCodeCantHaveMoreThan3Characters() {
+    MainMethodResult result = invokeMain(" ", " ", "BOOM", " ", " ", "KOA", " ", " ");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
+  }
+
+  @Test
+  public void testDestAirportCodeCantHaveMoreThan3Characters() {
+    MainMethodResult result = invokeMain(" ", " ", "BOO", " ", " ", "KOANS", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code"));
   }
