@@ -37,6 +37,13 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   @Test
+  public void testNotEnoughArgsGiven() {
+    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Not enough arguments given."));
+  }
+
+  @Test
   public void testNineArgumentsGivenButPrintNotGivenFirst() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", "-print", " ", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
