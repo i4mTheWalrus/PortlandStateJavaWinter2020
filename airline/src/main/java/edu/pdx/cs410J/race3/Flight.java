@@ -102,29 +102,53 @@ public class Flight extends AbstractFlight {
       return Integer.parseInt(flightNumber);
   }
 
+  /**
+   * Method for getting the arrival time of a flight.
+   * @return A string containing arrival time.
+   */
   public String getArriveTime() {
     return arriveTime;
   }
 
+  /**
+   * Method for getting the departure time of a flight.
+   * @return A string containing arrival time.
+   */
   public String getDepartureTime() {
     return departTime;
   }
 
+  /**
+   * Method for getting the source airport code of a flight.
+   * @return A string containing the source airport code.
+   */
   @Override
   public String getSource() {
     return this.src;
   }
 
+  /**
+   * Method for building a string containing both the departure date and time of a flight.
+   * @return A string containing departure date and departure time separated by a space.
+   */
   @Override
   public String getDepartureString() {
     return this.departDate + " " + this.departTime;
   }
 
+  /**
+   * Method for getting the destination airport code of a flight.
+   * @return A string containing the destination airport code.
+   */
   @Override
   public String getDestination() {
     return this.dest;
   }
 
+  /**
+   * Method for building a string containing both the arrival date and time of a flight.
+   * @return A string containing arrival date and arrival time separated by a space.
+   */
   @Override
   public String getArrivalString() {
     return this.arriveDate + " " + this.arriveTime;

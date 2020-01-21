@@ -34,16 +34,28 @@ public class Airline extends AbstractAirline {
     airlineName = name;
   }
 
+  /**
+   * Get the name of the airline.
+   * @return A string containing the name of the airline.
+   */
   @Override
   public String getName() {
-    return null;
+    return airlineName;
   }
 
+  /**
+   * Add a flight to the collection of flights for an airline. Takes a flight as an argument.
+   * @param abstractFlight
+   */
   @Override
   public void addFlight(AbstractFlight abstractFlight) {
     flights.add((Flight) abstractFlight);
   }
 
+  /**
+   * Get the flights that belong to an airline.
+   * @return A collection of flights.
+   */
   @Override
   public Collection getFlights() {
     return null;
