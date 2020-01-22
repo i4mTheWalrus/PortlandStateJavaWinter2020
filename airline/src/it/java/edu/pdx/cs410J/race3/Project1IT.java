@@ -98,4 +98,44 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
+
+  /**
+   * Tests the formatting check for departure date.
+   */
+  @Test
+  public void testDepartureDateFormatCheck() {
+    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/191", "14:25", "BOI", "12/12/2012", "16:23");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Depart date is not in correct format. (##/##/####)"));
+  }
+
+  /**
+   * Tests the formatting check for the departure time.
+   */
+  @Test
+  public void testDepartureTimeFormatCheck() {
+    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:2", "BOI", "12/12/2012", "16:23");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Depart time is not in correct format. (##:##)"));
+  }
+
+  /**
+   * Tests the formatting check for the arrival date.
+   */
+  @Test
+  public void testArrivalDateFormatCheck() {
+    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "BOI", "192/12/212", "16:23");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Arrive date is not in correct format. (##/##/####)"));
+  }
+
+  /**
+   * Tests the formatting check for the arrival time.
+   */
+  @Test
+  public void testArrivalTimeFormatCheck() {
+    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "BOI", "12/12/2012", "123:23");
+    assertThat(result.getExitCode(), equalTo(1));
+    assertThat(result.getTextWrittenToStandardError(), containsString("Arrive time is not in correct format. (##:##)"));
+  }
 }
