@@ -79,8 +79,7 @@ public class Flight extends AbstractFlight {
 
     // src should be 3 characters! (no numbers or special characters)
     if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
-      System.err.println("Airport code is not a 3 character letter-only code.");
-      System.exit(1);
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
     }
     this.src = src;
 
@@ -89,8 +88,7 @@ public class Flight extends AbstractFlight {
 
     // src should be 3 characters! (no numbers or special characters)
     if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
-      System.err.println("Airport code is not a 3 character letter-only code.");
-      System.exit(1);
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
     }
     this.dest = dest;
 
