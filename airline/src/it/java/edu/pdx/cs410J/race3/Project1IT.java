@@ -64,7 +64,7 @@ public class Project1IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", " ", "555", " ", " ", "BOI", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", "555", "11/11/1911", "14:25", "BOI", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -74,7 +74,7 @@ public class Project1IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", " ", " ", "666", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "666", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -84,7 +84,7 @@ public class Project1IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", " ", "BOOM", " ", " ", "KOA", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", "BOOM", "11/11/1911", "14:25", "KOA", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -94,15 +94,8 @@ public class Project1IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", " ", "BOO", " ", " ", "KOANS", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", "BOO", "11/11/1911", "14:25", "KOANS", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
-
-  /**
-   * Test that depart date is formed correctly.
-   *
-  public void testIncorrectFormatOfDepartDateGivesError() {
-    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ");
-  }*/
 }

@@ -79,8 +79,16 @@ public class Flight extends AbstractFlight {
     }
     this.src = src;
 
-    //SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+    // Date should be in ##/##/#### format
+    if(!departDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
+    }
     this.departDate = departDate;
+
+    // Time should be in ##:## format
+    if(!departTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    }
     this.departTime = departTime;
 
     // src should be 3 characters! (no numbers or special characters)
@@ -89,7 +97,16 @@ public class Flight extends AbstractFlight {
     }
     this.dest = dest;
 
+    // Date should be in ##/##/#### format
+    if(!arriveDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Arrive date is not in correct format. (##/##/####)");
+    }
     this.arriveDate = arriveDate;
+
+    // Time should be in ##:## format
+    if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
+    }
     this.arriveTime = arriveTime;
   }
 
