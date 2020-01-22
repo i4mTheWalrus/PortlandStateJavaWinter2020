@@ -98,4 +98,11 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
+
+  /**
+   * Test that depart date is formed correctly.
+   *
+  public void testIncorrectFormatOfDepartDateGivesError() {
+    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ");
+  }*/
 }

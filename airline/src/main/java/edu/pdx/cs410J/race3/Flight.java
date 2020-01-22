@@ -1,6 +1,8 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractFlight;
+
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
 
@@ -52,12 +54,6 @@ public class Flight extends AbstractFlight {
   String arriveTime;
 
   /**
-   * Counts the number of options. 0, 1, or 2.
-   * Available options are -README and -print
-   */
-  int optionNum;
-
-  /**
    * Default constructor. Does nothing.
    */
   Flight() {}
@@ -83,6 +79,7 @@ public class Flight extends AbstractFlight {
     }
     this.src = src;
 
+    //SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
     this.departDate = departDate;
     this.departTime = departTime;
 

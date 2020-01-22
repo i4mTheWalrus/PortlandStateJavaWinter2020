@@ -5,7 +5,6 @@ import edu.pdx.cs410J.AbstractFlight;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * This class is used to model an airline. An airline has a name, and a collection of flights.
@@ -27,15 +26,15 @@ public class Airline extends AbstractAirline {
    * Default constructor, does nothing special.
    */
   Airline() {
-    flights = new ArrayList<Flight>();
-  };
+    flights = new ArrayList<>();
+  }
 
   /**
    * Parameterized constructor. Takes a string a sets that as the airline's name.
    * @param name String containing name of airline.
    */
   Airline(String name) {
-    flights = new ArrayList<Flight>();
+    flights = new ArrayList<>();
     airlineName = name;
   }
 

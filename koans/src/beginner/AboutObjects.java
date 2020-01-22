@@ -22,7 +22,7 @@ public class AboutObjects {
         }
 
         Class<?>[] ancestors = getAncestors(new Foo());
-        assertEquals(ancestors[0], AboutObjects.class);
+        assertEquals(ancestors[0], AboutObjects$1Foo.class);
         assertEquals(ancestors[1], java.lang.Object.class);
     }
 
