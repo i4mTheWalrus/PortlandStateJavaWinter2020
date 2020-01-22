@@ -20,7 +20,7 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   /**
-   * Tests that invoking the main method with no arguments issues an error
+   * Tests that invoking the main method with no arguments issues an error.
    */
   @Test
   public void testNoCommandLineArguments() {
@@ -29,6 +29,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Missing command line arguments."));
   }
 
+  /**
+   * Tests that invoking the main method with too many arguments issues an error.
+   */
   @Test
   public void testTooManyArgs() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
@@ -36,6 +39,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Too many command line arguments."));
   }
 
+  /**
+   * Tests that invoking main with not enough arguments (but more than 0) issues an error.
+   */
   @Test
   public void testNotEnoughArgsGiven() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ");
@@ -43,6 +49,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Not enough arguments given."));
   }
 
+  /**
+   * Tests that if 9 arguments are given (8 for the flight, 1 for the -print option), and the -print flag is not given first, and error is issued.
+   */
   @Test
   public void testNineArgumentsGivenButPrintNotGivenFirst() {
     MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", "-print", " ", " ", " ");
@@ -50,6 +59,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Nine arguments given, expected -print first but not found."));
   }
 
+  /**
+   * Test that the source airport code cannot contain numbers.
+   */
   @Test
   public void testSrcAirportCodeCantHaveNumbers() {
     MainMethodResult result = invokeMain(" ", " ", "555", " ", " ", "BOI", " ", " ");
@@ -57,6 +69,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
 
+  /**
+   * Tests that the destination airport code cannot contain numbers.
+   */
   @Test
   public void testDestAirportCodeCantHaveNumbers() {
     MainMethodResult result = invokeMain(" ", " ", "PDX", " ", " ", "666", " ", " ");
@@ -64,6 +79,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
 
+  /**
+   * Tests that the source airport code cannot have more than 3 characters.
+   */
   @Test
   public void testSrcAirportCodeCantHaveMoreThan3Characters() {
     MainMethodResult result = invokeMain(" ", " ", "BOOM", " ", " ", "KOA", " ", " ");
@@ -71,6 +89,9 @@ public class Project1IT extends InvokeMainTestCase {
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
 
+  /**
+   * Tests that the destination airport code cannot have more than 3 characters.
+   */
   @Test
   public void testDestAirportCodeCantHaveMoreThan3Characters() {
     MainMethodResult result = invokeMain(" ", " ", "BOO", " ", " ", "KOANS", " ", " ");

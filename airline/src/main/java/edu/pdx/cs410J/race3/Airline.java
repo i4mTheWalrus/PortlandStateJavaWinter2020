@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * This class is used to model an airline. An airline has a name, and a collection of flights.
+ * Flights are modelled with an arraylist.
+ * @author Tyler Race
+ */
 public class Airline extends AbstractAirline {
   /**
    * Name of the airline.
@@ -27,7 +32,7 @@ public class Airline extends AbstractAirline {
 
   /**
    * Parameterized constructor. Takes a string a sets that as the airline's name.
-   * @param name
+   * @param name String containing name of airline.
    */
   Airline(String name) {
     flights = new ArrayList<Flight>();
@@ -45,7 +50,7 @@ public class Airline extends AbstractAirline {
 
   /**
    * Add a flight to the collection of flights for an airline. Takes a flight as an argument.
-   * @param abstractFlight
+   * @param abstractFlight Flight to be added to the airline collection.
    */
   @Override
   public void addFlight(AbstractFlight abstractFlight) {
@@ -57,7 +62,7 @@ public class Airline extends AbstractAirline {
    * @return A collection of flights.
    */
   @Override
-  public Collection getFlights() {
-    return null;
+  public Collection<Flight> getFlights() {
+    return flights;
   }
 }

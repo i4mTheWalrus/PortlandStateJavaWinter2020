@@ -19,7 +19,7 @@ public class Project1 {
       System.exit(1);
     }
 
-    // If -readme is detected anywhere as an argument, print the readme.
+    // If -readme is detected anywhere as an argument, print the readme and exit.
     for(String i : args) {
       if(i.toLowerCase().contains("-readme")) {
         System.out.println("About project 1:\n" +

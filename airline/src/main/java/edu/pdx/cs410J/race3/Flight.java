@@ -27,10 +27,14 @@ public class Flight extends AbstractFlight {
   String src;
 
   /**
-   * Date and time of flight departure. xx/xx/xxxx ##:##.
-   * Will change to use Date class later
+   * Date of flight departure. xx/xx/xxxx
    */
-  String departDate, departTime;
+  String departDate;
+
+  /**
+   * Time of flight departure. ##:##
+   */
+  String departTime;
 
   /**
    * 3 letter destination airport code.
@@ -38,10 +42,14 @@ public class Flight extends AbstractFlight {
   String dest;
 
   /**
-   * Date and time of flight arrival. xx/xx/xxxx ##:##.
-   * Will change to use Date class later
+   * Date of flight arrival. xx/xx/xxxx
    */
-  String arriveDate, arriveTime;
+  String arriveDate;
+
+  /**
+   * Time of flight arrival. ##:##
+   */
+  String arriveTime;
 
   /**
    * Counts the number of options. 0, 1, or 2.
@@ -56,14 +64,14 @@ public class Flight extends AbstractFlight {
 
   /**
    * Parameterized constructor. Build the flight with specified info.
-   * @param airline
-   * @param flightNumber
-   * @param src
-   * @param departDate
-   * @param departTime
-   * @param dest
-   * @param arriveDate
-   * @param arriveTime
+   * @param airline String containing name of airline.
+   * @param flightNumber String of flight number. Numerical only.
+   * @param src String of source airport. Must be 3 letters.
+   * @param departDate String of flight departure date.
+   * @param departTime String of flight departure time.
+   * @param dest String of destination airport. Must be 3 letters.
+   * @param arriveDate String of flight arrival date.
+   * @param arriveTime String of flight arrival time.
    */
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
