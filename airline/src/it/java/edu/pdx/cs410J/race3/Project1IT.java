@@ -3,9 +3,9 @@ package edu.pdx.cs410J.race3;
 import edu.pdx.cs410J.InvokeMainTestCase;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.containsString;
-import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 /**
  * An integration test for the {@link Project1} main class.
@@ -65,7 +65,7 @@ public class Project1IT extends InvokeMainTestCase {
   @Test
   public void testToStringMethodOutputForFlight() {
     MainMethodResult result = invokeMain("-print", "Delta", "4567", "PDX", "12/12/2012", "15:24", "SFC", "12/12/2012", "17:15");
-    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 4567 departs PDX at 12/12/2012 15:24 arrives SFC at 12/12/2012 17:15\r\n"));
+    assertThat(result.getTextWrittenToStandardOut().contains("Flight 4567 departs PDX at 12/12/2012 15:24 arrives SFC at 12/12/2012 17:15"), is(true));
   }
 
   /**
