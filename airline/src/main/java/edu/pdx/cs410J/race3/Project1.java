@@ -53,7 +53,6 @@ public class Project1 {
         System.err.println(e.getMessage());
         System.exit(1);
       }
-
     } else if(args.length == 8 && !args[0].toLowerCase().contains("-print") && !args[1].toLowerCase().contains("-print")) {
       // No options given, create the flight and do nothing
       Airline airline = new Airline(args[0]);
@@ -64,7 +63,6 @@ public class Project1 {
         System.err.println(e.getMessage());
         System.exit(1);
       }
-
     } else {
       System.err.println("Not enough arguments given.");
       System.exit(1);

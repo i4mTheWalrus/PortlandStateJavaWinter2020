@@ -60,6 +60,15 @@ public class Project1IT extends InvokeMainTestCase {
   }
 
   /**
+   * Test the string out contents for a flight.
+   */
+  @Test
+  public void testToStringMethodOutputForFlight() {
+    MainMethodResult result = invokeMain("-print", "Delta", "4567", "PDX", "12/12/2012", "15:24", "SFC", "12/12/2012", "17:15");
+    assertThat(result.getTextWrittenToStandardOut(), equalTo("Flight 4567 departs PDX at 12/12/2012 15:24 arrives SFC at 12/12/2012 17:15\r\n"));
+  }
+
+  /**
    * Test that the source airport code cannot contain numbers.
    */
   @Test
