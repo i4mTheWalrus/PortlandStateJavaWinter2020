@@ -5,18 +5,17 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 /**
  * An integration test for the {@link Project1} main class.
  */
-public class Project1IT extends InvokeMainTestCase {
+public class Project2IT extends InvokeMainTestCase {
 
   /**
    * Invokes the main method of {@link Project1} with the given arguments.
    */
   private MainMethodResult invokeMain(String... args) {
-    return invokeMain( Project1.class, args );
+    return invokeMain( Project2.class, args );
   }
 
   /**
