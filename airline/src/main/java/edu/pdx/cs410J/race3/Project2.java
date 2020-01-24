@@ -1,13 +1,9 @@
 package edu.pdx.cs410J.race3;
 
-//import java.io.*;
-//import java.lang.*;
-
 /**
  * The main class for the CS410J airline Project
  */
 public class Project2 {
-
   public static void main(String[] args) {
     Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
 
