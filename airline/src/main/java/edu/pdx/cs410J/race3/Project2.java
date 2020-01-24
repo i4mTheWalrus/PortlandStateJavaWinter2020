@@ -49,7 +49,7 @@ public class Project2 {
         Flight flight2 = new Flight(args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
         airline.addFlight(flight2);
         System.out.println(flight2);
-      } catch (Exception e) {
+      } catch (IllegalArgumentException e) {
         System.err.println(e.getMessage());
         System.exit(1);
       }
@@ -59,7 +59,7 @@ public class Project2 {
       try {
         Flight flight2 = new Flight(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
         airline.addFlight(flight2);
-      } catch (Exception e) {
+      } catch (IllegalArgumentException e) {
         System.err.println(e.getMessage());
         System.exit(1);
       }

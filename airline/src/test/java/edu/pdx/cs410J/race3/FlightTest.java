@@ -95,8 +95,8 @@ public class FlightTest {
    * Test that the Project1 class can even be instantiated.
    */
   @Test
-  public void testProject1CanBeCreated() {
-    Project1 testProj = new Project1();
+  public void testProject2CanBeCreated() {
+    Project2 testProj = new Project2();
     assertThat(testProj, notNullValue());
   }
 }
