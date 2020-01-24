@@ -8,8 +8,8 @@ import java.io.IOException;
 public class TextDumperTest {
   TextDumper td = new TextDumper();
 
-  @Test (expected = IllegalArgumentException.class)
-  public void testNullPassedToDumpReturnsInvalidArgumentException() {
-    
+  @Test (expected = IOException.class)
+  public void testNullPassedToDumpReturnsInvalidArgumentException() throws IOException {
+    td.dump(null);
   }
 }

@@ -11,6 +11,8 @@ import java.io.IOException;
 public class TextDumper implements AirlineDumper {
   @Override
   public void dump(AbstractAirline abstractAirline) throws IOException {
-
+    if(abstractAirline == null) {
+      throw new IOException("Airline passed to text dump is a null object.");
+    }
   }
 }
