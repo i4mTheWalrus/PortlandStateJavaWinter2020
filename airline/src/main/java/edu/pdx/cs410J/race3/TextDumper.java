@@ -4,6 +4,7 @@ import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AirlineDumper;
 
 import java.io.*;
+import java.util.Collection;
 
 /**
  * Class that dumps the contents of an airline (including ﬂights) to a text ﬁle.
@@ -15,10 +16,19 @@ public class TextDumper implements AirlineDumper {
       throw new IOException("Airline passed to text dump is a null object.");
     }
 
+    // Create the text file if it doesn't exist
     String airlineName = abstractAirline.getName();
     File newFile = new File(airlineName + ".txt");
-    if(!newFile.createNewFile()) {
-      throw new IOException("Could not create file.");
+    if(!newFile.exists()) {
+      if(!newFile.createNewFile()) {
+        throw new IOException("Could not create file.");
+      }
+    }
+
+    // Write each flight in the airline to a text file
+    Collection<Flight> flights = abstractAirline.getFlights();
+    for(Flight f : flights) {
+
     }
   }
 }

@@ -173,4 +173,13 @@ public class Flight extends AbstractFlight {
   public String getArrivalString() {
     return this.arriveDate + " " + this.arriveTime;
   }
+
+  /**
+   * Format a flight for output made for text file (CSV).
+   * @return String value of line to go into file
+   */
+  public String getTextFileString() {
+    return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," +
+        dest + "," + arriveDate + "," + arriveTime;
+  }
 }

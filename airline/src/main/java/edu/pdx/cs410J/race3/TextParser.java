@@ -13,5 +13,15 @@ public class TextParser implements AirlineParser {
     return null;
   }
 
+  /**
+   * Method takes a file path, checks that it exists, then calls parse.
+   * @param filePath
+   */
+  public AbstractAirline parseFile(String filePath) throws IllegalArgumentException {
+    // check that the file path is formatted correctly
+    // check that the file exists
+    // try to parse the text file, parse returns an airline object
+    return null;
+  }
 
 }
