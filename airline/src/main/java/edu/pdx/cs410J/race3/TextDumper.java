@@ -31,5 +31,6 @@ public class TextDumper implements AirlineDumper {
     for(Flight f : flights) {
       filePrinter.println(f.getTextFileString());
     }
+    filePrinter.close();
   }
 }

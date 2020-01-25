@@ -24,4 +24,12 @@ public class TextDumperTest {
     td.dump(a);
     assertThat(tempFile.exists(), is(true));
   }
+
+  @Test
+  public void testThatDumpWritesSuccessfullyToFile() throws IOException {
+    Airline airline = new Airline("Delta");
+    Flight flight = new Flight("Delta", "345", "BOI", "12/12/2012", "23:43", "PDX", "11/11/2011", "23:40");
+    airline.addFlight(flight);
+    td.dump(airline);
+  }
 }
