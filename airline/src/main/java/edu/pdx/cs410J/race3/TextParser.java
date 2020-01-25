@@ -4,10 +4,7 @@ import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AirlineParser;
 import edu.pdx.cs410J.ParserException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.*;
 
 /**
  * A class that reads the contents of a text ﬁle and from it creates an airline with its associated ﬂights.
@@ -34,12 +31,20 @@ public class TextParser implements AirlineParser {
    */
   @Override
   public AbstractAirline parse() throws ParserException {
-    File inFile = new File(this.FileName);
+    File in = new File(this.FileName);
     // Check that the file exists (thrown exception by file reader if not)
     try {
-      FileReader inReader = new FileReader(inFile);
+      BufferedReader inFile = new BufferedReader(new FileReader(in));
+      String line;
+      while((line = inFile.readLine()) != null) {
+        String[] flightData = line.split(",");
+        Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
+        //System.out.println(flight);
+      }
     } catch (FileNotFoundException e) {
       throw new ParserException("File not found!");
+    } catch (IOException e) {
+      throw new ParserException("Error reading from file. May be malformed.");
     }
 
     return null;
