@@ -16,6 +16,8 @@ public class Project2 {
       }
     }
 
+    // Check for not no args, not enough args, or too many args.
+    // Arg count should be between 8 and 10
     checkArgCount(args);
 
     // There should be 8 cmd line arguments, and possibly 1 option for -print (no readme by this point)
@@ -44,12 +46,14 @@ public class Project2 {
         System.err.println(e.getMessage());
         System.exit(1);
       }
-    } else {
-      System.err.println("Not enough arguments given.");
-      System.exit(1);
     }
   }
 
+  /**
+   * Check the count of command line arguments.
+   * Precondition: Readme flag is not specified anywhere in args
+   * @param args The array of args passed in from the command line.
+   */
   public static void checkArgCount(String[] args) {
     // Exit with error if no command line arguments are given
     if(args.length == 0) {
@@ -57,9 +61,15 @@ public class Project2 {
       System.exit(1);
     }
 
+    // Minimum arg count if not options specified
+    if(args.length < 8) {
+      System.err.println("Not enough arguments given.");
+      System.exit(1);
+    }
+
     // Exit with error if too many command line arguments are given.
     // Readme is not present, so there should be no more than 9 args (1 for print, 8 for flight)
-    if(args.length > 9) {
+    if(args.length > 10) {
       System.err.println("Too many command line arguments.");
       System.exit(1);
     }
