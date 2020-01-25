@@ -1,7 +1,12 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.InvokeMainTestCase;
+import edu.pdx.cs410J.ParserException;
 import org.junit.Test;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -145,5 +150,40 @@ public class Project2IT extends InvokeMainTestCase {
     MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "BOI", "12/12/2012", "123:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Arrive time is not in correct format. (##:##)"));
+  }
+
+  /**
+   * Test that an airline read from a file is saved back to the same file correctly.
+   */
+  @Test
+  public void readIntoAirlineFromFileAndSaveBackToSameFileWithNoErrors() throws IOException, ParserException {
+    TextParser tp = new TextParser("testAirline");
+    Airline airline = (Airline)tp.parse();
+    TextDumper td = new TextDumper();
+    td.dump(airline);
+  }
+
+  /**
+   * Test that a new airline dump matches what is read in from the file
+   */
+  @Test
+  public void dumpIntoFileAndCheckThatParseMatchesAfterReadingIntoAirline() throws IOException, ParserException {
+    TextDumper td = new TextDumper();
+    Airline airline = new Airline("testDumpThenRead");
+    Flight flight = new Flight("testDumpThenRead", "43", "PDX", "06/30/2019", "03:43", "SFC", "04/12/2019", "20:20");
+    airline.addFlight(flight);
+    flight = new Flight("testDumpThenRead", "6532", "NYC", "04/11/2020", "04:27", "SFC", "05/15/2021", "15:54");
+    airline.addFlight(flight);
+    td.dump(airline);
+
+    TextParser tp = new TextParser("testDumpThenRead");
+    Airline airline2 = (Airline)tp.parse();
+    Collection<Flight> a = airline.getFlights();
+    Collection<Flight> b = airline2.getFlights();
+
+    Iterator<Flight> it = b.iterator();
+    for(Flight f : a) {
+      assertThat(f.toString().equals(it.next().toString()), is(true));
+    }
   }
 }

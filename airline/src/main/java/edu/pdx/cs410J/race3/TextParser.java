@@ -26,6 +26,7 @@ public class TextParser implements AirlineParser {
    * @param airlineName Specify the name of the airline. Appends .txt and uses that as filename.
    */
   TextParser(String airlineName) {
+    this.airlineName = airlineName;
     this.fileName = "src/main/resources/" + airlineName + ".txt";
   }
 
@@ -47,6 +48,7 @@ public class TextParser implements AirlineParser {
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
         airline.addFlight(flight);
       }
+      inFile.close();
       return airline;
 
     } catch (FileNotFoundException e) {
