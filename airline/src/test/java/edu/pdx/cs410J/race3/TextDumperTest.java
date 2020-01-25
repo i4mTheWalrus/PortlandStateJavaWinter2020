@@ -13,9 +13,13 @@ public class TextDumperTest {
     td.dump(null);
   }
 
+  /**
+   * Create an airline called test and check that is creates test.txt if it does not exist.
+   * @throws IOException
+   */
   @Test
   public void testIfFileForAirlineDoesntExistItIsCreated() throws IOException {
-    File tempFile = new File("test.txt");
+    File tempFile = new File("src/main/resources/test.txt");
     Airline a = new Airline("test");
     td.dump(a);
     assertThat(tempFile.exists(), is(true));

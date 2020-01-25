@@ -18,17 +18,18 @@ public class TextDumper implements AirlineDumper {
 
     // Create the text file if it doesn't exist
     String airlineName = abstractAirline.getName();
-    File newFile = new File(airlineName + ".txt");
+    File newFile = new File("src/main/resources/" + airlineName + ".txt");
     if(!newFile.exists()) {
       if(!newFile.createNewFile()) {
         throw new IOException("Could not create file.");
       }
     }
+    PrintWriter filePrinter = new PrintWriter(newFile);
 
     // Write each flight in the airline to a text file
     Collection<Flight> flights = abstractAirline.getFlights();
     for(Flight f : flights) {
-
+      filePrinter.println(f.getTextFileString());
     }
   }
 }
