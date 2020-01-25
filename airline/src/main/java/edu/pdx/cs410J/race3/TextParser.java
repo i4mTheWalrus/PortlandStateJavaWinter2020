@@ -14,14 +14,19 @@ public class TextParser implements AirlineParser {
   /**
    * Variable of TextParser that holds the name of the file. Path is assumed to be in src/main/resources/
    */
-  String FileName;
+  String fileName;
+
+  /**
+   * String that stores the name of the airline. Given from the constructor
+   */
+  String airlineName;
 
   /**
    * Constructor that takes in a filename. Path is assumed to be in src/main/resources/
-   * @param fileName Specify the name of the file. The file extension should be given with filename.
+   * @param airlineName Specify the name of the airline. Appends .txt and uses that as filename.
    */
-  TextParser(String fileName) {
-    this.FileName = "src/main/resources/" + fileName;
+  TextParser(String airlineName) {
+    this.fileName = "src/main/resources/" + airlineName + ".txt";
   }
 
   /**
@@ -31,22 +36,23 @@ public class TextParser implements AirlineParser {
    */
   @Override
   public AbstractAirline parse() throws ParserException {
-    File in = new File(this.FileName);
+    File in = new File(this.fileName);
     // Check that the file exists (thrown exception by file reader if not)
     try {
       BufferedReader inFile = new BufferedReader(new FileReader(in));
       String line;
+      Airline airline = new Airline(airlineName);
       while((line = inFile.readLine()) != null) {
         String[] flightData = line.split(",");
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
-        //System.out.println(flight);
+        airline.addFlight(flight);
       }
+      return airline;
+
     } catch (FileNotFoundException e) {
       throw new ParserException("File not found!");
     } catch (IOException e) {
       throw new ParserException("Error reading from file. May be malformed.");
     }
-
-    return null;
   }
 }
