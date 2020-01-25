@@ -7,14 +7,7 @@ import edu.pdx.cs410J.ParserException;
  */
 public class Project2 {
   public static void main(String[] args) {
-
     Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
-
-    // Exit with error if no command line arguments are given
-    if(args.length == 0) {
-      System.err.println("Missing command line arguments.");
-      System.exit(1);
-    }
 
     // If -readme is detected anywhere as an argument, print the readme and exit.
     for(String i : args) {
@@ -23,14 +16,7 @@ public class Project2 {
       }
     }
 
-    // Exit with error if too many command line arguments are given.
-    // Readme is not present, so there should be no more than 9 args (1 for print, 8 for flight)
-    if(args.length > 9) {
-      System.err.println("Too many command line arguments.");
-      System.exit(1);
-    }
-
-    /* IF THIS POINT IS REACHED, NO -README HAS BEEN SPECIFIED */
+    checkArgCount(args);
 
     // There should be 8 cmd line arguments, and possibly 1 option for -print (no readme by this point)
     // Expected -print but it wasn't the first argument
@@ -60,6 +46,21 @@ public class Project2 {
       }
     } else {
       System.err.println("Not enough arguments given.");
+      System.exit(1);
+    }
+  }
+
+  public static void checkArgCount(String[] args) {
+    // Exit with error if no command line arguments are given
+    if(args.length == 0) {
+      System.err.println("Missing command line arguments.");
+      System.exit(1);
+    }
+
+    // Exit with error if too many command line arguments are given.
+    // Readme is not present, so there should be no more than 9 args (1 for print, 8 for flight)
+    if(args.length > 9) {
+      System.err.println("Too many command line arguments.");
       System.exit(1);
     }
   }
