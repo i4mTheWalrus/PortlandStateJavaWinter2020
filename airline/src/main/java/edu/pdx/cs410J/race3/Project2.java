@@ -19,11 +19,7 @@ public class Project2 {
     // If -readme is detected anywhere as an argument, print the readme and exit.
     for(String i : args) {
       if(i.toLowerCase().contains("-readme")) {
-        System.out.println("About project 1:\n" +
-                "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
-                "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
-                "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
-        System.exit(0);
+        printReadme();
       }
     }
 
@@ -66,5 +62,13 @@ public class Project2 {
       System.err.println("Not enough arguments given.");
       System.exit(1);
     }
+  }
+
+  public static void printReadme() {
+    System.out.println("About project 1:\n" +
+        "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
+        "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
+        "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
+    System.exit(0);
   }
 }

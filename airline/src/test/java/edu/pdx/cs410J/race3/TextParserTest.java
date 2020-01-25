@@ -19,7 +19,7 @@ public class TextParserTest {
   @Test
   public void testConstructorCreatesCorrectFileAndFilePath() {
     TextParser tp = new TextParser("testPath.txt");
-    assertThat(tp.FileName.contains("src/main/resources/"), is(true));
+    assertThat(tp.fileName.contains("src/main/resources/"), is(true));
   }
 
   @Test (expected = ParserException.class)
