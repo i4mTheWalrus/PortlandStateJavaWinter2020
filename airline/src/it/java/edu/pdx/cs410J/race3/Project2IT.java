@@ -38,7 +38,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testTooManyArgs() {
-    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Too many command line arguments."));
   }
