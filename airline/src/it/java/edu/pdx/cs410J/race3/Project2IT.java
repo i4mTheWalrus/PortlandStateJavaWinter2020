@@ -54,16 +54,6 @@ public class Project2IT extends InvokeMainTestCase {
   }
 
   /**
-   * Tests that if 9 arguments are given (8 for the flight, 1 for the -print option), and the -print flag is not given first, and error is issued.
-   */
-  @Test
-  public void testNineArgumentsGivenButPrintNotGivenFirst() {
-    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", "-print", " ", " ", " ");
-    assertThat(result.getExitCode(), equalTo(1));
-    assertThat(result.getTextWrittenToStandardError(), containsString("Nine arguments given, expected -print first but not found."));
-  }
-
-  /**
    * Test the string out contents for a flight.
    */
   @Test

@@ -36,7 +36,7 @@ public class Project2 {
    * @param args Command line arguments
    */
   public static void main(String[] args) {
-    Flight flight = new Flight();  // Refer to one of Dave's classes so that we can be sure it is on the classpath
+    int argCount = args.length;
 
     // Check for not no args, not enough args, or too many args.
     // Arg count should be between 8 and 11
@@ -47,39 +47,31 @@ public class Project2 {
       printReadme();
       System.exit(0);
     }
-    if(printFlag) {
 
+    Airline airline = new Airline(args[argCount-8]);
+
+    if(printFlag) {
+      try {
+        Flight flight = new Flight(args[argCount-8], args[argCount-7], args[argCount-6], args[argCount-5], args[argCount-4], args[argCount-3],args[argCount-2], args[argCount-1]);
+        airline.addFlight(flight);
+        System.out.println(flight);
+      } catch (IllegalArgumentException e) {
+        System.err.println(e.getMessage());
+        System.exit(1);
+      }
     }
+
     if(textFileFlag) {
 
     }
 
-    // There should be 8 cmd line arguments, and possibly 1 option for -print (no readme by this point)
-    // Expected -print but it wasn't the first argument
-    if(args.length == 9 && !args[0].toLowerCase().contains("-print")) {
-      System.err.println("Nine arguments given, expected -print first but not found.");
+    // No options specified
+    try {
+      Flight flight = new Flight(args[argCount-8], args[argCount-7], args[argCount-6], args[argCount-5], args[argCount-4], args[argCount-3],args[argCount-2], args[argCount-1]);
+      airline.addFlight(flight);
+    } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
       System.exit(1);
-    } else if(args.length == 9 && args[0].toLowerCase().contains("-print")) {
-      // print specified, create flight and print to console window
-      Airline airline = new Airline(args[1]);
-      try {
-        Flight flight2 = new Flight(args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8]);
-        airline.addFlight(flight2);
-        System.out.println(flight2);
-      } catch (IllegalArgumentException e) {
-        System.err.println(e.getMessage());
-        System.exit(1);
-      }
-    } else if(args.length == 8 && !args[0].toLowerCase().contains("-print") && !args[1].toLowerCase().contains("-print")) {
-      // No options given, create the flight and do nothing
-      Airline airline = new Airline(args[0]);
-      try {
-        Flight flight2 = new Flight(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7]);
-        airline.addFlight(flight2);
-      } catch (IllegalArgumentException e) {
-        System.err.println(e.getMessage());
-        System.exit(1);
-      }
     }
   }
 
