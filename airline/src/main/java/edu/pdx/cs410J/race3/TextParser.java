@@ -5,6 +5,7 @@ import edu.pdx.cs410J.AirlineParser;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
+import java.nio.file.Paths;
 
 /**
  * A class that reads the contents of a text ﬁle and from it creates an airline with its associated ﬂights.
@@ -52,7 +53,7 @@ public class TextParser implements AirlineParser {
       return airline;
 
     } catch (FileNotFoundException e) {
-      throw new ParserException("File not found!");
+      throw new ParserException("File not found! Path given: " + fileName);
     } catch (IOException e) {
       throw new ParserException("Error reading from file. May be malformed.");
     }
