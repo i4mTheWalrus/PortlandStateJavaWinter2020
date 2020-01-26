@@ -43,37 +43,31 @@ public class Project2 {
     checkArgCount(args);
     findOptions(args);
 
-    if(readmeFlag) {
+    if (readmeFlag) {
       printReadme();
       System.exit(0);
     }
 
-    Airline airline = new Airline(args[argCount-8]);
+    Airline airline = new Airline(args[argCount - 8]);
 
-    if(printFlag) {
-      try {
-        Flight flight = new Flight(args[argCount-8], args[argCount-7], args[argCount-6], args[argCount-5], args[argCount-4], args[argCount-3],args[argCount-2], args[argCount-1]);
-        airline.addFlight(flight);
-        System.out.println(flight);
-      } catch (IllegalArgumentException e) {
-        System.err.println(e.getMessage());
-        System.exit(1);
-      }
-    }
-
-    if(textFileFlag) {
-
-    }
-
-    // No options specified
     try {
-      Flight flight = new Flight(args[argCount-8], args[argCount-7], args[argCount-6], args[argCount-5], args[argCount-4], args[argCount-3],args[argCount-2], args[argCount-1]);
+      Flight flight = new Flight(args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
       airline.addFlight(flight);
+      if (printFlag) {
+        System.out.println(flight);
+      }
     } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
       System.exit(1);
     }
+
+    if (textFileFlag) {
+
+    }
   }
+
+    // No options specified
+
 
   /**
    * Check the count of command line arguments.
@@ -102,10 +96,13 @@ public class Project2 {
   }
 
   public static void printReadme() {
-    System.out.println("About project 1:\n" +
-        "Consists of a single class, Flight, which is used to represent a flight to and from an airport by a specified airline.\n" +
-        "The flight is currently not stored in any persistent capacity, and is simply created using constructors from command\n" +
-        "line arguments. If the -print option is given, the flight information based on the given arguments are printed to the console.");
+    System.out.println("About project 2:\n" +
+        "Usage: cmdLineExec [options] <flight args>\n" +
+        "This project extends project 1 with the ability to load and save flights from a file.\n" +
+        "Command line options: -print prints the flight given on the command line\n" +
+        "                      -readme prints this readme\n" +
+        "                      -textFile [filename] Specifies the title of a text file to load/save with. (should not include file extension)\n" +
+        "The overall purpose is to represent an airline that consists of flights to and from various airports.");
   }
 
   public static void findOptions(String[] args) {
