@@ -134,7 +134,7 @@ public class Project2 {
     // If the -textFile flag is specified, the following option is used as a file to read/write from
     for(int i = 0; i < maxOptionCount; i++) {
       if(args[i].toLowerCase().contains("-textfile")) {
-        printFlag = true;
+        textFileFlag = true;
         fileName = args[i+1];
         break;
       }
