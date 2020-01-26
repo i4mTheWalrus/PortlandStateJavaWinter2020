@@ -2,6 +2,8 @@ package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.ParserException;
 
+import java.io.IOException;
+
 /**
  * The main class for the CS410J airline Project
  */
@@ -9,16 +11,16 @@ public class Project2 {
   /**
    * Define the number of options that can come before flight arguments.
    */
-  static int maxOptionCount = 3;
+  static int maxOptionCount = 4;
 
   /**
-   * Flag option for printing the flight given via the command line.
-   */
+  * Flag option for printing the flight given via the command line.
+  */
   static boolean printFlag = false;
 
   /**
-   * Flag option to print the readme.
-   */
+  * Flag option to print the readme.
+  */
   static boolean readmeFlag = false;
 
   /**
@@ -34,7 +36,7 @@ public class Project2 {
   /**
    * Entry point of the program.
    * @param args Command line arguments
-   */
+  */
   public static void main(String[] args) {
     int argCount = args.length;
 
@@ -48,26 +50,26 @@ public class Project2 {
       System.exit(0);
     }
 
-    Airline airline = new Airline(args[argCount - 8]);
-
     try {
       Flight flight = new Flight(args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
-      airline.addFlight(flight);
+
+      if(textFileFlag) {
+        TextParser tp = new TextParser(fileName);
+        Airline airline = (Airline)tp.parse();
+        airline.addFlight(flight);
+        TextDumper td = new TextDumper();
+        td.dump(airline);
+      }
       if (printFlag) {
+        Airline airline = new Airline(args[argCount - 8]);
+        airline.addFlight(flight);
         System.out.println(flight);
       }
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | ParserException | IOException e) {
       System.err.println(e.getMessage());
       System.exit(1);
     }
-
-    if (textFileFlag) {
-
-    }
   }
-
-    // No options specified
-
 
   /**
    * Check the count of command line arguments.
@@ -89,12 +91,15 @@ public class Project2 {
 
     // Exit with error if too many command line arguments are given.
     // Readme is not present, so there should be no more than 9 args (1 for print, 8 for flight)
-    if(args.length > (8 + maxOptionCount + 1)) {
+    if(args.length > 8 + maxOptionCount) {
       System.err.println("Too many command line arguments.");
       System.exit(1);
     }
   }
 
+  /**
+   * Prints the readme to standard out.
+   */
   public static void printReadme() {
     System.out.println("About project 2:\n" +
         "Usage: cmdLineExec [options] <flight args>\n" +
@@ -105,26 +110,33 @@ public class Project2 {
         "The overall purpose is to represent an airline that consists of flights to and from various airports.");
   }
 
+  /**
+   * Searches the beginning of the command line arguments for any specified options
+   * @param args Command line arguments.
+   */
   public static void findOptions(String[] args) {
     // If -readme is detected anywhere as an argument, print the readme and exit.
     for(String i : args) {
-      if(i.toLowerCase().contains("-readme")) {
+      if (i.toLowerCase().contains("-readme")) {
         readmeFlag = true;
+        break;
       }
     }
 
     // If the -print flag is specified, set print flag
-    for(int i = 0; i < maxOptionCount + 1; i++) {
-      if(args[i].toLowerCase().contains("-print")) {
+    for(int i = 0; i < maxOptionCount; i++) {
+      if (args[i].toLowerCase().contains("-print")) {
         printFlag = true;
+        break;
       }
     }
 
     // If the -textFile flag is specified, the following option is used as a file to read/write from
-    for(int i = 0; i < maxOptionCount + 1; i++) {
+    for(int i = 0; i < maxOptionCount; i++) {
       if(args[i].toLowerCase().contains("-textfile")) {
         printFlag = true;
         fileName = args[i+1];
+        break;
       }
     }
   }
