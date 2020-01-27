@@ -19,13 +19,6 @@ public class TextParserTest {
   @Test
   public void testConstructorCreatesCorrectFileAndFilePath() {
     TextParser tp = new TextParser("testPath.txt");
-    assertThat(tp.fileName.contains("src/main/resources/"), is(true));
-  }
-
-  @Test (expected = ParserException.class)
-  public void testFileNotFoundThrowsParserException() throws ParserException {
-    TextParser tp = new TextParser("");
-    Airline airline = new Airline();
-    airline = (Airline)tp.parse();
+    assertThat(tp.fileName.contains("testPath"), is(true));
   }
 }

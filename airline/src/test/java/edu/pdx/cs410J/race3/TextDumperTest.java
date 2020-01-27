@@ -22,7 +22,7 @@ public class TextDumperTest {
    */
   @Test
   public void testIfFileForAirlineDoesntExistItIsCreated() throws IOException {
-    File tempFile = new File("src/main/resources/test.txt");
+    File tempFile = new File("test.txt");
     Airline a = new Airline("test");
     td.dump(a);
     assertThat(tempFile.exists(), is(true));

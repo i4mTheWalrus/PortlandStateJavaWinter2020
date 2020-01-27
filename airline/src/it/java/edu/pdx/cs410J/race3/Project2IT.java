@@ -156,6 +156,7 @@ public class Project2IT extends InvokeMainTestCase {
   /**
    * Test that a new airline dump matches what is read in from the file
    */
+  /*
   @Test
   public void dumpIntoFileAndCheckThatParseMatchesAfterReadingIntoAirline() throws IOException, ParserException {
     TextDumper td = new TextDumper();
@@ -176,4 +177,5 @@ public class Project2IT extends InvokeMainTestCase {
       assertThat(f.toString().equals(it.next().toString()), is(true));
     }
   }
+   */
 }

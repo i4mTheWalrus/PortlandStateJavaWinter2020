@@ -18,7 +18,7 @@ public class TextDumper implements AirlineDumper {
 
     // Create the text file if it doesn't exist
     String airlineName = abstractAirline.getName();
-    File newFile = new File("src/main/resources/" + airlineName + ".txt");
+    File newFile = new File(airlineName);
     if(!newFile.exists()) {
       if(!newFile.createNewFile()) {
         throw new IOException("Could not create file.");

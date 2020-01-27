@@ -24,11 +24,11 @@ public class TextParser implements AirlineParser {
 
   /**
    * Constructor that takes in a filename. Path is assumed to be in src/main/resources/
-   * @param airlineName Specify the name of the airline. Appends .txt and uses that as filename.
+   * @param airlineName Specify the name of the airline.
    */
   TextParser(String airlineName) {
     this.airlineName = airlineName;
-    this.fileName = "src/main/resources/" + airlineName + ".txt";
+    this.fileName = airlineName;
   }
 
   /**
@@ -39,8 +39,12 @@ public class TextParser implements AirlineParser {
   @Override
   public AbstractAirline parse() throws ParserException {
     File in = new File(this.fileName);
-    // Check that the file exists (thrown exception by file reader if not)
     try {
+      if(!in.exists()) {
+        if(!in.createNewFile()) {
+          throw new IOException("Could not create file.");
+        }
+      }
       BufferedReader inFile = new BufferedReader(new FileReader(in));
       String line;
       Airline airline = new Airline(airlineName);
@@ -51,9 +55,6 @@ public class TextParser implements AirlineParser {
       }
       inFile.close();
       return airline;
-
-    } catch (FileNotFoundException e) {
-      throw new ParserException("File not found! Path given: " + fileName);
     } catch (IOException e) {
       throw new ParserException("Error reading from file. May be malformed.");
     }
