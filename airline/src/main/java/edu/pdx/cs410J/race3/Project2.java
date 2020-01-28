@@ -57,7 +57,7 @@ public class Project2 {
         TextParser tp = new TextParser(fileName);
         Airline airline = (Airline)tp.parse();
         airline.addFlight(flight);
-        TextDumper td = new TextDumper();
+        TextDumper td = new TextDumper(fileName);
         td.dump(airline);
       }
       if (printFlag) {

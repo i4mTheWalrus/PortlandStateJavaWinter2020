@@ -10,6 +10,15 @@ import java.util.Collection;
  * Class that dumps the contents of an airline (including ﬂights) to a text ﬁle.
  */
 public class TextDumper implements AirlineDumper {
+  /**
+   * String for class that holds the filename and path.
+   */
+  String filename;
+
+  TextDumper(String filePath) {
+    this.filename = filePath;
+  }
+
   @Override
   public void dump(AbstractAirline abstractAirline) throws IOException {
     if(abstractAirline == null) {
@@ -18,7 +27,7 @@ public class TextDumper implements AirlineDumper {
 
     // Create the text file if it doesn't exist
     String airlineName = abstractAirline.getName();
-    File newFile = new File(airlineName);
+    File newFile = new File(this.filename);
     if(!newFile.exists()) {
       if(!newFile.createNewFile()) {
         throw new IOException("Could not create file.");

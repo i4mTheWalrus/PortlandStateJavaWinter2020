@@ -9,10 +9,9 @@ import java.io.*;
  * Class to unit test the {@link TextDumper} class.
  */
 public class TextDumperTest {
-  TextDumper td = new TextDumper();
-
   @Test (expected = IOException.class)
   public void testNullPassedToDumpReturnsInvalidArgumentException() throws IOException {
+    TextDumper td = new TextDumper(null);
     td.dump(null);
   }
 
@@ -22,6 +21,7 @@ public class TextDumperTest {
    */
   @Test
   public void testIfFileForAirlineDoesntExistItIsCreated() throws IOException {
+    TextDumper td = new TextDumper("test");
     File tempFile = new File("test");
     Airline a = new Airline("test");
     td.dump(a);
@@ -34,6 +34,7 @@ public class TextDumperTest {
    */
   @Test
   public void testThatDumpWritesSuccessfullyToFile() throws IOException {
+    TextDumper td = new TextDumper("testAirline");
     Airline airline = new Airline("testAirline");
     Flight flight = new Flight("testAirline", "345", "BOI", "12/12/2012", "23:43", "PDX", "11/11/2011", "23:40");
     airline.addFlight(flight);

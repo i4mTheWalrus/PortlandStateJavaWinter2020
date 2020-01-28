@@ -18,17 +18,11 @@ public class TextParser implements AirlineParser {
   String fileName;
 
   /**
-   * String that stores the name of the airline. Given from the constructor
-   */
-  String airlineName;
-
-  /**
    * Constructor that takes in a filename. Path is assumed to be in src/main/resources/
-   * @param airlineName Specify the name of the airline.
+   * @param filePath String containing name and path of file to read.
    */
-  TextParser(String airlineName) {
-    this.airlineName = airlineName;
-    this.fileName = airlineName;
+  TextParser(String filePath) {
+    this.fileName = filePath;
   }
 
   /**
@@ -38,6 +32,7 @@ public class TextParser implements AirlineParser {
    */
   @Override
   public AbstractAirline parse() throws ParserException {
+    Airline airline = null;
     File in = new File(this.fileName);
     try {
       if(!in.exists()) {
@@ -47,10 +42,11 @@ public class TextParser implements AirlineParser {
       }
       BufferedReader inFile = new BufferedReader(new FileReader(in));
       String line;
-      Airline airline = new Airline(airlineName);
+
       while((line = inFile.readLine()) != null) {
         String[] flightData = line.split(",");
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
+        airline = new Airline(flightData[0]);
         airline.addFlight(flight);
       }
       inFile.close();
