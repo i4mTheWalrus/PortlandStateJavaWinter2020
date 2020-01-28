@@ -19,6 +19,11 @@ public class TextDumper implements AirlineDumper {
     this.filename = filePath;
   }
 
+  /**
+   * Method to dump the contents of an airline to a textfile given via the constructor.
+   * @param abstractAirline Airlines' contents to dump.
+   * @throws IOException Throws the exception if the airline is null, or if the text file couldn't be created.
+   */
   @Override
   public void dump(AbstractAirline abstractAirline) throws IOException {
     if(abstractAirline == null) {
