@@ -147,6 +147,7 @@ public class Project2IT extends InvokeMainTestCase {
   /**
    * Test that an airline read from a file is saved back to the same file correctly.
    */
+  /*
   @Test
   public void readIntoAirlineFromFileAndSaveBackToSameFileWithNoErrors() throws IOException, ParserException {
     TextParser tp = new TextParser("testAirline");
@@ -154,6 +155,8 @@ public class Project2IT extends InvokeMainTestCase {
     TextDumper td = new TextDumper("testAirline");
     td.dump(airline);
   }
+
+   */
 
   /**
    * Test that a new airline dump matches what is read in from the file

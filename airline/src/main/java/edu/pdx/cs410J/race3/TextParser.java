@@ -6,6 +6,7 @@ import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.util.regex.Pattern;
 
 /**
  * A class that reads the contents of a text ﬁle and from it creates an airline with its associated ﬂights.
@@ -65,6 +66,33 @@ public class TextParser implements AirlineParser {
   }
 
   public void checkFlightFormatting(String[] flightArgs) {
-    // airline name, flight #,
+    // airline name, flight #, src, departDate, departTime, dest, arriveDate, arriveTime
+    if(!flightArgs[1].matches("([0-9]+)")) {
+      throw new IllegalArgumentException("Text file: A flight number is not an integer.");
+    }
+
+    if(flightArgs[2].length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(flightArgs[2]).find()) {
+      throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code.");
+    }
+
+    if(!flightArgs[3].matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Text file: A depart date are not in correct format. (##/##/####)");
+    }
+
+    if(!flightArgs[4].matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Text file: A depart time is not in correct format. (##:##)");
+    }
+
+    if(flightArgs[5].length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(flightArgs[5]).find()) {
+      throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code.");
+    }
+
+    if(!flightArgs[6].matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Text file: An arrive date is not in correct format. (##/##/####)");
+    }
+
+    if(!flightArgs[7].matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Text file: An arrive time is not in correct format. (##:##)");
+    }
   }
 }
