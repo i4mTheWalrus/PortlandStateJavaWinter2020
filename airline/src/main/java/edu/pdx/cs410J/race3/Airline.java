@@ -64,4 +64,12 @@ public class Airline extends AbstractAirline {
   public Collection<Flight> getFlights() {
     return flights;
   }
+
+  /**
+   * Set the name of the airline with a method.
+   * @param newName Name of airline.
+   */
+  public void setAirlineName(String newName) {
+    this.airlineName = newName;
+  }
 }

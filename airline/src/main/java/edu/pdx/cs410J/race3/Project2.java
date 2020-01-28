@@ -117,7 +117,7 @@ public class Project2 {
   public static void findOptions(String[] args) {
     // If -readme is detected anywhere as an argument, print the readme and exit.
     for(String i : args) {
-      if (i.toLowerCase().contains("-readme")) {
+      if (i.contains("-README")) {
         readmeFlag = true;
         break;
       }
@@ -125,7 +125,7 @@ public class Project2 {
 
     // If the -print flag is specified, set print flag
     for(int i = 0; i < maxOptionCount; i++) {
-      if (args[i].toLowerCase().contains("-print")) {
+      if (args[i].contains("-print")) {
         printFlag = true;
         break;
       }
@@ -133,7 +133,7 @@ public class Project2 {
 
     // If the -textFile flag is specified, the following option is used as a file to read/write from
     for(int i = 0; i < maxOptionCount; i++) {
-      if(args[i].toLowerCase().contains("-textfile")) {
+      if(args[i].contains("-textFile")) {
         textFileFlag = true;
         fileName = args[i+1];
         break;

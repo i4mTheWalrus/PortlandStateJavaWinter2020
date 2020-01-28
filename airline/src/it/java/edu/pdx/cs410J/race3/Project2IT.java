@@ -178,7 +178,7 @@ public class Project2IT extends InvokeMainTestCase {
       assertThat(f.toString().equals(it.next().toString()), is(true));
     }
   }
-  
+
    */
 
   /**

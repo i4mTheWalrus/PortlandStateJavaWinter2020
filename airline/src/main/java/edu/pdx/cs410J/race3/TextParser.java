@@ -32,7 +32,7 @@ public class TextParser implements AirlineParser {
    */
   @Override
   public AbstractAirline parse() throws ParserException {
-    Airline airline = null;
+    Airline airline = new Airline();
     File in = new File(this.fileName);
     try {
       if(!in.exists()) {
@@ -46,7 +46,7 @@ public class TextParser implements AirlineParser {
       while((line = inFile.readLine()) != null) {
         String[] flightData = line.split(",");
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
-        airline = new Airline(flightData[0]);
+        airline.setAirlineName(flightData[0]);
         airline.addFlight(flight);
       }
       inFile.close();
