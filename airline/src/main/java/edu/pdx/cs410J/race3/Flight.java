@@ -123,6 +123,14 @@ public class Flight extends AbstractFlight {
   }
 
   /**
+   * Method to return the name of the airline that the flight belongs to.
+   * @return String containing airline name.
+   */
+  public String getAirlineName() {
+    return airline;
+  }
+
+  /**
    * Method for getting the arrival time of a flight.
    * @return A string containing arrival time.
    */

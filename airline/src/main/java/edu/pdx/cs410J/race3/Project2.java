@@ -3,6 +3,7 @@ package edu.pdx.cs410J.race3;
 import edu.pdx.cs410J.ParserException;
 
 import java.io.IOException;
+import java.util.Collection;
 
 /**
  * The main class for the CS410J airline Project
@@ -56,6 +57,16 @@ public class Project2 {
       if(textFileFlag) {
         TextParser tp = new TextParser(fileName);
         Airline airline = (Airline)tp.parse();
+
+        // Check that airline found in file is the same as the one on the command line
+        Collection<Flight> flightsFromFile = airline.getFlights();
+        for(Flight f : flightsFromFile) {
+          if(!f.getAirlineName().equals(args[argCount-8])) {
+            System.err.println("The airline name provided on command line does not match what is found in file!");
+            System.exit(1);
+          }
+        }
+
         airline.addFlight(flight);
         TextDumper td = new TextDumper(fileName);
         td.dump(airline);

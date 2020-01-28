@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.race3;
 
+import com.sun.tools.javac.Main;
 import edu.pdx.cs410J.InvokeMainTestCase;
 import edu.pdx.cs410J.ParserException;
 import org.junit.Test;
@@ -180,6 +181,13 @@ public class Project2IT extends InvokeMainTestCase {
   }
 
    */
+
+  public void testCheckingForFlightPassedOnCommandLineMatchesNameInFile() {
+    MainMethodResult result = invokeMain("-textFile", "TestNameMatch", "Test1", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
+    MainMethodResult result2 = invokeMain("-textFile", "TestNameMatch", "Test2", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
+    assertThat(result2.getTextWrittenToStandardError(), containsString("The airline name provided on command line does not match what is found in file!"));
+    assertThat(result2.getExitCode(), is(1));
+  }
 
   /**
    * Test that file is created properly from command line
