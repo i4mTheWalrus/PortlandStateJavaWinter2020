@@ -4,6 +4,7 @@ import edu.pdx.cs410J.InvokeMainTestCase;
 import edu.pdx.cs410J.ParserException;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -156,26 +157,33 @@ public class Project2IT extends InvokeMainTestCase {
   /**
    * Test that a new airline dump matches what is read in from the file
    */
-  /*
   @Test
   public void dumpIntoFileAndCheckThatParseMatchesAfterReadingIntoAirline() throws IOException, ParserException {
     TextDumper td = new TextDumper();
-    Airline airline = new Airline("testDumpThenRead");
-    Flight flight = new Flight("testDumpThenRead", "43", "PDX", "06/30/2019", "03:43", "SFC", "04/12/2019", "20:20");
+    Airline airline = new Airline("testDumpThenRead.txt");
+    Flight flight = new Flight("testDumpThenRead.txt", "43", "PDX", "06/30/2019", "03:43", "SFC", "04/12/2019", "20:20");
     airline.addFlight(flight);
-    flight = new Flight("testDumpThenRead", "6532", "NYC", "04/11/2020", "04:27", "SFC", "05/15/2021", "15:54");
+    flight = new Flight("testDumpThenRead.txt", "6532", "NYC", "04/11/2020", "04:27", "SFC", "05/15/2021", "15:54");
     airline.addFlight(flight);
     td.dump(airline);
 
-    TextParser tp = new TextParser("testDumpThenRead");
-    Airline airline2 = (Airline)tp.parse();
+    TextParser tp = new TextParser("testDumpThenRead.txt");
+    Airline airline2 = (Airline) tp.parse();
     Collection<Flight> a = airline.getFlights();
     Collection<Flight> b = airline2.getFlights();
 
     Iterator<Flight> it = b.iterator();
-    for(Flight f : a) {
+    for (Flight f : a) {
       assertThat(f.toString().equals(it.next().toString()), is(true));
     }
   }
+
+  /**
+   * Test that file is created properly from command line
    */
+  public void createFileFroCommandLineArgWorksProperly() {
+    MainMethodResult result = invokeMain("-textFile", "TestCreate", "TestCreate", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
+    File aFile = new File("TestCreate");
+    assertThat(aFile.exists(), is(true));
+  }
 }
