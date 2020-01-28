@@ -71,6 +71,11 @@ public class Flight extends AbstractFlight {
    */
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
+
+    // flight number should be integer
+    if(!flightNumber.matches("([0-9]+)")) {
+      throw new IllegalArgumentException("Flight number should be integer");
+    }
     this.flightNumber = flightNumber;
 
     // src should be 3 characters! (no numbers or special characters)

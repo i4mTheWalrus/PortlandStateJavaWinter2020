@@ -45,6 +45,10 @@ public class TextParser implements AirlineParser {
 
       while((line = inFile.readLine()) != null) {
         String[] flightData = line.split(",");
+
+        // Check if the flight string is malformed
+        checkFlightFormatting(flightData);
+
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
         airline.setAirlineName(flightData[0]);
         airline.addFlight(flight);
@@ -53,6 +57,14 @@ public class TextParser implements AirlineParser {
       return airline;
     } catch (IOException e) {
       throw new ParserException("Error reading from file. May be malformed.");
+    } catch (NullPointerException e) {
+      throw new ParserException("Error reading from file. May be malformed.");
+    } catch (IllegalArgumentException e) {
+      throw new ParserException(e.getMessage());
     }
+  }
+
+  public void checkFlightFormatting(String[] flightArgs) {
+    // airline name, flight #,
   }
 }

@@ -69,7 +69,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", " ", "555", "11/11/1911", "14:25", "BOI", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "555", "11/11/1911", "14:25", "BOI", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -79,7 +79,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "666", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "666", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -89,7 +89,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", " ", "BOOM", "11/11/1911", "14:25", "KOA", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "BOOM", "11/11/1911", "14:25", "KOA", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -99,7 +99,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", " ", "BOO", "11/11/1911", "14:25", "KOANS", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "BOO", "11/11/1911", "14:25", "KOANS", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -109,7 +109,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testDepartureDateFormatCheck() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/191", "14:25", "BOI", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/191", "14:25", "BOI", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Depart date is not in correct format. (##/##/####)"));
   }
@@ -119,7 +119,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testDepartureTimeFormatCheck() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:2", "BOI", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:2", "BOI", "12/12/2012", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Depart time is not in correct format. (##:##)"));
   }
@@ -129,7 +129,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testArrivalDateFormatCheck() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "BOI", "192/12/212", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "BOI", "192/12/212", "16:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Arrive date is not in correct format. (##/##/####)"));
   }
@@ -139,7 +139,7 @@ public class Project2IT extends InvokeMainTestCase {
    */
   @Test
   public void testArrivalTimeFormatCheck() {
-    MainMethodResult result = invokeMain(" ", " ", "PDX", "11/11/1911", "14:25", "BOI", "12/12/2012", "123:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "BOI", "12/12/2012", "123:23");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Arrive time is not in correct format. (##:##)"));
   }
