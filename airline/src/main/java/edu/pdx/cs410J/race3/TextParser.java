@@ -56,9 +56,7 @@ public class TextParser implements AirlineParser {
       }
       inFile.close();
       return airline;
-    } catch (IOException e) {
-      throw new ParserException("Error reading from file. May be malformed.");
-    } catch (NullPointerException e) {
+    } catch (IOException | NullPointerException e) {
       throw new ParserException("Error reading from file. May be malformed.");
     } catch (IllegalArgumentException e) {
       throw new ParserException(e.getMessage());
