@@ -63,6 +63,10 @@ public class TextParser implements AirlineParser {
     }
   }
 
+  /**
+   * Gets passed the flight string array read in from file. Checks each element eo ensure correctness of flight.
+   * @param flightArgs String array of line read from file.
+   */
   public void checkFlightFormatting(String[] flightArgs) {
     if(flightArgs.length < 8) {
       throw new NullPointerException("A fight in the file doesn't have enough arguments");

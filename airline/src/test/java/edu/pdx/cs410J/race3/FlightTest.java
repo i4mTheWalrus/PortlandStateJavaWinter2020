@@ -99,6 +99,9 @@ public class FlightTest {
     assertThat(testProj, notNullValue());
   }
 
+  /**
+   * Test to ensure exception is thrown if flight number passed in is not an integer.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testFlightNumberIsInteger() {
     Flight constructedFlight2 = new Flight("Delta", "LETTERS", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");

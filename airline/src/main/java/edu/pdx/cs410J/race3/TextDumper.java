@@ -15,6 +15,10 @@ public class TextDumper implements AirlineDumper {
    */
   String filename;
 
+  /**
+   * Constructor that takes in a string to determine file path.
+   * @param filePath String for filepath. File extension should be included when passed in.
+   */
   TextDumper(String filePath) {
     this.filename = filePath;
   }

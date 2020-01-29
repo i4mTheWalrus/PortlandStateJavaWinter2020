@@ -185,6 +185,9 @@ public class Project2IT extends InvokeMainTestCase {
 
    */
 
+  /**
+   * Tests to make sure an exception is thrown if there is a mismatched airline name on command line arg vs found in text file.
+   */
   public void testCheckingForFlightPassedOnCommandLineMatchesNameInFile() {
     MainMethodResult result = invokeMain("-textFile", "TestNameMatch", "Test1", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
     MainMethodResult result2 = invokeMain("-textFile", "TestNameMatch", "Test2", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
