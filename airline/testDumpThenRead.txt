@@ -1,2 +1,0 @@
-testDumpThenRead.txt,43,PDX,06/30/2019,03:43,SFC,04/12/2019,20:20
-testDumpThenRead.txt,6532,NYC,04/11/2020,04:27,SFC,05/15/2021,15:54

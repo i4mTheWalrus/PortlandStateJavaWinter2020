@@ -57,14 +57,17 @@ public class TextParser implements AirlineParser {
       inFile.close();
       return airline;
     } catch (IOException | NullPointerException e) {
-      throw new ParserException("Error reading from file. May be malformed.");
+      throw new ParserException(e.getMessage());
     } catch (IllegalArgumentException e) {
       throw new ParserException(e.getMessage());
     }
   }
 
   public void checkFlightFormatting(String[] flightArgs) {
-    // airline name, flight #, src, departDate, departTime, dest, arriveDate, arriveTime
+    if(flightArgs.length < 8) {
+      throw new NullPointerException("A fight in the file doesn't have enough arguments");
+    }
+
     if(!flightArgs[1].matches("([0-9]+)")) {
       throw new IllegalArgumentException("Text file: A flight number is not an integer.");
     }
