@@ -1,28 +1,23 @@
 package edu.pdx.cs410J.race3;
 
-import com.sun.tools.javac.Main;
 import edu.pdx.cs410J.InvokeMainTestCase;
-import edu.pdx.cs410J.ParserException;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * An integration test for the {@link Project2} main class.
+ * An integration test for the {@link Project3} main class.
  */
-public class Project2IT extends InvokeMainTestCase {
+public class Project3IT extends InvokeMainTestCase {
 
   /**
-   * Invokes the main method of {@link Project2} with the given arguments.
+   * Invokes the main method of {@link Project3} with the given arguments.
    */
   private MainMethodResult invokeMain(String... args) {
-    return invokeMain( Project2.class, args );
+    return invokeMain( Project3.class, args );
   }
 
   /**

@@ -8,7 +8,7 @@ import java.util.Collection;
 /**
  * The main class for the CS410J airline Project
  */
-public class Project2 {
+public class Project3 {
   /**
    * Define the number of options that can come before flight arguments.
    */

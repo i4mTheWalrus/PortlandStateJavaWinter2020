@@ -95,7 +95,7 @@ public class FlightTest {
    */
   @Test
   public void testProject2CanBeCreated() {
-    Project2 testProj = new Project2();
+    Project3 testProj = new Project3();
     assertThat(testProj, notNullValue());
   }
 
