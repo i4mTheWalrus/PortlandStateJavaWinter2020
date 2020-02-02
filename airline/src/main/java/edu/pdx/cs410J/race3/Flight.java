@@ -193,6 +193,6 @@ public class Flight extends AbstractFlight {
    */
   public String getTextFileString() {
     return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," +
-        dest + "," + arriveDate + "," + arriveTime;
+        dest + "," + arriveDate + "," + arriveTime + '\n';
   }
 }

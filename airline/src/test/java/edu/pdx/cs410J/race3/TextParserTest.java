@@ -15,15 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 public class TextParserTest {
   /**
-   * Test that TextParser creates the correct file in the correct directory (resources).
-   */
-  @Test
-  public void testConstructorCreatesCorrectFileAndFilePath() {
-    TextParser tp = new TextParser("testPath.txt");
-    assertThat(tp.fileName.contains("testPath"), is(true));
-  }
-
-  /**
    * Test to check for thrown exception if flight number in file is not an integer.
    * @throws ParserException Expected exception to be thrown.
    * @throws IOException Unexpected exception related to file writer.

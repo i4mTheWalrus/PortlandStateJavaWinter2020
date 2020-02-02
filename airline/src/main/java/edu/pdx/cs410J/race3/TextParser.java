@@ -13,17 +13,20 @@ import java.util.regex.Pattern;
  */
 public class TextParser implements AirlineParser {
 
-  /**
-   * Variable of TextParser that holds the name of the file. Path is assumed to be in src/main/resources/
-   */
-  String fileName;
+  final Reader reader;
 
   /**
    * Constructor that takes in a filename. Path is assumed to be in src/main/resources/
    * @param filePath String containing name and path of file to read.
    */
-  TextParser(String filePath) {
-    this.fileName = filePath;
+  TextParser(String filePath) throws IOException {
+    File file = new File(filePath);
+    if(!file.exists()) {
+      if(!file.createNewFile()) {
+        throw new IOException("Could not create file.");
+      }
+    }
+    this.reader = new FileReader(filePath);
   }
 
   /**
@@ -34,14 +37,9 @@ public class TextParser implements AirlineParser {
   @Override
   public AbstractAirline parse() throws ParserException {
     Airline airline = new Airline();
-    File in = new File(this.fileName);
     try {
-      if(!in.exists()) {
-        if(!in.createNewFile()) {
-          throw new IOException("Could not create file.");
-        }
-      }
-      BufferedReader inFile = new BufferedReader(new FileReader(in));
+
+      BufferedReader inFile = new BufferedReader(reader);
       String line;
 
       while((line = inFile.readLine()) != null) {
@@ -56,9 +54,7 @@ public class TextParser implements AirlineParser {
       }
       inFile.close();
       return airline;
-    } catch (IOException | NullPointerException e) {
-      throw new ParserException(e.getMessage());
-    } catch (IllegalArgumentException e) {
+    } catch (IOException | NullPointerException | IllegalArgumentException e) {
       throw new ParserException(e.getMessage());
     }
   }
