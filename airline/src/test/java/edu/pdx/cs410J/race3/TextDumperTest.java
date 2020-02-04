@@ -9,7 +9,6 @@ import java.io.*;
 /**
  * Class to unit test the {@link TextDumper} class.
  */
-@Ignore
 public class TextDumperTest {
   @Test (expected = IOException.class)
   public void testNullPassedToDumpReturnsInvalidArgumentException() throws IOException {

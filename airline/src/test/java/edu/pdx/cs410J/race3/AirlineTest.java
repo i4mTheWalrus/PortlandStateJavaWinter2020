@@ -11,10 +11,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit tests for the {@link Airline} class.
  */
-@Ignore
 public class AirlineTest {
   Airline airline1 = new Airline();
-  Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
+  Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "3:15", "AM", "BOI", "11/16/1986", "5:17", "PM");
 
   /**
    * Test that a flight can be added to an airline's collection.
@@ -34,6 +33,6 @@ public class AirlineTest {
     flights = airline1.getFlights();
     Flight first = flights.iterator().next();
     //System.out.println(first.toString());
-    assertThat(first.toString(), equalTo("Flight 3021 departs PDX at 11/15/1986 13:15 arrives BOI at 11/16/1986 15:17"));
+    assertThat(first.toString(), equalTo("Flight 3021 departs PDX at 11/15/1986 03:15 AM arrives BOI at 11/16/1986 05:17 PM"));
   }
 }

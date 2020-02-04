@@ -14,7 +14,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Class to unit test the {@link TextParser} class.
  */
-@Ignore
 public class TextParserTest {
   /**
    * Test to check for thrown exception if flight number in file is not an integer.
