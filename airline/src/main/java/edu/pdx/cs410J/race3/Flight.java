@@ -1,7 +1,9 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.ParserException;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Pattern;
@@ -101,6 +103,90 @@ public class Flight extends AbstractFlight {
       throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
     }
     this.departDate = departDate;
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
+    }
+    this.src = src;
+
+    // flight number should be integer
+    if(!flightNumber.matches("([0-9]+)")) {
+      throw new IllegalArgumentException("Flight number should be integer");
+    }
+    this.flightNumber = flightNumber;
+  }
+
+  /**
+   * Parameterized constructor. Build the flight with specified info.
+   * @param airline String containing name of airline.
+   * @param flightNumber String of flight number. Numerical only.
+   * @param src String of source airport. Must be 3 letters.
+   * @param departDate String of flight departure date.
+   * @param departTime String of flight departure time.
+   * @param departAmPm String containing either am or pm.
+   * @param dest String of destination airport. Must be 3 letters.
+   * @param arriveDate String of flight arrival date.
+   * @param arriveTime String of flight arrival time.
+   * @param arriveAmPm String containing either am or pm.
+   */
+  Flight(String airline, String flightNumber, String src, String departDate, String departTime, String departAmPm, String dest, String arriveDate, String arriveTime, String arriveAmPm) throws ParserException {
+    this.airline = airline;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YYYY mm:ss a");
+
+    // Time should be in ##:## format
+    if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
+    }
+    this.arriveTime = arriveTime;
+
+    // Date should be in ##/##/#### format
+    if(!arriveDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Arrive date is not in correct format. (##/##/####)");
+    }
+    this.arriveDate = arriveDate;
+
+    // arriveAmPm should be either 'am' or 'pm'
+    if(!(arriveAmPm.toLowerCase().equals("am") || arriveAmPm.toLowerCase().equals("pm"))) {
+      throw new IllegalArgumentException("Arrival time should include an am or pm");
+    }
+
+    // Try to build arrival date
+    try {
+      sdf.parse(arriveDate + " " + arriveTime + " " + arriveAmPm);
+    } catch (ParseException e) {
+      throw new ParserException("Could not build arrival date object.");
+    }
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
+    }
+    this.dest = dest;
+
+    // Time should be in ##:## format
+    if(!departTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    }
+    this.departTime = departTime;
+
+    // Date should be in ##/##/#### format
+    if(!departDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
+    }
+    this.departDate = departDate;
+
+    // departAmPm should be either 'am' or 'pm'
+    if(!(departAmPm.toLowerCase().equals("am") || departAmPm.toLowerCase().equals("pm"))) {
+      throw new IllegalArgumentException("Departure time should include an am or pm");
+    }
+
+    // Try to build depart date
+    try {
+      sdf.parse(departDate + " " + departTime + " " + departAmPm);
+    } catch (ParseException e) {
+      throw new ParserException("Could not build departure date object.");
+    }
 
     // src should be 3 characters! (no numbers or special characters)
     if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
