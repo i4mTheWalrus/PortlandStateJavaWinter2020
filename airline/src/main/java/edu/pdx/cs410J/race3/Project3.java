@@ -12,7 +12,7 @@ public class Project3 {
   /**
    * Define the number of options that can come before flight arguments.
    */
-  static int maxOptionCount = 4;
+  static int maxOptionCount = 6;
 
   /**
   * Flag option for printing the flight given via the command line.
@@ -30,9 +30,19 @@ public class Project3 {
   static boolean textFileFlag = false;
 
   /**
-   * String used to store file name for command line argument
+   * String used to store file name for command line argument.
    */
   static String fileName;
+
+  /**
+   * Flag option to specify if the program should pretty print somewhere.
+   */
+  static boolean prettyFlag = false;
+
+  /**
+   * Path for pretty print destination. '-' specifies a print to std out.
+   */
+  static String prettyFile;
 
   /**
    * Entry point of the program.
@@ -52,7 +62,7 @@ public class Project3 {
     }
 
     try {
-      Flight flight = new Flight(args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
+      Flight flight = new Flight(args[argCount - 10], args[argCount - 9], args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
 
       if(textFileFlag) {
         TextParser tp = new TextParser(fileName);
@@ -61,7 +71,7 @@ public class Project3 {
         // Check that airline found in file is the same as the one on the command line
         Collection<Flight> flightsFromFile = airline.getFlights();
         for(Flight f : flightsFromFile) {
-          if(!f.getAirlineName().equals(args[argCount-8])) {
+          if(!f.getAirlineName().equals(args[argCount-10])) {
             System.err.println("The airline name provided on command line does not match what is found in file!");
             System.exit(1);
           }
@@ -72,7 +82,7 @@ public class Project3 {
         td.dump(airline);
       }
       if (printFlag) {
-        Airline airline = new Airline(args[argCount - 8]);
+        Airline airline = new Airline(args[argCount - 10]);
         airline.addFlight(flight);
         System.out.println(flight);
       }
@@ -147,6 +157,15 @@ public class Project3 {
       if(args[i].contains("-textFile")) {
         textFileFlag = true;
         fileName = args[i+1];
+        break;
+      }
+    }
+
+    // Determine if pretty print option is given
+    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
+      if(args[i].contains("-pretty")) {
+        prettyFlag = true;
+        prettyFile = args[i+1];
         break;
       }
     }
