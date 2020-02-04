@@ -46,9 +46,9 @@ public class TextParser implements AirlineParser {
         String[] flightData = line.split(",");
 
         // Check if the flight string is malformed
-        checkFlightFormatting(flightData);
+        //checkFlightFormatting(flightData);
 
-        Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7]);
+        Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7], flightData[8], flightData[9]);
         airline.setAirlineName(flightData[0]);
         airline.addFlight(flight);
       }
@@ -63,6 +63,7 @@ public class TextParser implements AirlineParser {
    * Gets passed the flight string array read in from file. Checks each element eo ensure correctness of flight.
    * @param flightArgs String array of line read from file.
    */
+  /*
   public void checkFlightFormatting(String[] flightArgs) {
     if(flightArgs.length < 8) {
       throw new NullPointerException("A fight in the file doesn't have enough arguments");
@@ -96,4 +97,6 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Text file: An arrive time is not in correct format. (##:##)");
     }
   }
+
+   */
 }

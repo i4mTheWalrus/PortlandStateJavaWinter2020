@@ -56,6 +56,10 @@ public class Flight extends AbstractFlight {
    */
   String arriveTime;
 
+  String arriveAP;
+
+  String departAP;
+
   Date departure;
 
   Date arrival;
@@ -137,6 +141,8 @@ public class Flight extends AbstractFlight {
    */
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String departAmPm, String dest, String arriveDate, String arriveTime, String arriveAmPm) throws ParserException {
     this.airline = airline;
+    this.arriveAP = arriveAmPm;
+    this.departAP = departAmPm;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
 
     // Time should be in ##:## format
@@ -285,7 +291,7 @@ public class Flight extends AbstractFlight {
    * @return String value of line to go into file
    */
   public String getTextFileString() {
-    return airline + "," + flightNumber + "," + src + "," + getDepartureString() + "," +
-        dest + "," + getArrivalString() + '\n';
+    return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," + departAP + "," +
+        dest + "," + arriveDate + "," + arriveTime + "," + arriveAP + '\n';
   }
 }
