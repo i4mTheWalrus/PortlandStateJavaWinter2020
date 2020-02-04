@@ -43,8 +43,8 @@ public class Project3 {
 
     // Check for not no args, not enough args, or too many args.
     // Arg count should be between 8 and 11
-    checkArgCount(args);
     findOptions(args);
+    checkArgCount(args);
 
     if (readmeFlag) {
       printReadme();
@@ -95,7 +95,7 @@ public class Project3 {
     }
 
     // Minimum arg count if not options specified
-    if(args.length < 8) {
+    if(args.length < 8 && !readmeFlag) {
       System.err.println("Not enough arguments given.");
       System.exit(1);
     }
@@ -135,7 +135,7 @@ public class Project3 {
     }
 
     // If the -print flag is specified, set print flag
-    for(int i = 0; i < maxOptionCount; i++) {
+    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
       if (args[i].contains("-print")) {
         printFlag = true;
         break;
@@ -143,7 +143,7 @@ public class Project3 {
     }
 
     // If the -textFile flag is specified, the following option is used as a file to read/write from
-    for(int i = 0; i < maxOptionCount; i++) {
+    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
       if(args[i].contains("-textFile")) {
         textFileFlag = true;
         fileName = args[i+1];

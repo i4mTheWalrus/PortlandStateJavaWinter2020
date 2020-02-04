@@ -72,35 +72,11 @@ public class Flight extends AbstractFlight {
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
 
-    // flight number should be integer
-    if(!flightNumber.matches("([0-9]+)")) {
-      throw new IllegalArgumentException("Flight number should be integer");
-    }
-    this.flightNumber = flightNumber;
-
-    // src should be 3 characters! (no numbers or special characters)
-    if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
-      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
-    }
-    this.src = src;
-
-    // Date should be in ##/##/#### format
-    if(!departDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
-      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
-    }
-    this.departDate = departDate;
-
     // Time should be in ##:## format
-    if(!departTime.matches("([0-9]{2}):([0-9]{2})")) {
-      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
     }
-    this.departTime = departTime;
-
-    // src should be 3 characters! (no numbers or special characters)
-    if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
-      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
-    }
-    this.dest = dest;
+    this.arriveTime = arriveTime;
 
     // Date should be in ##/##/#### format
     if(!arriveDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
@@ -108,11 +84,35 @@ public class Flight extends AbstractFlight {
     }
     this.arriveDate = arriveDate;
 
-    // Time should be in ##:## format
-    if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
-      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
+    // src should be 3 characters! (no numbers or special characters)
+    if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
     }
-    this.arriveTime = arriveTime;
+    this.dest = dest;
+
+    // Time should be in ##:## format
+    if(!departTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    }
+    this.departTime = departTime;
+
+    // Date should be in ##/##/#### format
+    if(!departDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
+    }
+    this.departDate = departDate;
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
+    }
+    this.src = src;
+
+    // flight number should be integer
+    if(!flightNumber.matches("([0-9]+)")) {
+      throw new IllegalArgumentException("Flight number should be integer");
+    }
+    this.flightNumber = flightNumber;
   }
 
   /**
