@@ -6,6 +6,10 @@ import edu.pdx.cs410J.ParserException;
 
 import java.io.*;
 import java.nio.file.Paths;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -46,7 +50,7 @@ public class TextParser implements AirlineParser {
         String[] flightData = line.split(",");
 
         // Check if the flight string is malformed
-        //checkFlightFormatting(flightData);
+        checkFlightFormatting(flightData);
 
         Flight flight = new Flight(flightData[0], flightData[1], flightData[2], flightData[3], flightData[4], flightData[5], flightData[6], flightData[7], flightData[8], flightData[9]);
         airline.setAirlineName(flightData[0]);
@@ -63,9 +67,10 @@ public class TextParser implements AirlineParser {
    * Gets passed the flight string array read in from file. Checks each element eo ensure correctness of flight.
    * @param flightArgs String array of line read from file.
    */
-  /*
   public void checkFlightFormatting(String[] flightArgs) {
-    if(flightArgs.length < 8) {
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+
+    if(flightArgs.length < 10) {
       throw new NullPointerException("A fight in the file doesn't have enough arguments");
     }
 
@@ -77,26 +82,20 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code.");
     }
 
-    if(!flightArgs[3].matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
-      throw new IllegalArgumentException("Text file: A depart date are not in correct format. (##/##/####)");
+    try {
+      Date testDate = sdf.parse(flightArgs[3] + " " + flightArgs[4] + " " + flightArgs[5]);
+    } catch (ParseException e) {
+      throw new IllegalArgumentException("Incorrect departure date/time found in file.");
     }
 
-    if(!flightArgs[4].matches("([0-9]{2}):([0-9]{2})")) {
-      throw new IllegalArgumentException("Text file: A depart time is not in correct format. (##:##)");
-    }
-
-    if(flightArgs[5].length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(flightArgs[5]).find()) {
+    if(flightArgs[6].length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(flightArgs[6]).find()) {
       throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code.");
     }
 
-    if(!flightArgs[6].matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
-      throw new IllegalArgumentException("Text file: An arrive date is not in correct format. (##/##/####)");
-    }
-
-    if(!flightArgs[7].matches("([0-9]{2}):([0-9]{2})")) {
-      throw new IllegalArgumentException("Text file: An arrive time is not in correct format. (##:##)");
+    try {
+      Date testDate = sdf.parse(flightArgs[7] + " " + flightArgs[8] + " " + flightArgs[9]);
+    } catch (ParseException e) {
+      throw new IllegalArgumentException("Incorrect arrival date/time found in file.");
     }
   }
-
-   */
 }
