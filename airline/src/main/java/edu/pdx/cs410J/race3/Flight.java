@@ -28,14 +28,30 @@ public class Flight extends AbstractFlight {
    */
   String src;
 
-  Date departTime;
+  /**
+   * Date of flight departure. xx/xx/xxxx
+   */
+  String departDate;
+
+  /**
+   * Time of flight departure. ##:##
+   */
+  String departTime;
 
   /**
    * 3 letter destination airport code.
    */
   String dest;
 
-  Date arriveTime;
+  /**
+   * Date of flight arrival. xx/xx/xxxx
+   */
+  String arriveDate;
+
+  /**
+   * Time of flight arrival. ##:##
+   */
+  String arriveTime;
 
   /**
    * Default constructor. Does nothing.
@@ -47,14 +63,26 @@ public class Flight extends AbstractFlight {
    * @param airline String containing name of airline.
    * @param flightNumber String of flight number. Numerical only.
    * @param src String of source airport. Must be 3 letters.
-   * @param departTime Date type containing departure date and time.
+   * @param departDate String of flight departure date.
+   * @param departTime String of flight departure time.
    * @param dest String of destination airport. Must be 3 letters.
-   * @param arriveTime Date type containing arrival date and time.
+   * @param arriveDate String of flight arrival date.
+   * @param arriveTime String of flight arrival time.
    */
-  Flight(String airline, String flightNumber, String src, Date departTime, String dest, Date arriveTime) {
+  Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
 
+    // Time should be in ##:## format
+    if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
+    }
     this.arriveTime = arriveTime;
+
+    // Date should be in ##/##/#### format
+    if(!arriveDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Arrive date is not in correct format. (##/##/####)");
+    }
+    this.arriveDate = arriveDate;
 
     // src should be 3 characters! (no numbers or special characters)
     if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
@@ -62,7 +90,17 @@ public class Flight extends AbstractFlight {
     }
     this.dest = dest;
 
+    // Time should be in ##:## format
+    if(!departTime.matches("([0-9]{2}):([0-9]{2})")) {
+      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    }
     this.departTime = departTime;
+
+    // Date should be in ##/##/#### format
+    if(!departDate.matches("([0-9]{2})/([0-9]{2})/([0-9]{4})")) {
+      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
+    }
+    this.departDate = departDate;
 
     // src should be 3 characters! (no numbers or special characters)
     if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
@@ -97,13 +135,19 @@ public class Flight extends AbstractFlight {
     return airline;
   }
 
-  @Override
-  public Date getArrival() {
+  /**
+   * Method for getting the arrival time of a flight.
+   * @return A string containing arrival time.
+   */
+  public String getArriveTime() {
     return arriveTime;
   }
 
-  @Override
-  public Date getDeparture() {
+  /**
+   * Method for getting the departure time of a flight.
+   * @return A string containing arrival time.
+   */
+  public String getDepartureTime() {
     return departTime;
   }
 
@@ -122,7 +166,7 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getDepartureString() {
-    return departTime.toString();
+    return this.departDate + " " + this.departTime;
   }
 
   /**
@@ -140,7 +184,7 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getArrivalString() {
-    return arriveTime.toString();
+    return this.arriveDate + " " + this.arriveTime;
   }
 
   /**
@@ -148,7 +192,7 @@ public class Flight extends AbstractFlight {
    * @return String value of line to go into file
    */
   public String getTextFileString() {
-    return airline + "," + flightNumber + "," + src + "," + departTime.toString() + "," +
-        dest + "," + arriveTime.toString() + '\n';
+    return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," +
+        dest + "," + arriveDate + "," + arriveTime + '\n';
   }
 }
