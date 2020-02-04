@@ -3,6 +3,7 @@ package edu.pdx.cs410J.race3;
 import edu.pdx.cs410J.AbstractFlight;
 import edu.pdx.cs410J.ParserException;
 
+import javax.print.attribute.DateTimeSyntax;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -144,9 +145,15 @@ public class Flight extends AbstractFlight {
     this.arriveAP = arriveAmPm;
     this.departAP = departAmPm;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
-
+/*
+    if(!arriveTime.matches("([0-1]):([0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
+    }*/
     this.arriveTime = arriveTime;
 
+    if(!arriveDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+      throw new IllegalArgumentException("Arrive date is not in correct format. (##/##/####)");
+    }
     this.arriveDate = arriveDate;
 
     // arriveAmPm should be either 'am' or 'pm'
@@ -169,6 +176,9 @@ public class Flight extends AbstractFlight {
 
     this.departTime = departTime;
 
+    if(!departDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+      throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
+    }
     this.departDate = departDate;
 
     // departAmPm should be either 'am' or 'pm'
