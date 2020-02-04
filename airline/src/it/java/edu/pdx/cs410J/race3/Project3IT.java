@@ -12,7 +12,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * An integration test for the {@link Project3} main class.
  */
-@Ignore
 public class Project3IT extends InvokeMainTestCase {
 
   /**
@@ -37,7 +36,7 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testTooManyArgs() {
-    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
+    MainMethodResult result = invokeMain(" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Too many command line arguments."));
   }
@@ -57,8 +56,8 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testToStringMethodOutputForFlight() {
-    MainMethodResult result = invokeMain("-print", "Delta", "4567", "PDX", "12/12/2012", "15:24", "SFC", "12/12/2012", "17:15");
-    assertThat(result.getTextWrittenToStandardOut().contains("Flight 4567 departs PDX at 12/12/2012 15:24 arrives SFC at 12/12/2012 17:15"), is(true));
+    MainMethodResult result = invokeMain("-print", "Delta", "4567", "PDX", "12/12/2012", "5:24", "AM", "SFC", "12/12/2012", "7:15", "PM");
+    assertThat(result.getTextWrittenToStandardOut().contains("Flight 4567 departs PDX at 12/12/2012 05:24 AM arrives SFC at 12/12/2012 07:15 PM"), is(true));
   }
 
   /**
@@ -66,7 +65,7 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", "234", "555", "11/11/1911", "14:25", "BOI", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "555", "11/11/1911", "4:25", "AM", "BOI", "12/12/2012", "6:23", "PM");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -76,7 +75,7 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "666", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "4:25", "AM", "666", "12/12/2012", "6:23", "PM");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -86,7 +85,7 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", "234", "BOOM", "11/11/1911", "14:25", "KOA", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "BOOM", "11/11/1911", "4:25", "AM", "KOA", "12/12/2012", "6:23", "PM");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }
@@ -96,49 +95,9 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testDestAirportCodeCantHaveMoreThan3Characters() {
-    MainMethodResult result = invokeMain(" ", "234", "BOO", "11/11/1911", "14:25", "KOANS", "12/12/2012", "16:23");
+    MainMethodResult result = invokeMain(" ", "234", "BOO", "11/11/1911", "4:25", "AM", "KOANS", "12/12/2012", "6:23", "PM");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
-  }
-
-  /**
-   * Tests the formatting check for departure date.
-   */
-  @Test
-  public void testDepartureDateFormatCheck() {
-    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/191", "14:25", "BOI", "12/12/2012", "16:23");
-    assertThat(result.getExitCode(), equalTo(1));
-    assertThat(result.getTextWrittenToStandardError(), containsString("Depart date is not in correct format. (##/##/####)"));
-  }
-
-  /**
-   * Tests the formatting check for the departure time.
-   */
-  @Test
-  public void testDepartureTimeFormatCheck() {
-    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:2", "BOI", "12/12/2012", "16:23");
-    assertThat(result.getExitCode(), equalTo(1));
-    assertThat(result.getTextWrittenToStandardError(), containsString("Depart time is not in correct format. (##:##)"));
-  }
-
-  /**
-   * Tests the formatting check for the arrival date.
-   */
-  @Test
-  public void testArrivalDateFormatCheck() {
-    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "BOI", "192/12/212", "16:23");
-    assertThat(result.getExitCode(), equalTo(1));
-    assertThat(result.getTextWrittenToStandardError(), containsString("Arrive date is not in correct format. (##/##/####)"));
-  }
-
-  /**
-   * Tests the formatting check for the arrival time.
-   */
-  @Test
-  public void testArrivalTimeFormatCheck() {
-    MainMethodResult result = invokeMain(" ", "234", "PDX", "11/11/1911", "14:25", "BOI", "12/12/2012", "123:23");
-    assertThat(result.getExitCode(), equalTo(1));
-    assertThat(result.getTextWrittenToStandardError(), containsString("Arrive time is not in correct format. (##:##)"));
   }
 
   /**
@@ -186,8 +145,8 @@ public class Project3IT extends InvokeMainTestCase {
    * Tests to make sure an exception is thrown if there is a mismatched airline name on command line arg vs found in text file.
    */
   public void testCheckingForFlightPassedOnCommandLineMatchesNameInFile() {
-    MainMethodResult result = invokeMain("-textFile", "TestNameMatch", "Test1", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
-    MainMethodResult result2 = invokeMain("-textFile", "TestNameMatch", "Test2", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
+    MainMethodResult result = invokeMain("-textFile", "TestNameMatch", "Test1", "1254", "PDX", "05/05/2015", "4:14", "AM", "SFC", "05/05/2015", "4:55", "PM");
+    MainMethodResult result2 = invokeMain("-textFile", "TestNameMatch", "Test1", "1254", "PDX", "05/05/2015", "4:14", "AM", "SFC", "05/05/2015", "4:55", "PM");
     assertThat(result2.getTextWrittenToStandardError(), containsString("The airline name provided on command line does not match what is found in file!"));
     assertThat(result2.getExitCode(), is(1));
   }
@@ -196,7 +155,7 @@ public class Project3IT extends InvokeMainTestCase {
    * Test that file is created properly from command line
    */
   public void createFileFroCommandLineArgWorksProperly() {
-    MainMethodResult result = invokeMain("-textFile", "TestCreate", "TestCreate", "1254", "PDX", "05/05/2015", "14:14", "SFC", "05/05/2015", "14:55");
+    MainMethodResult result = invokeMain("-textFile", "TestCreate", "TestCreate", "1254", "PDX", "05/05/2015", "4:14", "AM", "SFC", "05/05/2015", "4:55", "PM");
     File aFile = new File("TestCreate");
     assertThat(aFile.exists(), is(true));
   }
