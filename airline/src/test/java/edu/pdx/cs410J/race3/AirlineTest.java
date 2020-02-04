@@ -1,5 +1,6 @@
 package edu.pdx.cs410J.race3;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -10,6 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit tests for the {@link Airline} class.
  */
+@Ignore
 public class AirlineTest {
   Airline airline1 = new Airline();
   Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");

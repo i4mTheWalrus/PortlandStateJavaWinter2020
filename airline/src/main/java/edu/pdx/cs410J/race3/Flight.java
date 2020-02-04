@@ -6,6 +6,7 @@ import edu.pdx.cs410J.ParserException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 /**
@@ -54,6 +55,10 @@ public class Flight extends AbstractFlight {
    * Time of flight arrival. ##:##
    */
   String arriveTime;
+
+  Date departure;
+
+  Date arrival;
 
   /**
    * Default constructor. Does nothing.
@@ -132,7 +137,7 @@ public class Flight extends AbstractFlight {
    */
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String departAmPm, String dest, String arriveDate, String arriveTime, String arriveAmPm) throws ParserException {
     this.airline = airline;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/DD/YYYY mm:ss a");
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
 
     // Time should be in ##:## format
     if(!arriveTime.matches("([0-9]{2}):([0-9]{2})")) {
@@ -153,7 +158,7 @@ public class Flight extends AbstractFlight {
 
     // Try to build arrival date
     try {
-      sdf.parse(arriveDate + " " + arriveTime + " " + arriveAmPm);
+      arrival = sdf.parse(arriveDate + " " + arriveTime + " " + arriveAmPm);
     } catch (ParseException e) {
       throw new ParserException("Could not build arrival date object.");
     }
@@ -183,7 +188,7 @@ public class Flight extends AbstractFlight {
 
     // Try to build depart date
     try {
-      sdf.parse(departDate + " " + departTime + " " + departAmPm);
+      departure = sdf.parse(departDate + " " + departTime + " " + departAmPm);
     } catch (ParseException e) {
       throw new ParserException("Could not build departure date object.");
     }
@@ -252,7 +257,8 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getDepartureString() {
-    return this.departDate + " " + this.departTime;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+    return sdf.format(departure);
   }
 
   /**
@@ -270,7 +276,8 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getArrivalString() {
-    return this.arriveDate + " " + this.arriveTime;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+    return sdf.format(arrival);
   }
 
   /**
@@ -278,7 +285,7 @@ public class Flight extends AbstractFlight {
    * @return String value of line to go into file
    */
   public String getTextFileString() {
-    return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," +
-        dest + "," + arriveDate + "," + arriveTime + '\n';
+    return airline + "," + flightNumber + "," + src + "," + getDepartureString() + "," +
+        dest + "," + getArrivalString() + '\n';
   }
 }
