@@ -8,16 +8,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * Unit tests for the {@link Flight} class.
  */
-@Ignore
 public class FlightTest {
   Flight constructedFlight = new Flight("Delta", "3021", "PDX", "11/15/1986", "13:15", "BOI", "11/16/1986", "15:17");
+  Flight constructedFlight2 = new Flight("Delta", "3021", "PDX", "11/15/1986", "3:15", "pm", "BOI", "11/16/1986", "5:17", "pm");
 
   /**
    * Test getting the depart string matches what constructor set it to.
    */
   @Test
   public void testGetDepartString() {
-    assertThat(constructedFlight.getDepartureString(), equalTo("11/15/1986 13:15"));
+    assertThat(constructedFlight2.getDepartureString(), equalTo("11/15/1986 03:15 PM"));
   }
 
   /**
@@ -25,7 +25,7 @@ public class FlightTest {
    */
   @Test
   public void testGetArrivalString() {
-    assertThat(constructedFlight.getArrivalString(), equalTo("11/16/1986 15:17"));
+    assertThat(constructedFlight2.getArrivalString(), equalTo("11/16/1986 05:17 PM"));
   }
 
   /**

@@ -139,7 +139,7 @@ public class Flight extends AbstractFlight {
    * @param arriveTime String of flight arrival time.
    * @param arriveAmPm String containing either am or pm.
    */
-  Flight(String airline, String flightNumber, String src, String departDate, String departTime, String departAmPm, String dest, String arriveDate, String arriveTime, String arriveAmPm) throws ParserException {
+  Flight(String airline, String flightNumber, String src, String departDate, String departTime, String departAmPm, String dest, String arriveDate, String arriveTime, String arriveAmPm) {
     this.airline = airline;
     this.arriveAP = arriveAmPm;
     this.departAP = departAmPm;
@@ -158,7 +158,7 @@ public class Flight extends AbstractFlight {
     try {
       arrival = sdf.parse(arriveDate + " " + arriveTime + " " + arriveAmPm);
     } catch (ParseException e) {
-      throw new ParserException("Could not build arrival date object.");
+      e.getStackTrace();
     }
 
     // src should be 3 characters! (no numbers or special characters)
@@ -180,7 +180,7 @@ public class Flight extends AbstractFlight {
     try {
       departure = sdf.parse(departDate + " " + departTime + " " + departAmPm);
     } catch (ParseException e) {
-      throw new ParserException("Could not build departure date object.");
+      e.getStackTrace();
     }
 
     // src should be 3 characters! (no numbers or special characters)
