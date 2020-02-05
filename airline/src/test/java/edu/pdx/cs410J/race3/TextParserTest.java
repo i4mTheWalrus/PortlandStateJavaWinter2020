@@ -45,7 +45,7 @@ public class TextParserTest {
     writeOut.close();
     Airline airline = new Airline("Airline");
     TextParser tp = new TextParser("ParseTest.txt");
-    airline = (Airline)tp.parse();
+    airline = (Airline) tp.parse();
     file.delete();
   }
 
@@ -132,5 +132,61 @@ public class TextParserTest {
     TextParser tp = new TextParser("ParseTest.txt");
     airline = (Airline) tp.parse();
     file.delete();
+  }
+
+  @Test (expected = NullPointerException.class)
+  public void testTextFileNullPointerExceptionNotEnoughArgs() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "Missing", "Args"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadFlightNumber() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "BADFLIGHTNUM", "PDX", "2/2/2012", "2:15", "am", "BOI", "5/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadSrcAirportCode() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "345", "XXPDX", "2/2/2012", "2:15", "am", "BOI", "5/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadDepartDate() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "456", "PDX", "2/2/2010342", "2:15", "am", "BOI", "5/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadDepartTime() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "5654", "PDX", "2/2/2012", "2:105", "am", "BOI", "5/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadDestAirportCode() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "45", "PDX", "2/2/2012", "2:15", "am", "6543BOI", "5/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadArrivalDate() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "98", "PDX", "2/2/2012", "2:15", "am", "BOI", "50/12/2009", "3:26", "pm"};
+    tp.checkFlightFormatting(str);
+  }
+
+  @Test (expected = IllegalArgumentException.class)
+  public void testTextFileIllegalArgumentExceptionBadArrivalTime() throws IOException {
+    TextParser tp = new TextParser("Whatever");
+    String[] str = new String[]{"Delta", "56", "PDX", "2/2/2012", "2:15", "am", "BOI", "5/12/2009", "30:26", "pm"};
+    tp.checkFlightFormatting(str);
   }
 }

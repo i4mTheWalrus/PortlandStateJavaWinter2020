@@ -86,7 +86,7 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Depart date in text file is not in correct format. (##/##/####) Was found to be " + flightArgs[3]);
     }
 
-    if(!flightArgs[4].matches("    ((1[012]|[1-9]):[0-5][0-9])")) {
+    if(!flightArgs[4].matches("((1[012]|[1-9]):[0-5][0-9])")) {
       throw new IllegalArgumentException("Depart time in text file is not in correct format. (##:##) Was found to be " + flightArgs[4]);
     }
 
@@ -104,7 +104,7 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Arrival date in text file is not in correct format. (##/##/####) Was found to be " + flightArgs[7]);
     }
 
-    if(!flightArgs[8].matches("    ((1[012]|[1-9]):[0-5][0-9])")) {
+    if(!flightArgs[8].matches("((1[012]|[1-9]):[0-5][0-9])")) {
       throw new IllegalArgumentException("Arrive time in text file is not in correct format. (##:##) Was found to be " + flightArgs[8]);
     }
 
