@@ -145,10 +145,10 @@ public class Flight extends AbstractFlight {
     this.arriveAP = arriveAmPm;
     this.departAP = departAmPm;
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
-/*
-    if(!arriveTime.matches("([0-1]):([0-9]{2})")) {
+
+    if(!arriveTime.matches("((1[012]|[1-9]):[0-5][0-9])")) {
       throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
-    }*/
+    }
     this.arriveTime = arriveTime;
 
     if(!arriveDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
@@ -174,6 +174,9 @@ public class Flight extends AbstractFlight {
     }
     this.dest = dest;
 
+    if(!departTime.matches("((1[012]|[1-9]):[0-5][0-9])")) {
+      throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
+    }
     this.departTime = departTime;
 
     if(!departDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
