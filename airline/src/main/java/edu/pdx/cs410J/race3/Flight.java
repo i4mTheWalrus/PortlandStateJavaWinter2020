@@ -151,7 +151,7 @@ public class Flight extends AbstractFlight {
     }
     this.arriveTime = arriveTime;
 
-    if(!arriveDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+    if(!arriveDate.matches("((0[1-9]|1[012])|([1-9]|1[012]))/((0[1-9]|[12][0-9]|3[01])|([1-9]|[12][0-9]|3[01]))/((19|2[0-9])[0-9]{2})")) {
       throw new IllegalArgumentException("Arrive date is not in correct format. (##/##/####)");
     }
     this.arriveDate = arriveDate;
@@ -179,7 +179,7 @@ public class Flight extends AbstractFlight {
     }
     this.departTime = departTime;
 
-    if(!departDate.matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+    if(!departDate.matches("((0[1-9]|1[012])|([1-9]|1[012]))/((0[1-9]|[12][0-9]|3[01])|([1-9]|[12][0-9]|3[01]))/((19|2[0-9])[0-9]{2})")) {
       throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
     }
     this.departDate = departDate;

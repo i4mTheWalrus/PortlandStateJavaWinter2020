@@ -82,8 +82,12 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code. Was found to be " + flightArgs[2]);
     }
 
-    if(!flightArgs[3].matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+    if(!flightArgs[3].matches("((0[1-9]|1[012])|([1-9]|1[012]))/((0[1-9]|[12][0-9]|3[01])|([1-9]|[12][0-9]|3[01]))/((19|2[0-9])[0-9]{2})")) {
       throw new IllegalArgumentException("Depart date in text file is not in correct format. (##/##/####) Was found to be " + flightArgs[3]);
+    }
+
+    if(!flightArgs[4].matches("    ((1[012]|[1-9]):[0-5][0-9])")) {
+      throw new IllegalArgumentException("Depart time in text file is not in correct format. (##:##) Was found to be " + flightArgs[4]);
     }
 
     try {
@@ -96,8 +100,12 @@ public class TextParser implements AirlineParser {
       throw new IllegalArgumentException("Text file: An airport code is not a 3 character letter-only code. Was found to be " + flightArgs[6]);
     }
 
-    if(!flightArgs[7].matches("(0[1-9]|1[012])/(0[1-9]|[12][0-9]|3[01])/((19|2[0-9])[0-9]{2})")) {
+    if(!flightArgs[7].matches("((0[1-9]|1[012])|([1-9]|1[012]))/((0[1-9]|[12][0-9]|3[01])|([1-9]|[12][0-9]|3[01]))/((19|2[0-9])[0-9]{2})")) {
       throw new IllegalArgumentException("Arrival date in text file is not in correct format. (##/##/####) Was found to be " + flightArgs[7]);
+    }
+
+    if(!flightArgs[8].matches("    ((1[012]|[1-9]):[0-5][0-9])")) {
+      throw new IllegalArgumentException("Arrive time in text file is not in correct format. (##:##) Was found to be " + flightArgs[8]);
     }
 
     try {
