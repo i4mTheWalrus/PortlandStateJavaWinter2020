@@ -39,7 +39,7 @@ public class TextDumperTest {
     Airline airline = new Airline("testAirline");
     Flight flight = new Flight("testAirline", "345", "BOI", "12/12/2012", "23:43", "PDX", "11/11/2011", "23:40");
     airline.addFlight(flight);
-    flight = new Flight("testAirline", "6543", "SFC", "01/01/2012", "03:43", "NYC", "01/01/2011", "03:40");
+    flight = new Flight("testAirline", "6543", "PDX", "01/01/2012", "03:43", "ORD", "01/01/2011", "03:40");
     airline.addFlight(flight);
     td.dump(airline);
   }

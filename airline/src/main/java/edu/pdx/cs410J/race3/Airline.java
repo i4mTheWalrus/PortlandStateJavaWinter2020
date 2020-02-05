@@ -2,9 +2,11 @@ package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.AbstractAirline;
 import edu.pdx.cs410J.AbstractFlight;
+import edu.pdx.cs410J.AirportNames;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * This class is used to model an airline. An airline has a name, and a collection of flights.
@@ -53,6 +55,7 @@ public class Airline extends AbstractAirline {
    */
   @Override
   public void addFlight(AbstractFlight abstractFlight) {
+    checkFlightSrcAndDestAreValid(abstractFlight);
     flights.add((Flight) abstractFlight);
   }
 
@@ -71,5 +74,19 @@ public class Airline extends AbstractAirline {
    */
   public void setAirlineName(String newName) {
     this.airlineName = newName;
+  }
+
+  /**
+   * Called before adding a flight to an airline, this method checks
+   */
+  public void checkFlightSrcAndDestAreValid(AbstractFlight abstractFlight) {
+    if(AirportNames.getName(abstractFlight.getSource()) == null) {
+      System.err.println("Source airport unknown when adding to flight. Found to be " + abstractFlight.getSource());
+      System.exit(1);
+    }
+    if(AirportNames.getName(abstractFlight.getDestination()) == null) {
+      System.err.println("Destination airport unknown when adding to flight. Found to be " + abstractFlight.getDestination());
+      System.exit(1);
+    }
   }
 }
