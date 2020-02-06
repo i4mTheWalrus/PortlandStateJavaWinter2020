@@ -6,6 +6,7 @@ import edu.pdx.cs410J.AirportNames;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 /**
@@ -57,6 +58,9 @@ public class Airline extends AbstractAirline {
   public void addFlight(AbstractFlight abstractFlight) {
     checkFlightSrcAndDestAreValid(abstractFlight);
     flights.add((Flight) abstractFlight);
+
+    // Always sort after adding a flight
+    flights.sort(new SortFlights());
   }
 
   /**

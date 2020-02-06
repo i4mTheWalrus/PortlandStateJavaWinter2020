@@ -33,6 +33,7 @@ public class TextDumperTest {
    * Test that the dump method correctly writes flights to a file for an airline
    * @throws IOException
    */
+  /*
   @Test
   public void testThatDumpWritesSuccessfullyToFile() throws IOException {
     TextDumper td = new TextDumper("testAirline");
@@ -43,4 +44,5 @@ public class TextDumperTest {
     airline.addFlight(flight);
     td.dump(airline);
   }
+   */
 }
