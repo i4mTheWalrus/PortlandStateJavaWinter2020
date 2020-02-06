@@ -198,6 +198,10 @@ public class Flight extends AbstractFlight {
       e.getStackTrace();
     }
 
+    if(departure.compareTo(arrival) > 0) {
+      throw new IllegalArgumentException("Departure date/time is before arrival date/time!");
+    }
+
     // src should be 3 characters! (no numbers or special characters)
     if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
       throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");

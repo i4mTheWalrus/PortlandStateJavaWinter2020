@@ -69,6 +69,7 @@ public class TextParser implements AirlineParser {
    */
   public void checkFlightFormatting(String[] flightArgs) {
     SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+    Date arr, depart;
 
     if(flightArgs.length < 10) {
       throw new NullPointerException("A fight in the file doesn't have enough arguments");
@@ -91,7 +92,7 @@ public class TextParser implements AirlineParser {
     }
 
     try {
-      Date testDate = sdf.parse(flightArgs[3] + " " + flightArgs[4] + " " + flightArgs[5]);
+      depart = sdf.parse(flightArgs[3] + " " + flightArgs[4] + " " + flightArgs[5]);
     } catch (ParseException e) {
       throw new IllegalArgumentException("Incorrect departure date/time found in file.");
     }
@@ -109,9 +110,13 @@ public class TextParser implements AirlineParser {
     }
 
     try {
-      Date testDate = sdf.parse(flightArgs[7] + " " + flightArgs[8] + " " + flightArgs[9]);
+      arr = sdf.parse(flightArgs[7] + " " + flightArgs[8] + " " + flightArgs[9]);
     } catch (ParseException e) {
       throw new IllegalArgumentException("Incorrect arrival date/time found in file.");
+    }
+
+    if(depart.compareTo(arr) > 0) {
+      throw new IllegalArgumentException("A flight in the file has a departure date/time that is before arrival date/time!");
     }
   }
 }
