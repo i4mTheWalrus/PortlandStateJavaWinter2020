@@ -132,12 +132,13 @@ public class Project3 {
    * Prints the readme to standard out.
    */
   public static void printReadme() {
-    System.out.println("About project 2:\n" +
+    System.out.println("About project 3:\n" +
         "Usage: cmdLineExec [options] <flight args>\n" +
-        "This project extends project 1 with the ability to load and save flights from a file.\n" +
+        "This project extends project 2. Date class has been implemented for departures and arrivals, flights are sorted by departure airport/time, and a pretty printer has been added to show the flights in a more readable form.\n" +
         "Command line options: -print prints the flight given on the command line\n" +
         "                      -readme prints this readme\n" +
         "                      -textFile [filename] Specifies the title of a text file to load/save with. (should not include file extension)\n" +
+        "                      -pretty [filename] Specifies a file to pretty print to. Use \"-\" to specify printing to console window.\n" +
         "The overall purpose is to represent an airline that consists of flights to and from various airports.");
   }
 
