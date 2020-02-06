@@ -56,9 +56,14 @@ public class Project3 {
     findOptions(args);
     checkArgCount(args);
 
-    if (readmeFlag) {
+    if(readmeFlag) {
       printReadme();
       System.exit(0);
+    }
+
+    if(fileName.equals(prettyFile)) {
+      System.err.println("Filename given for -textFile and -pretty cannot be the same.");
+      System.exit(1);
     }
 
     try {
@@ -76,12 +81,18 @@ public class Project3 {
             System.exit(1);
           }
         }
-
         airline.addFlight(flight);
         TextDumper td = new TextDumper(fileName);
         td.dump(airline);
       }
-      if (printFlag) {
+      if(prettyFlag) {
+        if(prettyFile.equals("-")) {
+          // pretty print to console
+        } else {
+          // create a file and pretty print to it
+        }
+      }
+      if(printFlag) {
         Airline airline = new Airline(args[argCount - 10]);
         airline.addFlight(flight);
         System.out.println(flight);
