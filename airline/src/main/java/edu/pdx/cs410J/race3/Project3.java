@@ -61,17 +61,21 @@ public class Project3 {
       System.exit(0);
     }
 
-    if(fileName.equals(prettyFile)) {
-      System.err.println("Filename given for -textFile and -pretty cannot be the same.");
-      System.exit(1);
+    if(fileName != null && prettyFile != null) {
+      if(fileName.equals(prettyFile)) {
+        System.err.println("Filename given for -textFile and -pretty cannot be the same.");
+        System.exit(1);
+      }
     }
 
     try {
       Flight flight = new Flight(args[argCount - 10], args[argCount - 9], args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
+      Airline airline = new Airline();
+      airline.addFlight(flight);
 
       if(textFileFlag) {
         TextParser tp = new TextParser(fileName);
-        Airline airline = (Airline)tp.parse();
+        airline = (Airline)tp.parse();
 
         // Check that airline found in file is the same as the one on the command line
         Collection<Flight> flightsFromFile = airline.getFlights();
@@ -81,17 +85,14 @@ public class Project3 {
             System.exit(1);
           }
         }
-        airline.addFlight(flight);
         TextDumper td = new TextDumper(fileName);
         td.dump(airline);
       }
       if(prettyFlag) {
         PrettyPrinter printer = new PrettyPrinter(prettyFile);
-
+        printer.dump(airline);
       }
       if(printFlag) {
-        Airline airline = new Airline(args[argCount - 10]);
-        airline.addFlight(flight);
         System.out.println(flight);
       }
     } catch (IllegalArgumentException | ParserException | IOException e) {

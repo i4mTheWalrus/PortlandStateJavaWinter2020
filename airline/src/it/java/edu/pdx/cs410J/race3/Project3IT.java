@@ -65,7 +65,7 @@ public class Project3IT extends InvokeMainTestCase {
    */
   @Test
   public void testSrcAirportCodeCantHaveNumbers() {
-    MainMethodResult result = invokeMain(" ", "234", "555", "11/11/1911", "4:25", "AM", "BOI", "12/12/2012", "6:23", "PM");
+    MainMethodResult result = invokeMain("test", "234", "555", "11/11/1911", "4:25", "AM", "BOI", "12/12/2012", "6:23", "PM");
     assertThat(result.getExitCode(), equalTo(1));
     assertThat(result.getTextWrittenToStandardError(), containsString("Airport code is not a 3 character letter-only code."));
   }

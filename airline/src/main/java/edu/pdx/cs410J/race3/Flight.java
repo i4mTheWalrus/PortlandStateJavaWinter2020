@@ -5,6 +5,7 @@ import edu.pdx.cs410J.AirportNames;
 import edu.pdx.cs410J.ParserException;
 
 import javax.print.attribute.DateTimeSyntax;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -145,7 +146,7 @@ public class Flight extends AbstractFlight {
     this.airline = airline;
     this.arriveAP = arriveAmPm;
     this.departAP = departAmPm;
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm a", Locale.getDefault());
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
 
     if(!arriveTime.matches("((1[012]|[1-9]):[0-5][0-9])")) {
       throw new IllegalArgumentException("Arrive time is not in correct format. (##:##)");
@@ -261,7 +262,7 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getDepartureString() {
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
     return sdf.format(departure);
   }
 
@@ -280,7 +281,7 @@ public class Flight extends AbstractFlight {
    */
   @Override
   public String getArrivalString() {
-    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy mm:ss a", Locale.getDefault());
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
     return sdf.format(arrival);
   }
 
@@ -306,16 +307,13 @@ public class Flight extends AbstractFlight {
   public String getPrettyPrintString() throws ParseException {
     String srcName = AirportNames.getName(src);
     String destName = AirportNames.getName(dest);
-    return airline + " flight " + flightNumber + " departs " + srcName + " at " + departure + " and arrives at " + destName + " at " + arrival + " for a total flight time of " + getFlightDuration() + " minutes\n";
+    DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
+    return airline + " flight " + flightNumber + " departs " + srcName + " at " + format.format(departure) + " and arrives at " + destName + " at " + format.format(arrival) + " for a total flight time of " + getFlightDuration() + " minutes.\n";
   }
 
   private long getFlightDuration() throws ParseException {
-    SimpleDateFormat format = new SimpleDateFormat("HH:mm");
-    Date d = format.parse(departTime);
-    Date a = format.parse(arriveTime);
-    long difference = d.getTime() - a.getTime();
-    // Return seconds instead of milliseconds
-    return difference * 1000;
+    long difference = arrival.getTime() - departure.getTime();
+    return difference / (60 * 1000);
   }
 /*
   @Override
