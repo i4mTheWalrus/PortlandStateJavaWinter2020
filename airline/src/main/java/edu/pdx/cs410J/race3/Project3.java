@@ -76,6 +76,7 @@ public class Project3 {
       if(textFileFlag) {
         TextParser tp = new TextParser(fileName);
         airline = (Airline)tp.parse();
+        airline.addFlight(flight);
 
         // Check that airline found in file is the same as the one on the command line
         Collection<Flight> flightsFromFile = airline.getFlights();
@@ -88,12 +89,12 @@ public class Project3 {
         TextDumper td = new TextDumper(fileName);
         td.dump(airline);
       }
+      if(printFlag) {
+        System.out.println(flight);
+      }
       if(prettyFlag) {
         PrettyPrinter printer = new PrettyPrinter(prettyFile);
         printer.dump(airline);
-      }
-      if(printFlag) {
-        System.out.println(flight);
       }
     } catch (IllegalArgumentException | ParserException | IOException e) {
       System.err.println(e.getMessage());

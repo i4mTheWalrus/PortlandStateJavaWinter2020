@@ -1,0 +1,11 @@
+Delta flight 235 departs Boise, ID at 2/4/09, 5:34 AM and arrives at Chicago, IL (O'Hare) at 4/5/18, 4:54 PM for a total flight time of 4820300 minutes.
+Delta flight 235 departs Boise, ID at 2/4/09, 5:34 PM and arrives at Chicago, IL (O'Hare) at 2/4/09, 5:54 PM for a total flight time of 20 minutes.
+Delta flight 234 departs Boise, ID at 2/4/12, 4:54 AM and arrives at Portland, OR at 5/6/09, 3:59 PM for a total flight time of -1445155 minutes.
+Delta flight 235 departs Boise, ID at 2/4/17, 5:34 AM and arrives at Chicago, IL (O'Hare) at 4/5/18, 4:54 PM for a total flight time of 612620 minutes.
+Delta flight 23432 departs Portland, OR at 1/1/11, 1:15 AM and arrives at Boise, ID at 2/12/11, 5:12 PM for a total flight time of 61437 minutes.
+Delta flight 2345 departs Portland, OR at 1/1/12, 4:12 AM and arrives at Boise, ID at 4/6/09, 5:23 PM for a total flight time of -1439269 minutes.
+Delta flight 2345 departs Portland, OR at 1/1/12, 4:12 AM and arrives at Boise, ID at 4/6/09, 5:23 PM for a total flight time of -1439269 minutes.
+Delta flight 234 departs Portland, OR at 12/2/12, 12:54 PM and arrives at Boise, ID at 12/4/12, 11:20 AM for a total flight time of 2786 minutes.
+Delta flight 234 departs Portland, OR at 12/2/12, 12:54 PM and arrives at Boise, ID at 12/4/12, 1:20 AM for a total flight time of 2186 minutes.
+Delta flight 234 departs Portland, OR at 12/2/12, 2:54 PM and arrives at Boise, ID at 12/4/12, 1:20 AM for a total flight time of 2066 minutes.
+Delta flight 234 departs Portland, OR at 12/2/12, 4:54 PM and arrives at Boise, ID at 12/4/12, 11:20 AM for a total flight time of 2546 minutes.
