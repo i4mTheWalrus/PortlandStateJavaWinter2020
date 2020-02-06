@@ -86,11 +86,8 @@ public class Project3 {
         td.dump(airline);
       }
       if(prettyFlag) {
-        if(prettyFile.equals("-")) {
-          // pretty print to console
-        } else {
-          // create a file and pretty print to it
-        }
+        PrettyPrinter printer = new PrettyPrinter(prettyFile);
+
       }
       if(printFlag) {
         Airline airline = new Airline(args[argCount - 10]);
