@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  * The flight is created using a constructor.
  * @author Tyler Race
  */
-public class Flight extends AbstractFlight {
+public class Flight extends AbstractFlight implements Comparable<Flight> {
   /**
    * Holds the name of the airline. ex: Delta
    */
@@ -290,5 +290,11 @@ public class Flight extends AbstractFlight {
   public String getTextFileString() {
     return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," + departAP + "," +
         dest + "," + arriveDate + "," + arriveTime + "," + arriveAP + '\n';
+  }
+
+  @Override
+  public int compareTo(Flight f) {
+
+    return 0;
   }
 }
