@@ -298,16 +298,29 @@ public class Flight extends AbstractFlight {
         dest + "," + arriveDate + "," + arriveTime + "," + arriveAP + '\n';
   }
 
+  /**
+   * Get the departure date class.
+   * @return Date object of departure.
+   */
   @Override
   public Date getDeparture() {
     return departure;
   }
 
+  /**
+   * Get the arrival date class.
+   * @return Date object of arrival.
+   */
   @Override
   public Date getArrival() {
     return arrival;
   }
 
+  /**
+   * Method used to form the flight data into a string used for pretty printing.
+   * @return String to be printed by pretty printer.
+   * @throws ParseException Unexpected exception thrown when parsing the date.
+   */
   public String getPrettyPrintString() throws ParseException {
     String srcName = AirportNames.getName(src);
     String destName = AirportNames.getName(dest);
@@ -315,6 +328,11 @@ public class Flight extends AbstractFlight {
     return airline + " flight " + flightNumber + " departs " + srcName + " at " + format.format(departure) + " and arrives at " + destName + " at " + format.format(arrival) + " for a total flight time of " + getFlightDuration() + " minutes.\n";
   }
 
+  /**
+   * Method used to calculate the duration of the flight. If it's negative, the flight should be invalidated.
+   * @return The flight duration time in minutes.
+   * @throws ParseException Unexpected exception thrown when parsing the dates.
+   */
   private long getFlightDuration() throws ParseException {
     long difference = arrival.getTime() - departure.getTime();
     return difference / (60 * 1000);

@@ -10,10 +10,18 @@ import java.io.Writer;
 import java.text.ParseException;
 import java.util.Collection;
 
+/**
+ * Class to print the contents of an airline in a more readable fashion.
+ */
 public class PrettyPrinter implements AirlineDumper {
 
   final Writer writer;
 
+  /**
+   * Constructor that takes a destination for the printing, be it a file, or standard output if equal to "-".
+   * @param path String when printing should be directed to.
+   * @throws IOException Unexpected exception from file writer.
+   */
   public PrettyPrinter(String path) throws IOException {
     if(path.equals(null)) {
       throw new IllegalArgumentException("Pretty printer path cannot be null");
@@ -26,6 +34,11 @@ public class PrettyPrinter implements AirlineDumper {
     }
   }
 
+  /**
+   * Method that does the actual printing. Destination determined by constructor.
+   * @param abstractAirline Airline to dump the flight contents of.
+   * @throws IOException Unexpected exception from file writer.
+   */
   @Override
   public void dump(AbstractAirline abstractAirline) throws IOException {
     if(abstractAirline == null) {

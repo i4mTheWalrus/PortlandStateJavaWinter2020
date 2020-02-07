@@ -9,8 +9,15 @@ import java.io.IOException;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+/**
+ * Class to test the PrettyPrinter class.
+ */
 public class PrettyPrinterTest {
 
+  /**
+   * Method that tests if pretty print sends to the console window correctly when given the "-" argument.
+   * @throws IOException Unexpected exception from file reader.
+   */
   @Test
   public void testPrettyOutputToStandardOut() throws IOException {
     PrettyPrinter printer = new PrettyPrinter("TestPretty.txt");

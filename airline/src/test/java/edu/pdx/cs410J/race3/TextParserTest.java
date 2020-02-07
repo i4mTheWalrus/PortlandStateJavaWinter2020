@@ -134,6 +134,10 @@ public class TextParserTest {
     file.delete();
   }
 
+  /**
+   * Test that if not enough arguments are given to the parser, it throws a null pointer exception.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = NullPointerException.class)
   public void testTextFileNullPointerExceptionNotEnoughArgs() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -141,6 +145,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if a flight number in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadFlightNumber() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -148,6 +156,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if a src airport in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadSrcAirportCode() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -155,6 +167,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if a depart date in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadDepartDate() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -162,6 +178,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if a depart time in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadDepartTime() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -169,6 +189,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if a destination airport in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadDestAirportCode() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -176,6 +200,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if an arrival date in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadArrivalDate() throws IOException {
     TextParser tp = new TextParser("Whatever");
@@ -183,6 +211,10 @@ public class TextParserTest {
     tp.checkFlightFormatting(str);
   }
 
+  /**
+   * Test that if an arrival time in the text file is malformed, an illegal argument exception is thrown.
+   * @throws IOException Unexpected exception relate to file reader.
+   */
   @Test (expected = IllegalArgumentException.class)
   public void testTextFileIllegalArgumentExceptionBadArrivalTime() throws IOException {
     TextParser tp = new TextParser("Whatever");
