@@ -1,6 +1,5 @@
 package edu.pdx.cs410J.race3;
 
-import org.junit.Ignore;
 import org.junit.Test;
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -97,7 +96,7 @@ public class FlightTest {
    */
   @Test
   public void testProject2CanBeCreated() {
-    Project3 testProj = new Project3();
+    Project4 testProj = new Project4();
     assertThat(testProj, notNullValue());
   }
 
