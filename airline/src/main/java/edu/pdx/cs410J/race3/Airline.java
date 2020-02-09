@@ -6,8 +6,6 @@ import edu.pdx.cs410J.AirportNames;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Map;
 
 /**
  * This class is used to model an airline. An airline has a name, and a collection of flights.

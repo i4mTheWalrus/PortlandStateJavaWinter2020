@@ -22,7 +22,7 @@ public class AboutObjects {
         }
 
         Class<?>[] ancestors = getAncestors(new Foo());
-        //assertEquals(ancestors[0], AboutObjects$1Foo.class);
+        assertEquals(ancestors[0], Foo.class);
         assertEquals(ancestors[1], java.lang.Object.class);
     }
 
@@ -49,7 +49,7 @@ public class AboutObjects {
     @Koan
     public void toStringIsTestedForNullWhenInvokedImplicitly() {
         String string = "string";
-        assertEquals(string + null, "string");
+        assertEquals(string + null, "stringnull");
     }
 
     private Class<?>[] getAncestors(Object object) {
