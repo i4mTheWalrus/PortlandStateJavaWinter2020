@@ -44,6 +44,10 @@ public class Project4 {
    */
   static String prettyFile;
 
+  static boolean xmlFlag = false;
+
+  static String xmlFile;
+
   /**
    * Entry point of the program.
    * @param args Command line arguments
@@ -73,6 +77,12 @@ public class Project4 {
       Airline airline = new Airline();
       airline.addFlight(flight);
 
+      // Having both textFile flag and xmlFlag is an error
+      if(textFileFlag && xmlFlag) {
+        System.err.println("Cannot specify both -textFile and -xmlFile!");
+        System.exit(1);
+      }
+
       if(textFileFlag) {
         TextParser tp = new TextParser(fileName);
         airline = (Airline)tp.parse();
@@ -95,6 +105,10 @@ public class Project4 {
       if(prettyFlag) {
         PrettyPrinter printer = new PrettyPrinter(prettyFile);
         printer.dump(airline);
+      }
+      if(xmlFlag) {
+        XmlParser parser = new XmlParser;
+        
       }
     } catch (IllegalArgumentException | ParserException | IOException e) {
       System.err.println(e.getMessage());
@@ -177,6 +191,15 @@ public class Project4 {
       if(args[i].contains("-pretty")) {
         prettyFlag = true;
         prettyFile = args[i+1];
+        break;
+      }
+    }
+
+    // Determine if xmlfile option is given
+    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
+      if(args[i].contains("xmlFile")) {
+        xmlFlag = true;
+        xmlFile = args[i+1];
         break;
       }
     }
