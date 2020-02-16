@@ -10,6 +10,10 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class XmlParser implements AirlineParser {
   DocumentBuilderFactory factory;
@@ -28,11 +32,17 @@ public class XmlParser implements AirlineParser {
   @Override
   public AbstractAirline parse() throws ParserException {
     Airline airline = new Airline();
-    String number, src, dDay, dMonth, dYear, dHour, dMinute, dest, aDay, aMonth, aYear, aHour, aMinute;
+    Flight flight;
+
+    String airlineName, number, src, dDay, dMonth, dYear, dHour, dMinute, dest, aDay, aMonth, aYear, aHour, aMinute;
+    String dAmPm = "AM", aAmPm = "AM";
+    int hour;
+
     NodeList airlineFromXML = doc.getElementsByTagName("airline");
     Node node = airlineFromXML.item(0);
     Element element = (Element) node;
-    airline.setAirlineName(element.getElementsByTagName("name").item(0).getTextContent());
+    airlineName = element.getElementsByTagName("name").item(0).getTextContent();
+    airline.setAirlineName(airlineName);
 
     // Parse the flights in the file
     airlineFromXML = doc.getElementsByTagName("flight");
@@ -57,6 +67,22 @@ public class XmlParser implements AirlineParser {
         child = element.getElementsByTagName("time").item(1).getAttributes();
         aHour = child.getNamedItem("hour").getTextContent();
         aMinute = child.getNamedItem("minute").getTextContent();
+
+        // Format 24 hour to 12
+        if(Integer.parseInt(dHour) > 12) {
+          hour = Integer.parseInt(dHour) - 12;
+          dHour = String.valueOf(hour);
+          dAmPm = "PM";
+        }
+        // Format 24 hour to 12
+        if(Integer.parseInt(aHour) > 12) {
+          hour = Integer.parseInt(aHour) - 12;
+          aHour = String.valueOf(hour);
+          aAmPm = "PM";
+        }
+
+        flight = new Flight(airlineName, number, src, dMonth + "/" + dDay + "/" + dYear, dHour + ":" + dMinute, dAmPm, dest, aMonth + "/" + aDay + "/" + aYear, aHour + ":" + aMinute, aAmPm);
+        airline.addFlight(flight);
       }
     }
 
