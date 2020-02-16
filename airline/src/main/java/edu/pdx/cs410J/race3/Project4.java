@@ -101,13 +101,6 @@ public class Project4 {
         TextDumper td = new TextDumper(fileName);
         td.dump(airline);
       }
-      if(printFlag) {
-        System.out.println(flight);
-      }
-      if(prettyFlag) {
-        PrettyPrinter printer = new PrettyPrinter(prettyFile);
-        printer.dump(airline);
-      }
       if(xmlFlag) {
         XmlParser parser = new XmlParser(xmlFile);
         airline = (Airline)parser.parse();
@@ -123,6 +116,13 @@ public class Project4 {
         }
 
         // DUMP TO XML
+      }
+      if(printFlag) {
+        System.out.println(flight);
+      }
+      if(prettyFlag) {
+        PrettyPrinter printer = new PrettyPrinter(prettyFile);
+        printer.dump(airline);
       }
     } catch (IllegalArgumentException | ParserException | IOException | ParserConfigurationException | SAXException e) {
       System.err.println(e.getMessage());
