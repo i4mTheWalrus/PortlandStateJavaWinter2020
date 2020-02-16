@@ -14,7 +14,7 @@ public class Project4 {
   /**
    * Define the number of options that can come before flight arguments.
    */
-  static int maxOptionCount = 6;
+  static int maxOptionCount = 8;
 
   /**
   * Flag option for printing the flight given via the command line.
@@ -109,8 +109,20 @@ public class Project4 {
         printer.dump(airline);
       }
       if(xmlFlag) {
-        XmlParser parser = new XmlParser("nothin");
+        XmlParser parser = new XmlParser(xmlFile);
+        airline = (Airline)parser.parse();
+        airline.addFlight(flight);
 
+        // Check that airline found in file is the same as the one on the command line
+        Collection<Flight> flightsFromFile = airline.getFlights();
+        for(Flight f : flightsFromFile) {
+          if(!f.getAirlineName().equals(args[argCount-10])) {
+            System.err.println("The airline name provided on command line does not match what is found in file!");
+            System.exit(1);
+          }
+        }
+
+        // DUMP TO XML
       }
     } catch (IllegalArgumentException | ParserException | IOException | ParserConfigurationException | SAXException e) {
       System.err.println(e.getMessage());

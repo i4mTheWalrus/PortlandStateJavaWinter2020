@@ -216,6 +216,42 @@ public class Flight extends AbstractFlight {
   }
 
   /**
+   * Parameterized constructor. Build the flight with specified info.
+   * @param airline String containing name of airline.
+   * @param flightNumber String of flight number. Numerical only.
+   * @param src String of source airport. Must be 3 letters.
+   * @param dest String of destination airport. Must be 3 letters.
+   */
+  Flight(String airline, String flightNumber, String src, Date departureIn, String dest, Date arrivalIn) {
+    this.airline = airline;
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(dest.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(dest).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
+    }
+    this.dest = dest;
+
+    this.departure = departureIn;
+    this.arrival = arrivalIn;
+
+    if(departure.compareTo(arrival) > 0) {
+      throw new IllegalArgumentException("Departure date/time is before arrival date/time!");
+    }
+
+    // src should be 3 characters! (no numbers or special characters)
+    if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {
+      throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
+    }
+    this.src = src;
+
+    // flight number should be integer
+    if(!flightNumber.matches("([0-9]+)")) {
+      throw new IllegalArgumentException("Flight number should be integer");
+    }
+    this.flightNumber = flightNumber;
+  }
+
+  /**
    * Method for obtaining the flight number for the flight.
    * @return The flight number, or the number 42 if none is specified.
    */
