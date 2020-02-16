@@ -1,7 +1,9 @@
 package edu.pdx.cs410J.race3;
 
 import edu.pdx.cs410J.ParserException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.util.Collection;
 
@@ -107,10 +109,10 @@ public class Project4 {
         printer.dump(airline);
       }
       if(xmlFlag) {
-        XmlParser parser = new XmlParser;
-        
+        XmlParser parser = new XmlParser("nothin");
+
       }
-    } catch (IllegalArgumentException | ParserException | IOException e) {
+    } catch (IllegalArgumentException | ParserException | IOException | ParserConfigurationException | SAXException e) {
       System.err.println(e.getMessage());
       System.exit(1);
     }
