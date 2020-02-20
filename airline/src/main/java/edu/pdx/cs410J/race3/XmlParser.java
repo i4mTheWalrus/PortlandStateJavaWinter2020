@@ -46,44 +46,48 @@ public class XmlParser implements AirlineParser {
 
     // Parse the flights in the file
     airlineFromXML = doc.getElementsByTagName("flight");
-    for(int temp = 0; temp < airlineFromXML.getLength(); temp++) {
-      node = airlineFromXML.item(temp);
-      if (node.getNodeType() == Node.ELEMENT_NODE) {
-        element = (Element) node;
-        number = element.getElementsByTagName("number").item(0).getTextContent();
-        src = element.getElementsByTagName("src").item(0).getTextContent();
-        NamedNodeMap child = element.getElementsByTagName("date").item(0).getAttributes();
-        dDay = child.getNamedItem("day").getTextContent();
-        dMonth = child.getNamedItem("month").getTextContent();
-        dYear = child.getNamedItem("year").getTextContent();
-        child = element.getElementsByTagName("time").item(0).getAttributes();
-        dHour = child.getNamedItem("hour").getTextContent();
-        dMinute = child.getNamedItem("minute").getTextContent();
-        dest = element.getElementsByTagName("dest").item(0).getTextContent();
-        child = element.getElementsByTagName("date").item(1).getAttributes();
-        aDay = child.getNamedItem("day").getTextContent();
-        aMonth = child.getNamedItem("month").getTextContent();
-        aYear = child.getNamedItem("year").getTextContent();
-        child = element.getElementsByTagName("time").item(1).getAttributes();
-        aHour = child.getNamedItem("hour").getTextContent();
-        aMinute = child.getNamedItem("minute").getTextContent();
+    try {
+      for (int temp = 0; temp < airlineFromXML.getLength(); temp++) {
+        node = airlineFromXML.item(temp);
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+          element = (Element) node;
+          number = element.getElementsByTagName("number").item(0).getTextContent();
+          src = element.getElementsByTagName("src").item(0).getTextContent();
+          NamedNodeMap child = element.getElementsByTagName("date").item(0).getAttributes();
+          dDay = child.getNamedItem("day").getTextContent();
+          dMonth = child.getNamedItem("month").getTextContent();
+          dYear = child.getNamedItem("year").getTextContent();
+          child = element.getElementsByTagName("time").item(0).getAttributes();
+          dHour = child.getNamedItem("hour").getTextContent();
+          dMinute = child.getNamedItem("minute").getTextContent();
+          dest = element.getElementsByTagName("dest").item(0).getTextContent();
+          child = element.getElementsByTagName("date").item(1).getAttributes();
+          aDay = child.getNamedItem("day").getTextContent();
+          aMonth = child.getNamedItem("month").getTextContent();
+          aYear = child.getNamedItem("year").getTextContent();
+          child = element.getElementsByTagName("time").item(1).getAttributes();
+          aHour = child.getNamedItem("hour").getTextContent();
+          aMinute = child.getNamedItem("minute").getTextContent();
 
-        // Format 24 hour to 12
-        if(Integer.parseInt(dHour) > 12) {
-          hour = Integer.parseInt(dHour) - 12;
-          dHour = String.valueOf(hour);
-          dAmPm = "PM";
-        }
-        // Format 24 hour to 12
-        if(Integer.parseInt(aHour) > 12) {
-          hour = Integer.parseInt(aHour) - 12;
-          aHour = String.valueOf(hour);
-          aAmPm = "PM";
-        }
+          // Format 24 hour to 12
+          if (Integer.parseInt(dHour) > 12) {
+            hour = Integer.parseInt(dHour) - 12;
+            dHour = String.valueOf(hour);
+            dAmPm = "PM";
+          }
+          // Format 24 hour to 12
+          if (Integer.parseInt(aHour) > 12) {
+            hour = Integer.parseInt(aHour) - 12;
+            aHour = String.valueOf(hour);
+            aAmPm = "PM";
+          }
 
-        flight = new Flight(airlineName, number, src, dMonth + "/" + dDay + "/" + dYear, dHour + ":" + dMinute, dAmPm, dest, aMonth + "/" + aDay + "/" + aYear, aHour + ":" + aMinute, aAmPm);
-        airline.addFlight(flight);
+          flight = new Flight(airlineName, number, src, dMonth + "/" + dDay + "/" + dYear, dHour + ":" + dMinute, dAmPm, dest, aMonth + "/" + aDay + "/" + aYear, aHour + ":" + aMinute, aAmPm);
+          airline.addFlight(flight);
+        }
       }
+    } catch(NullPointerException e) {
+      throw new ParserException("Missing data in the XML file.");
     }
 
     return airline;
