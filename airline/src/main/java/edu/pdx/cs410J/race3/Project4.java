@@ -5,6 +5,7 @@ import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.Collection;
 
 /**
@@ -77,7 +78,7 @@ public class Project4 {
     try {
       Flight flight = new Flight(args[argCount - 10], args[argCount - 9], args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
       Airline airline = new Airline();
-      airline.addFlight(flight);
+      airline.setAirlineName(args[argCount - 10]);
 
       // Having both textFile flag and xmlFlag is an error
       if(textFileFlag && xmlFlag) {
@@ -104,18 +105,21 @@ public class Project4 {
       if(xmlFlag) {
         XmlParser parser = new XmlParser(xmlFile);
         airline = (Airline)parser.parse();
+        airline.setAirlineName(args[argCount - 10]);
         airline.addFlight(flight);
 
         // Check that airline found in file is the same as the one on the command line
         Collection<Flight> flightsFromFile = airline.getFlights();
-        for(Flight f : flightsFromFile) {
-          if(!f.getAirlineName().equals(args[argCount-10])) {
+        for (Flight f : flightsFromFile) {
+          if (!f.getAirlineName().equals(args[argCount - 10])) {
             System.err.println("The airline name provided on command line does not match what is found in file!");
             System.exit(1);
           }
         }
 
         // DUMP TO XML
+        XmlDumper dumper = new XmlDumper(xmlFile);
+        dumper.dump(airline);
       }
       if(printFlag) {
         System.out.println(flight);

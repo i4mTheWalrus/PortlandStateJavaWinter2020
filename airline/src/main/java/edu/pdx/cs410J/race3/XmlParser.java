@@ -9,16 +9,14 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 public class XmlParser implements AirlineParser {
   DocumentBuilderFactory factory;
   DocumentBuilder builder;
   Document doc;
+  Boolean newFile = false;
 
   XmlParser(String xmlFile) throws ParserConfigurationException, IOException, SAXException {
     AirlineXmlHelper helper = new AirlineXmlHelper();
@@ -26,13 +24,25 @@ public class XmlParser implements AirlineParser {
     builder = factory.newDocumentBuilder();
     builder.setErrorHandler(helper);
     builder.setEntityResolver(helper);
-    doc = builder.parse(this.getClass().getResourceAsStream(xmlFile));
+    File file = new File(xmlFile);
+    if(!file.exists()) {
+      if(!file.createNewFile()) {
+        throw new IOException("Could not create file.");
+      }
+      newFile = true;
+    } else {
+      doc = builder.parse(xmlFile);
+    }
   }
 
   @Override
   public AbstractAirline parse() throws ParserException {
     Airline airline = new Airline();
     Flight flight;
+
+    if(newFile) {
+      return airline;
+    }
 
     String airlineName, number, src, dDay, dMonth, dYear, dHour, dMinute, dest, aDay, aMonth, aYear, aHour, aMinute;
     String dAmPm = "AM", aAmPm = "AM";

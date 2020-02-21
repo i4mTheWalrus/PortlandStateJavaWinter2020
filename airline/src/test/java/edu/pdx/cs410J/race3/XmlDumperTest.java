@@ -7,10 +7,5 @@ import java.io.IOException;
 
 public class XmlDumperTest {
 
-  @Test (expected = IOException.class)
-  public void testStuff() throws IOException {
-    XmlDumper test = new XmlDumper();
-    Airline airline = new Airline();
-    test.dump(airline);
-  }
+
 }
