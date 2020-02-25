@@ -12,6 +12,12 @@ import java.util.Map;
  */
 public class Project5 {
 
+    static boolean readmeFlag = false;
+    static boolean printFlag = false;
+    static boolean searchFlag = false;
+    static String searchSrc;
+    static String searchDest;
+    static int maxOptionCount = 7;
     public static final String MISSING_ARGS = "Missing command line arguments";
 
     public static void main(String... args) {
@@ -116,5 +122,37 @@ public class Project5 {
         err.println();
 
         System.exit(1);
+    }
+
+    /**
+     * Searches the beginning of the command line arguments for any specified options
+     * @param args Command line arguments.
+     */
+    public static void findOptions(String[] args) {
+        // If -readme is detected anywhere as an argument, print the readme and exit.
+        for (String i : args) {
+            if (i.contains("-README")) {
+                readmeFlag = true;
+                break;
+            }
+        }
+
+        // If the -print flag is specified, set print flag
+        for (int i = 0; i < maxOptionCount && i < args.length; i++) {
+            if (args[i].contains("-print")) {
+                printFlag = true;
+                break;
+            }
+        }
+
+        // If the -search flag is specified, set print flag
+        for (int i = 0; i < maxOptionCount && i < args.length; i++) {
+            if (args[i].contains("-search")) {
+                searchFlag = true;
+                searchSrc = args[i + 1];
+                searchDest = args[i + 2];
+                break;
+            }
+        }
     }
 }
