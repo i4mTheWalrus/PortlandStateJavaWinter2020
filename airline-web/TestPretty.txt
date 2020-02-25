@@ -1,0 +1,1 @@
+Tester flight 234 departs Boise, ID at 2/2/02, 4:30 AM and arrives at Portland, OR at 2/2/02, 5:30 AM for a total flight time of 60 minutes.
