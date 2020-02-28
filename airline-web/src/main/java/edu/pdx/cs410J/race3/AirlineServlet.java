@@ -26,7 +26,7 @@ public class AirlineServlet extends HttpServlet {
   static final String DEST_PARAMETER = "dest";
   static final String ARRIVE_PARAMETER = "arrive";
 
-  private final ArrayList<Airline> airlines = new ArrayList<>();
+  private final Map<String, Airline> airlines = new HashMap<>();
 
   /**
    * Handles an HTTP GET request from a client by writing the definition of the
@@ -48,7 +48,40 @@ public class AirlineServlet extends HttpServlet {
   @Override
   protected void doPost( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
   {
+    response.setContentType( "text/plain" );
 
+    String airlineName = getParameter(AIRLINE_PARAMETER, request );
+    if (airlineName == null) {
+      missingRequiredParameter(response, AIRLINE_PARAMETER);
+      return;
+    }
+
+    Airline airline = getOrCreateAirline(airlineName);
+
+    String flightNumber = getParameter(NUMBER_PARAMETER, request );
+    if ( flightNumber == null) {
+      missingRequiredParameter( response, NUMBER_PARAMETER );
+      return;
+    }
+
+    Flight flight = new Flight(Integer.parseInt(flightNumber));
+    airline.addFlight(flight);
+
+    PrintWriter pw = response.getWriter();
+    pw.println(Messages.definedWordAs(airlineName, flightNumber));
+    pw.flush();
+
+    response.setStatus( HttpServletResponse.SC_OK);
+  }
+
+  private Airline getOrCreateAirline(String airlineName) {
+    Airline airline = getAirline(airlineName);
+    if(airline == null) {
+      airline = new Airline(airlineName);
+      this.airlines.put(airlineName, airline);
+    }
+
+    return airline;
   }
 
   /**
@@ -75,28 +108,6 @@ public class AirlineServlet extends HttpServlet {
   }
 
   /**
-   * Writes the definition of the given word to the HTTP response.
-   *
-   * The text of the message is formatted with
-   * {@link Messages#formatDictionaryEntry(String, String)}
-   */
-  private void writeDefinition(String word, HttpServletResponse response) throws IOException
-  {
-
-  }
-
-  /**
-   * Writes all of the dictionary entries to the HTTP response.
-   *
-   * The text of the message is formatted with
-   * {@link Messages#formatDictionaryEntry(String, String)}
-   */
-  private void writeAllDictionaryEntries(HttpServletResponse response ) throws IOException
-  {
-
-  }
-
-  /**
    * Returns the value of the HTTP request parameter with the given name.
    *
    * @return <code>null</code> if the value of the parameter is
@@ -104,6 +115,17 @@ public class AirlineServlet extends HttpServlet {
    */
   private String getParameter(String name, HttpServletRequest request)
   {
-    return null;
+    String value = request.getParameter(name);
+    if (value == null || "".equals(value)) {
+      return null;
+
+    } else {
+      return value;
+    }
+  }
+
+  @VisibleForTesting
+  public Airline getAirline(String airlineName) {
+    return this.airlines.get(airlineName);
   }
 }

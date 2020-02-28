@@ -215,6 +215,10 @@ public class Flight extends AbstractFlight {
     this.flightNumber = flightNumber;
   }
 
+  public Flight(int flightNum) {
+    this.flightNumber = String.valueOf(flightNum);
+  }
+
   /**
    * Method for obtaining the flight number for the flight.
    * @return The flight number, or the number 42 if none is specified.

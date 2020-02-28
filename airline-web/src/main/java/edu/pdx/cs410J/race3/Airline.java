@@ -54,7 +54,9 @@ public class Airline extends AbstractAirline {
    */
   @Override
   public void addFlight(AbstractFlight abstractFlight) {
-    checkFlightSrcAndDestAreValid(abstractFlight);
+    if(!(abstractFlight.getDestination() == null | abstractFlight.getSource() == null)) {
+      checkFlightSrcAndDestAreValid(abstractFlight);
+    }
     flights.add((Flight) abstractFlight);
 
     // Always sort after adding a flight

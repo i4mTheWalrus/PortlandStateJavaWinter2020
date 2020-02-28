@@ -12,44 +12,12 @@ import java.util.Collection;
  * The main class for the CS410J airline Project
  */
 public class Project4 {
-  /**
-   * Define the number of options that can come before flight arguments.
-   */
-  static int maxOptionCount = 8;
-
-  /**
-  * Flag option for printing the flight given via the command line.
-  */
-  static boolean printFlag = false;
-
-  /**
-  * Flag option to print the readme.
-  */
   static boolean readmeFlag = false;
-
-  /**
-   * Flag option to specify a file to read or write from.
-   */
-  static boolean textFileFlag = false;
-
-  /**
-   * String used to store file name for command line argument.
-   */
-  static String fileName;
-
-  /**
-   * Flag option to specify if the program should pretty print somewhere.
-   */
-  static boolean prettyFlag = false;
-
-  /**
-   * Path for pretty print destination. '-' specifies a print to std out.
-   */
-  static String prettyFile;
-
-  static boolean xmlFlag = false;
-
-  static String xmlFile;
+  static boolean printFlag = false;
+  static boolean searchFlag = false;
+  static String searchSrc;
+  static String searchDest;
+  static int maxOptionCount = 7;
 
   /**
    * Entry point of the program.
@@ -68,67 +36,15 @@ public class Project4 {
       System.exit(0);
     }
 
-    if(fileName != null && prettyFile != null) {
-      if(fileName.equals(prettyFile)) {
-        System.err.println("Filename given for -textFile and -pretty cannot be the same.");
-        System.exit(1);
-      }
-    }
-
     try {
       Flight flight = new Flight(args[argCount - 10], args[argCount - 9], args[argCount - 8], args[argCount - 7], args[argCount - 6], args[argCount - 5], args[argCount - 4], args[argCount - 3], args[argCount - 2], args[argCount - 1]);
       Airline airline = new Airline();
       airline.setAirlineName(args[argCount - 10]);
 
-      // Having both textFile flag and xmlFlag is an error
-      if(textFileFlag && xmlFlag) {
-        System.err.println("Cannot specify both -textFile and -xmlFile!");
-        System.exit(1);
-      }
-
-      if(textFileFlag) {
-        TextParser tp = new TextParser(fileName);
-        airline = (Airline)tp.parse();
-        airline.addFlight(flight);
-
-        // Check that airline found in file is the same as the one on the command line
-        Collection<Flight> flightsFromFile = airline.getFlights();
-        for(Flight f : flightsFromFile) {
-          if(!f.getAirlineName().equals(args[argCount-10])) {
-            System.err.println("The airline name provided on command line does not match what is found in file!");
-            System.exit(1);
-          }
-        }
-        TextDumper td = new TextDumper(fileName);
-        td.dump(airline);
-      }
-      if(xmlFlag) {
-        XmlParser parser = new XmlParser(xmlFile);
-        airline = (Airline)parser.parse();
-        airline.setAirlineName(args[argCount - 10]);
-        airline.addFlight(flight);
-
-        // Check that airline found in file is the same as the one on the command line
-        Collection<Flight> flightsFromFile = airline.getFlights();
-        for (Flight f : flightsFromFile) {
-          if (!f.getAirlineName().equals(args[argCount - 10])) {
-            System.err.println("The airline name provided on command line does not match what is found in file!");
-            System.exit(1);
-          }
-        }
-
-        // DUMP TO XML
-        XmlDumper dumper = new XmlDumper(xmlFile);
-        dumper.dump(airline);
-      }
       if(printFlag) {
         System.out.println(flight);
       }
-      if(prettyFlag) {
-        PrettyPrinter printer = new PrettyPrinter(prettyFile);
-        printer.dump(airline);
-      }
-    } catch (IllegalArgumentException | ParserException | IOException | ParserConfigurationException | SAXException e) {
+    } catch (IllegalArgumentException e) {
       System.err.println(e.getMessage());
       System.exit(1);
     }
@@ -195,29 +111,12 @@ public class Project4 {
       }
     }
 
-    // If the -textFile flag is specified, the following option is used as a file to read/write from
-    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
-      if(args[i].contains("-textFile")) {
-        textFileFlag = true;
-        fileName = args[i+1];
-        break;
-      }
-    }
-
-    // Determine if pretty print option is given
-    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
-      if(args[i].contains("-pretty")) {
-        prettyFlag = true;
-        prettyFile = args[i+1];
-        break;
-      }
-    }
-
-    // Determine if xmlfile option is given
-    for(int i = 0; i < maxOptionCount && i < args.length; i++) {
-      if(args[i].contains("xmlFile")) {
-        xmlFlag = true;
-        xmlFile = args[i+1];
+    // If the -search flag is specified, set print flag
+    for (int i = 0; i < maxOptionCount && i < args.length; i++) {
+      if (args[i].contains("-search")) {
+        searchFlag = true;
+        searchSrc = args[i + 1];
+        searchDest = args[i + 2];
         break;
       }
     }
