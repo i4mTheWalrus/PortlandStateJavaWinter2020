@@ -7,4 +7,5 @@
         airline are listed.
         \n\nA new airline can be created on the home screen, and new flights can
         be created for an airline after clicking on one.</string>
+    <string name="add_flight">Add Flight</string>
 </resources>

@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AddFlightActivity"></activity>
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -19,8 +20,7 @@
         </activity>
 
         <activity android:name=".HelpPopup"
-            android:theme="@style/AppTheme.CustomeTheme"
-            ></activity>
+            android:theme="@style/AppTheme.CustomeTheme" />
     </application>
 
 </manifest>
