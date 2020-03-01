@@ -17,22 +17,31 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.TimeZone;
 
 public class XmlDumper implements AirlineDumper {
-  DocumentBuilderFactory factory;
-  DocumentBuilder builder;
-  Document doc;
-  String xmlPath;
+  private final DocumentBuilderFactory factory;
+  private final DocumentBuilder builder;
+  private final Document doc;
+  private String xmlPath;
+  private PrintWriter pw;
 
   XmlDumper(String path) throws ParserConfigurationException {
     factory = DocumentBuilderFactory.newInstance();
     builder = factory.newDocumentBuilder();
     doc = builder.newDocument();
     xmlPath = path;
+  }
+
+  public XmlDumper(PrintWriter pw) throws ParserConfigurationException {
+    factory = DocumentBuilderFactory.newInstance();
+    builder = factory.newDocumentBuilder();
+    doc = builder.newDocument();
+    this.pw = pw;
   }
 
   @Override
@@ -52,7 +61,10 @@ public class XmlDumper implements AirlineDumper {
     for (Flight f : flights) {
       departDate = f.getDeparture();
       arriveDate = f.getArrival();
-      cal.setTime(departDate);
+
+      if(!(departDate == null)) {
+        cal.setTime(departDate);
+      }
 
       Element flight = doc.createElement("flight");
       Element number = doc.createElement("number");
@@ -90,7 +102,9 @@ public class XmlDumper implements AirlineDumper {
       dest.appendChild(doc.createTextNode(f.getDestination()));
       flight.appendChild(dest);
 
-      cal.setTime(arriveDate);
+      if(!(arriveDate == null)) {
+        cal.setTime(arriveDate);
+      }
 
       Element arrive = doc.createElement("arrive");
       Element aDate = doc.createElement("date");
@@ -124,7 +138,7 @@ public class XmlDumper implements AirlineDumper {
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       Transformer transformer = transformerFactory.newTransformer();
       DOMSource domSource = new DOMSource(doc);
-      StreamResult streamResult = new StreamResult(new File(xmlPath));
+      StreamResult streamResult = new StreamResult(pw);
 
       transformer.transform(domSource, streamResult);
     } catch (TransformerException e) {

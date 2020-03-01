@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -37,6 +38,22 @@ public class AirlineServlet extends HttpServlet {
   @Override
   protected void doGet( HttpServletRequest request, HttpServletResponse response ) throws ServletException, IOException
   {
+    response.setContentType("text/plain");
+
+    String airlineName = getParameter(AIRLINE_PARAMETER, request);
+    Airline airline = getAirline(airlineName);
+
+    if(airline == null) {
+      throw new IOException("Airline was empty when invoking doGet.");
+    }
+
+    try {
+      XmlDumper dumper = new XmlDumper(response.getWriter());
+      dumper.dump(airline);
+    } catch (ParserConfigurationException e) {
+      e.printStackTrace();
+    }
+
 
   }
 

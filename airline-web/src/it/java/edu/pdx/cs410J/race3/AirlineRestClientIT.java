@@ -34,24 +34,15 @@ public class AirlineRestClientIT {
     client.removeAllDictionaryEntries();
   }
 
-  @Ignore
   @Test
-  public void test1EmptyServerContainsNoDictionaryEntries() throws IOException {
+  public void test2AddOneFlight() throws IOException {
     AirlineRestClient client = newAirlineRestClient();
-    Map<String, String> dictionary = client.getAllDictionaryEntries();
-    assertThat(dictionary.size(), equalTo(0));
-  }
+    String airlineName = "TEST WORD";
+    int flightNumber = 1234;
+    client.addFlight(airlineName, flightNumber);
 
-  @Ignore
-  @Test
-  public void test2DefineOneWord() throws IOException {
-    AirlineRestClient client = newAirlineRestClient();
-    String testWord = "TEST WORD";
-    String testDefinition = "TEST DEFINITION";
-    client.addDictionaryEntry(testWord, testDefinition);
-
-    String definition = client.getDefinition(testWord);
-    assertThat(definition, equalTo(testDefinition));
+    String definition = client.getDefinition(airlineName);
+    assertThat(definition, equalTo(flightNumber));
   }
 
   @Ignore

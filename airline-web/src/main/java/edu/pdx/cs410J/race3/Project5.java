@@ -77,7 +77,7 @@ public class Project5 {
 
             } else {
                 // Post the word/definition pair
-                client.addDictionaryEntry(word, definition);
+                //client.addFlight(word, definition);
                 message = Messages.definedWordAs(word, definition);
             }
 

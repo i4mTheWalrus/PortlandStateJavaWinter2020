@@ -2,6 +2,7 @@ package edu.pdx.cs410J.race3;
 
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,21 +21,10 @@ import static org.mockito.Mockito.*;
 public class AirlineServletTest {
   @Test
   public void addingFlightToServletStoresAirlineWithFlight() throws ServletException, IOException {
-    AirlineServlet servlet = new AirlineServlet();
-
     String airlineName = "TEST AIRLINE";
     int flightNumber = 123;
 
-    HttpServletRequest request = mock(HttpServletRequest.class);
-    when(request.getParameter("airline")).thenReturn(airlineName);
-    when(request.getParameter("flightNumber")).thenReturn(String.valueOf(flightNumber));
-
-    HttpServletResponse response = mock(HttpServletResponse.class);
-    PrintWriter pw = mock(PrintWriter.class);
-
-    when(response.getWriter()).thenReturn(pw);
-
-    servlet.doPost(request, response);
+    AirlineServlet servlet = createFlight(airlineName, flightNumber);
 
     Airline airline = servlet.getAirline(airlineName);
 
@@ -43,5 +33,45 @@ public class AirlineServletTest {
     Flight flight = airline.getFlights().iterator().next();
 
     assertThat(flight.getNumber(), equalTo(flightNumber));
+  }
+
+  private AirlineServlet createFlight(String airlineName, int flightNumber) throws IOException, ServletException {
+    AirlineServlet servlet = new AirlineServlet();
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    when(request.getParameter("airline")).thenReturn(airlineName);
+    when(request.getParameter("flightNumber")).thenReturn(String.valueOf(flightNumber));
+
+    HttpServletResponse response = mock(HttpServletResponse.class);
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    servlet.doPost(request, response);
+
+    return servlet;
+  }
+
+  @Ignore
+  @Test
+  public void getAirlineAsXml() throws IOException, ServletException {
+    String airlineName = "TEST AIRLINE";
+    int flightNumber = 123;
+
+    AirlineServlet servlet = createFlight(airlineName, flightNumber);
+
+    HttpServletRequest request = mock(HttpServletRequest.class);
+    HttpServletResponse response = mock(HttpServletResponse.class);
+
+    when(request.getParameter("airline")).thenReturn(airlineName);
+
+    ArgumentCaptor<String> textWrittenToWriter = ArgumentCaptor.forClass(String.class);
+    PrintWriter pw = mock(PrintWriter.class);
+    when(response.getWriter()).thenReturn(pw);
+
+    servlet.doGet(request, response);
+
+    verify(pw).println(textWrittenToWriter.capture());
+    String xml = textWrittenToWriter.getValue();
+    assertThat(xml, containsString(airlineName));
+    assertThat(xml, containsString(String.valueOf(flightNumber)));
   }
 }
