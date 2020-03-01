@@ -13,11 +13,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button helpButton = (Button)findViewById(R.id.helpButton);
+        Button helpButton = findViewById(R.id.helpButton);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HelpPopup.class));
+            }
+        });
+
+        Button addFlightButton = findViewById(R.id.addFlightButton);
+        addFlightButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AddFlightActivity.class));
             }
         });
     }
