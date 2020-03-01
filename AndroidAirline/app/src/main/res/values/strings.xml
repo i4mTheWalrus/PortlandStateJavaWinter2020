@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidAirline</string>
+    <string name="airline_app">Airline App</string>
+    <string name="help">Help</string>
+    <string name="helptext">This is an android app used to hold airline and flight information.
+        \n\nAirlines are listed on the home screen, and when clicked the flights associated to that
+        airline are listed.
+        \n\nA new airline can be created on the home screen, and new flights can
+        be created for an airline after clicking on one.</string>
 </resources>
