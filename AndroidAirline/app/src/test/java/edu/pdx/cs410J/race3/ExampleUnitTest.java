@@ -1,4 +1,4 @@
-package com.example.androidairline;
+package edu.pdx.cs410J.race3;
 
 import org.junit.Test;
 

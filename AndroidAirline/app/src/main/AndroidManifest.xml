@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.androidairline">
+    package="edu.pdx.cs410J.race3">
 
     <application
         android:allowBackup="true"
@@ -9,9 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AddFlightActivity"></activity>
+        <activity android:name="edu.pdx.cs410J.race3.AddFlightActivity"></activity>
 
-        <activity android:name=".MainActivity">
+        <activity android:name="edu.pdx.cs410J.race3.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".HelpPopup"
+        <activity android:name="edu.pdx.cs410J.race3.HelpPopup"
             android:theme="@style/AppTheme.CustomeTheme" />
     </application>
 

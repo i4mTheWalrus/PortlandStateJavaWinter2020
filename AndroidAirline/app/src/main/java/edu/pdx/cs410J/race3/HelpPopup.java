@@ -1,8 +1,10 @@
-package com.example.androidairline;
+package edu.pdx.cs410J.race3;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+
+import edu.pdx.cs410J.race3.R;
 
 public class HelpPopup extends Activity {
 

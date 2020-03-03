@@ -1,4 +1,4 @@
-package com.example.androidairline;
+package edu.pdx.cs410J.race3;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.example.androidairline", appContext.getPackageName());
+        assertEquals("com.pdx.cs410J", appContext.getPackageName());
     }
 }
