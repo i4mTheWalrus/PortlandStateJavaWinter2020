@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="edu.pdx.cs410J.race3.HelpPopup"
+        <activity android:name="edu.pdx.cs410J.race3.HelpPopupActivity"
             android:theme="@style/AppTheme.CustomeTheme" />
     </application>
 

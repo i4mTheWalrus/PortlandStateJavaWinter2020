@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import edu.pdx.cs410J.race3.R;
-
 public class MainActivity extends Activity {
 
     @Override
@@ -19,7 +17,7 @@ public class MainActivity extends Activity {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HelpPopup.class));
+                startActivity(new Intent(MainActivity.this, HelpPopupActivity.class));
             }
         });
 

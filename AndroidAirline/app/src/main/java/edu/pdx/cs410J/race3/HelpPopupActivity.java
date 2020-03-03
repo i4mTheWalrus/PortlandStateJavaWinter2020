@@ -6,7 +6,7 @@ import android.util.DisplayMetrics;
 
 import edu.pdx.cs410J.race3.R;
 
-public class HelpPopup extends Activity {
+public class HelpPopupActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
