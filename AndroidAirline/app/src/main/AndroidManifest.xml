@@ -9,17 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="edu.pdx.cs410J.race3.AddFlightActivity"></activity>
-
-        <activity android:name="edu.pdx.cs410J.race3.MainActivity">
+        <activity android:name=".AddAirlineActivity"></activity>
+        <activity android:name=".AddFlightActivity" />
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name="edu.pdx.cs410J.race3.HelpPopupActivity"
+        <activity
+            android:name=".HelpPopupActivity"
             android:theme="@style/AppTheme.CustomeTheme" />
     </application>
 

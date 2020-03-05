@@ -11,4 +11,7 @@
     <string name="add_new_flight">Add New Flight</string>
     <string name="flight_number">Flight Number:</string>
     <string name="_123">123</string>
+    <string name="add_airline">Add New Airline</string>
+    <string name="textview">TextView</string>
+    <string name="airline_name">Airline Name:</string>
 </resources>

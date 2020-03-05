@@ -21,12 +21,12 @@ public class MainActivity extends Activity {
             }
         });
 
-        Button addFlightButton = findViewById(R.id.addFlightButton);
+        Button addFlightButton = findViewById(R.id.addAirlineButton);
         addFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Airline test = new Airline("testAir");
-                Intent intent = new Intent(MainActivity.this, AddFlightActivity.class);
+                Intent intent = new Intent(MainActivity.this, AddAirlineActivity.class);
                 intent.putExtra("Airline", test);
                 startActivity(intent);
             }
