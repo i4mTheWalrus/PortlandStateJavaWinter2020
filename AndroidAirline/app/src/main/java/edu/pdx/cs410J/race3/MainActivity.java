@@ -6,6 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 public class MainActivity extends Activity {
 
 
@@ -14,6 +20,9 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //ArrayList<Airline> airlineList = new ArrayList<>();
+
+        // Help button
         Button helpButton = findViewById(R.id.helpButton);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,6 +31,7 @@ public class MainActivity extends Activity {
             }
         });
 
+        // Add flight button
         Button addFlightButton = findViewById(R.id.addAirlineButton);
         addFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
