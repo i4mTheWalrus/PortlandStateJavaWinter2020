@@ -3,6 +3,7 @@ package edu.pdx.cs410J.race3;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,12 @@ public class AddAirlineActivity extends Activity {
             public void onClick(View v) {
                 if(airlineInputName.getText().length() == 0) {
                     Toast.makeText(getApplicationContext(), "Airline name cannot be null", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Airline airline = new Airline(airlineInputName.getText().toString());
+                    Intent intent = new Intent(AddAirlineActivity.this, MainActivity.class);
+                    intent.putExtra("Airline", airline);
+                    startActivity(intent);
                 }
             }
         });
