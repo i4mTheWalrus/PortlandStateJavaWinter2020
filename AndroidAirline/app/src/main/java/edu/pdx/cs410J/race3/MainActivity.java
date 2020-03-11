@@ -15,16 +15,18 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class MainActivity extends Activity {
 
+    ArrayList<Airline> airlineList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //ArrayList<Airline> airlineList = new ArrayList<>();
+        airlineList = new ArrayList<>();
 
         // Help button
         Button helpButton = findViewById(R.id.helpButton);
@@ -53,9 +55,22 @@ public class MainActivity extends Activity {
         super.onResume();
         if(getIntent().hasExtra("Airline")) {
             Airline airline = (Airline) getIntent().getSerializableExtra("Airline");
-            TextView view = (TextView) findViewById(R.id.testView);
-            view.setText(airline.getName());
+            //TextView view = (TextView) findViewById(R.id.testView);
+            //view.setText(airline.getName());
+            airlineList.add(airline);
         }
+        writeToFile(airlineList, getApplicationContext());
+
+        try {
+            airlineList = readFromFile(getApplicationContext());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TextView view = (TextView) findViewById(R.id.testView);
+        Iterator<Airline> itr = airlineList.iterator();
+        view.setText(itr.next().getName());
+        // Above fails since its not checking if itr is pointing to null
     }
 
     private void writeToFile(ArrayList<Airline> data, Context context) {
