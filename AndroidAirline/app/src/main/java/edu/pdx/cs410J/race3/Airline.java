@@ -96,7 +96,6 @@ public class Airline implements Serializable {
      * Returns a brief textual description of this airline.
      */
     public final String toString() {
-        return this.getName() + " with " + this.getFlights().size() +
-                " flights";
+        return this.airlineName;
     }
 }
