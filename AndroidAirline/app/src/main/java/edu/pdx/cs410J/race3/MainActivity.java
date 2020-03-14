@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -64,12 +65,24 @@ public class MainActivity extends Activity {
         if(getIntent().hasExtra("Airline")) {
             Airline airline = (Airline) getIntent().getSerializableExtra("Airline");
             airlineList.add(airline);
+            getIntent().removeExtra("Airline");
         }
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airlineList);
-        ListView listView = (ListView) findViewById(R.id.airlineListView);
+        ListView listView = (ListView) findViewById(R.id.flightListView);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
+
+        AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // Pass the airline to the next activity
+                Intent intent = new Intent(MainActivity.this, FlightList.class);
+                intent.putExtra("Airline", airlineList.get(position));
+                startActivity(intent);
+            }
+        };
+
+        listView.setOnItemClickListener(messageClickedHandler);
     }
 
     @Override
