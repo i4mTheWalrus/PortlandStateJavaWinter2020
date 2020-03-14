@@ -62,10 +62,10 @@ public class MainActivity extends Activity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        if(getIntent().hasExtra("Airline")) {
-            Airline airline = (Airline) getIntent().getSerializableExtra("Airline");
+        if(getIntent().hasExtra("newAirline")) {
+            Airline airline = (Airline) getIntent().getSerializableExtra("newAirline");
             airlineList.add(airline);
-            getIntent().removeExtra("Airline");
+            getIntent().removeExtra("newAirline");
         }
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airlineList);

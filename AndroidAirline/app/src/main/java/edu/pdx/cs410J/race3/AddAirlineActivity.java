@@ -26,7 +26,7 @@ public class AddAirlineActivity extends Activity {
                 else {
                     Airline airline = new Airline(airlineInputName.getText().toString());
                     Intent intent = new Intent(AddAirlineActivity.this, MainActivity.class);
-                    intent.putExtra("Airline", airline);
+                    intent.putExtra("newAirline", airline);
                     startActivity(intent);
                 }
             }
