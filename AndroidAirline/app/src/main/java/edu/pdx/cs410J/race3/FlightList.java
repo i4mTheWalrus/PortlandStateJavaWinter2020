@@ -4,11 +4,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class FlightList extends Activity {
+    ArrayAdapter adapter;
+    ArrayList<Flight> flights;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,6 +26,8 @@ public class FlightList extends Activity {
         assert airline != null;
         airlineTextView.setText(airline.getName());
 
+        flights = (ArrayList<Flight>) airline.getFlights();
+
         Button addFlightButton = findViewById(R.id.addFlightButton);
         addFlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -28,5 +37,18 @@ public class FlightList extends Activity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    protected void onResume() {
+        super.onResume();
+
+        // get new flight from extra and add to airline
+        if(flights.size() != 0) {
+            adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, flights);
+            ListView listView = (ListView) findViewById(R.id.flightListView);
+            listView.setAdapter(adapter);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

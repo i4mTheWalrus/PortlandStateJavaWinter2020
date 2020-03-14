@@ -69,7 +69,7 @@ public class MainActivity extends Activity {
         }
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airlineList);
-        ListView listView = (ListView) findViewById(R.id.flightListView);
+        ListView listView = (ListView) findViewById(R.id.airlineListView);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
