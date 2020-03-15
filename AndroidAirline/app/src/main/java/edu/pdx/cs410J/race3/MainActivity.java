@@ -23,7 +23,9 @@ import java.util.ArrayList;
 
 public class MainActivity extends Activity {
 
+    private static final int REQUEST_CODE_SELECT_AIRLINNE = 1;
     ArrayList<Airline> airlineList;
+    protected int airlinePos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +80,8 @@ public class MainActivity extends Activity {
                 // Pass the airline to the next activity
                 Intent intent = new Intent(MainActivity.this, FlightList.class);
                 intent.putExtra("Airline", airlineList.get(position));
-                startActivity(intent);
+                airlinePos = airlineList.indexOf(airlineList.get(position));
+                startActivityForResult(intent, REQUEST_CODE_SELECT_AIRLINNE);
             }
         };
 
@@ -89,6 +92,20 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         writeToFile(airlineList, this);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == REQUEST_CODE_SELECT_AIRLINNE) {
+            if(data.hasExtra("updatedAirline")) {
+                Airline updatedAirline = (Airline) data.getSerializableExtra("updatedAirline");
+                data.removeExtra("updatedAirline");
+                airlineList.set(airlinePos, updatedAirline);
+                writeToFile(airlineList, this);
+            }
+        }
     }
 
     private void writeToFile(ArrayList<Airline> data, Context context) {

@@ -9,10 +9,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.fragment.app.DialogFragment;
 
 import java.util.ArrayList;
 
@@ -20,7 +18,7 @@ public class FlightList extends Activity {
     ArrayAdapter adapter;
     ArrayList<Flight> flights;
     Airline airline;
-    private static final int REQUEST_CODE_NEWFLIGHT = 0x9988;
+    private static final int REQUEST_CODE_NEWFLIGHT = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,11 +50,6 @@ public class FlightList extends Activity {
             ListView listView = (ListView) findViewById(R.id.flightListView);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
-
-
-            // TESTING -----------------
-            //TextView testTextView = (TextView) findViewById(R.id.testTextView);
-            //testTextView.setText(flights.get(1).toString());
         }
     }
 
@@ -64,9 +57,8 @@ public class FlightList extends Activity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        final int unmaskedRequestCode = requestCode & 0x0000ffff;
 
-        if(unmaskedRequestCode == REQUEST_CODE_NEWFLIGHT) {
+        if(requestCode == REQUEST_CODE_NEWFLIGHT) {
             if(resultCode == Activity.RESULT_OK) {
                 // Get the result from the returned Intent
                 if(data.hasExtra("newFlight")) {
@@ -78,5 +70,14 @@ public class FlightList extends Activity {
                 // AnotherActivity was not successful. No data to retrieve.
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // pass resulting airline back
+        final Intent intent = new Intent();
+        intent.putExtra("updatedAirline", airline);
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 }
