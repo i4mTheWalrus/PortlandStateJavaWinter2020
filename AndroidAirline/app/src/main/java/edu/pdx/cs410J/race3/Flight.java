@@ -320,7 +320,7 @@ public class Flight implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return this.getNumber() + ": " + this.getSource() + "->" + this.getDestination() +
+        return "Flight #" + this.getNumber() + "\n" + this.getSource() + " -> " + this.getDestination() +
                 "\nDeparts: " + this.departDate + " " + this.departTime + "\nArrives: " +
                 this.arriveDate + " " + arriveTime;
     }

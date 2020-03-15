@@ -38,6 +38,14 @@ public class FlightList extends Activity {
                 startActivityForResult(intent, REQUEST_CODE_NEWFLIGHT);
             }
         });
+
+        Button helpButton = findViewById(R.id.helpButton);
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FlightList.this, HelpPopupActivity.class));
+            }
+        });
     }
 
     protected void onResume() {

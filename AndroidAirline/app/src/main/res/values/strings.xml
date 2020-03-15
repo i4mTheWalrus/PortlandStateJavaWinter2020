@@ -20,4 +20,5 @@
     <string name="arrive_date">Arrive Date</string>
     <string name="submit_new_flight">Submit New Flight</string>
     <string name="arrive_time">Arrive Time</string>
+    <string name="search_airline">Search Airline</string>
 </resources>
