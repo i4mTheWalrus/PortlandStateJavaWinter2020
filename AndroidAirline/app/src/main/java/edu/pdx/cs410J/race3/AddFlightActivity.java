@@ -1,15 +1,23 @@
 package edu.pdx.cs410J.race3;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 import edu.pdx.cs410J.race3.R;
 
 public class AddFlightActivity extends Activity {
-
+    TextView departDate, arriveDate;
+    DatePickerDialog.OnDateSetListener departDateListener, arriveDateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,5 +42,61 @@ public class AddFlightActivity extends Activity {
         // dest spinner
         Spinner s2 = (Spinner)findViewById(R.id.destSpinner);
         s2.setAdapter(adapter);
+
+        // depart date
+        departDate = (TextView) findViewById(R.id.departDate);
+        departDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        AddFlightActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        departDateListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        departDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month ++;
+                String date = String.valueOf(month) + "/" + String.valueOf(dayOfMonth) + "/" + String.valueOf(year);
+                departDate.setText(date);
+            }
+        };
+
+        // arrive date
+        arriveDate = (TextView) findViewById(R.id.arriveDate);
+        arriveDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        AddFlightActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        arriveDateListener,
+                        year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        arriveDateListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month ++;
+                String date = String.valueOf(month) + "/" + String.valueOf(dayOfMonth) + "/" + String.valueOf(year);
+                arriveDate.setText(date);
+            }
+        };
     }
 }

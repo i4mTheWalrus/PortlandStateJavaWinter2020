@@ -10,6 +10,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
+
 import java.util.ArrayList;
 
 public class FlightList extends Activity {
@@ -21,8 +23,8 @@ public class FlightList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flight_list);
 
-        TextView airlineTextView = (TextView)findViewById(R.id.textHeaderAirline);
-        final Airline airline = (Airline)getIntent().getSerializableExtra("Airline");
+        TextView airlineTextView = (TextView) findViewById(R.id.textHeaderAirline);
+        final Airline airline = (Airline) getIntent().getSerializableExtra("Airline");
         assert airline != null;
         airlineTextView.setText(airline.getName());
 
@@ -37,7 +39,6 @@ public class FlightList extends Activity {
                 startActivity(intent);
             }
         });
-
     }
 
     protected void onResume() {
