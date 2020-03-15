@@ -21,6 +21,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/srcSpinner" />
 
+    <TextView
+        android:id="@+id/departTime"
+        android:layout_width="171dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="date"
+        android:text="@string/depart_time"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/departDate" />
+
+    <TextView
+        android:id="@+id/arriveTime"
+        android:layout_width="171dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:ems="10"
+        android:gravity="center"
+        android:inputType="date"
+        android:text="@string/arrive_time"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arriveDate" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="0dp"
@@ -40,7 +70,7 @@
         android:layout_marginLeft="32dp"
         android:layout_marginTop="8dp"
         android:layout_marginRight="64dp"
-        android:text="@string/add_new_flight"
+        android:text="@string/add_flight"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold"
@@ -123,9 +153,19 @@
         android:layout_marginRight="16dp"
         android:ems="10"
         android:inputType="date"
-        android:text="Arrive Date"
+        android:text="@string/arrive_date"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/destSpinner" />
+
+    <Button
+        android:id="@+id/addNewFlightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/submit_new_flight"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/departTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,27 +2,32 @@ package edu.pdx.cs410J.race3;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
-import edu.pdx.cs410J.race3.R;
-
 public class AddFlightActivity extends Activity {
-    TextView departDate, arriveDate;
+    TextView departDate, arriveDate, departTime, arriveTime;
     DatePickerDialog.OnDateSetListener departDateListener, arriveDateListener;
+    TimePickerDialog.OnTimeSetListener departTimeListener, arriveTimeListener;
+    Button addFlight;
+    Calendar cal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flight);
+        cal = Calendar.getInstance();
 
         // Airline name header
         TextView airlineTextView = (TextView)findViewById(R.id.airlineNameText);
@@ -31,7 +36,7 @@ public class AddFlightActivity extends Activity {
 
         // src spinner
         String[] srcSpinnerItems = new String[] {
-                "[SRC]", "BOI", "SRC", "PDX", "ORD", "SFC"
+                "[SRC]", "BOI", "NYC", "PDX", "ORD", "SFC"
         };
         Spinner s1 = (Spinner)findViewById(R.id.srcSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
@@ -48,7 +53,6 @@ public class AddFlightActivity extends Activity {
         departDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -76,7 +80,6 @@ public class AddFlightActivity extends Activity {
         arriveDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Calendar cal = Calendar.getInstance();
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -98,5 +101,64 @@ public class AddFlightActivity extends Activity {
                 arriveDate.setText(date);
             }
         };
+
+        // depart time
+        departTime = (TextView) findViewById(R.id.departTime);
+        departTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            int hour = cal.get(Calendar.HOUR);
+            int minute = cal.get(Calendar.MINUTE);
+
+            TimePickerDialog dialog = new TimePickerDialog(
+                    AddFlightActivity.this,
+                    android.R.style.Theme_Holo_Dialog_MinWidth,
+                    departTimeListener,
+                    hour, minute, false);
+            dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            dialog.show();
+        }});
+        departTimeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+                departTime.setText(time);
+            }
+        };
+
+        // arrive time
+        arriveTime = (TextView) findViewById(R.id.arriveTime);
+        arriveTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int hour = cal.get(Calendar.HOUR);
+                int minute = cal.get(Calendar.MINUTE);
+
+                TimePickerDialog dialog = new TimePickerDialog(
+                        AddFlightActivity.this,
+                        android.R.style.Theme_Holo_Dialog_MinWidth,
+                        arriveTimeListener,
+                        hour, minute, false);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }});
+        arriveTimeListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                String time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+                arriveTime.setText(time);
+            }
+        };
+
+
+
+        // Submit button
+        addFlight = findViewById(R.id.addNewFlightButton);
+        addFlight.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Build the flight and send back
+            }
+        });
     }
 }
