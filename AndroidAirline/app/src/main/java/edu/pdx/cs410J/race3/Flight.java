@@ -1,5 +1,8 @@
 package edu.pdx.cs410J.race3;
 
+import androidx.annotation.NonNull;
+
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,7 +16,7 @@ import java.util.regex.Pattern;
  * The flight is created using a constructor.
  * @author Tyler Race
  */
-public class Flight {
+public class Flight implements Serializable {
     /**
      * Holds the name of the airline. ex: Delta
      */
@@ -258,7 +261,7 @@ public class Flight {
      * @return A string containing departure date and departure time separated by a space.
      */
     public String getDepartureString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
         return sdf.format(departure);
     }
 
@@ -275,17 +278,8 @@ public class Flight {
      * @return A string containing arrival date and arrival time separated by a space.
      */
     public String getArrivalString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm a", Locale.getDefault());
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
         return sdf.format(arrival);
-    }
-
-    /**
-     * Format a flight for output made for text file (CSV).
-     * @return String value of line to go into file
-     */
-    public String getTextFileString() {
-        return airline + "," + flightNumber + "," + src + "," + departDate + "," + departTime + "," + departAP + "," +
-                dest + "," + arriveDate + "," + arriveTime + "," + arriveAP + '\n';
     }
 
     /**
@@ -305,18 +299,6 @@ public class Flight {
     }
 
     /**
-     * Method used to form the flight data into a string used for pretty printing.
-     * @return String to be printed by pretty printer.
-     * @throws ParseException Unexpected exception thrown when parsing the date.
-     */
-    public String getPrettyPrintString() throws ParseException {
-        String srcName = AirportNames.getName(src);
-        String destName = AirportNames.getName(dest);
-        DateFormat format = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, Locale.getDefault());
-        return airline + " flight " + flightNumber + " departs " + srcName + " at " + format.format(departure) + " and arrives at " + destName + " at " + format.format(arrival) + " for a total flight time of " + getFlightDuration() + " minutes.\n";
-    }
-
-    /**
      * Method used to calculate the duration of the flight. If it's negative, the flight should be invalidated.
      * @return The flight duration time in minutes.
      * @throws ParseException Unexpected exception thrown when parsing the dates.
@@ -328,10 +310,18 @@ public class Flight {
 
     /**
      * Returns a brief textual description of this flight.
-     */
+
     public final String toString() {
         return "Flight " + this.getNumber() + " departs " + this.getSource()
                 + " at " + this.getDepartureString() + " arrives " +
                 this.getDestination() + " at " + this.getArrivalString();
+    }
+     */
+    @NonNull
+    @Override
+    public String toString() {
+        return this.getNumber() + ": " + this.getSource() + "->" + this.getDestination() +
+                "\nDeparts:" + this.departDate + " " + this.departTime + "\nArrives:" +
+                this.arriveDate + " " + arriveTime;
     }
 }

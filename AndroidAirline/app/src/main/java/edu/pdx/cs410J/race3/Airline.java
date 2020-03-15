@@ -58,7 +58,7 @@ public class Airline implements Serializable {
         flights.add(abstractFlight);
 
         // Always sort after adding a flight
-        flights.sort(new SortFlights());
+        //flights.sort(new SortFlights());
     }
 
     /**

@@ -3,9 +3,12 @@ package edu.pdx.cs410J.race3;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -13,39 +16,46 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 
 public class AddFlightActivity extends Activity {
-    TextView departDate, arriveDate, departTime, arriveTime;
+    TextView departDate, arriveDate, departTime, arriveTime, flightNumView;
     DatePickerDialog.OnDateSetListener departDateListener, arriveDateListener;
     TimePickerDialog.OnTimeSetListener departTimeListener, arriveTimeListener;
     Button addFlight;
     Calendar cal;
+    Spinner s1, s2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_flight);
         cal = Calendar.getInstance();
+        flightNumView = (TextView) findViewById(R.id.flightNumberTextbox);
 
         // Airline name header
         TextView airlineTextView = (TextView)findViewById(R.id.airlineNameText);
-        Airline airline = (Airline)getIntent().getSerializableExtra("Airline");
+        final Airline airline = (Airline)getIntent().getSerializableExtra("Airline");
         airlineTextView.setText(airline.getName());
 
         // src spinner
-        String[] srcSpinnerItems = new String[] {
+        final String[] srcSpinnerItems = new String[] {
                 "[SRC]", "BOI", "NYC", "PDX", "ORD", "SFC"
         };
-        Spinner s1 = (Spinner)findViewById(R.id.srcSpinner);
+        s1 = (Spinner)findViewById(R.id.srcSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, srcSpinnerItems);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         s1.setAdapter(adapter);
 
         // dest spinner
-        Spinner s2 = (Spinner)findViewById(R.id.destSpinner);
+        s2 = (Spinner)findViewById(R.id.destSpinner);
         s2.setAdapter(adapter);
 
         // depart date
@@ -153,11 +163,37 @@ public class AddFlightActivity extends Activity {
 
 
         // Submit button
-        addFlight = findViewById(R.id.addNewFlightButton);
+        addFlight = findViewById(R.id.submitNewFlight);
         addFlight.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                // Build the flight and send back
+                //
+                if(flightNumView.getText().toString().matches("") | s1.getSelectedItem().toString().equals("[SRC]") |
+                        (departDate.getText().toString().matches("Depart Date")) | (departTime.getText().toString().matches("Depart Time")) |
+                        (arriveDate.getText().toString().matches("Arrive Date")) | (arriveTime.getText().toString().matches("Arrive Time")) |
+                        s2.getSelectedItem().toString().equals("[SRC]")) {
+                    Toast.makeText(AddFlightActivity.this, "All Fields Required", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    // build the flight
+                    flightNumView = (TextView)findViewById(R.id.flightNumberTextbox);
+                    Flight flight = new Flight(
+                            airline.getName(),
+                            flightNumView.getText().toString(),
+                            s1.getSelectedItem().toString(),
+                            departDate.getText().toString(),
+                            departTime.getText().toString(),
+                            s2.getSelectedItem().toString(),
+                            arriveDate.getText().toString(),
+                            arriveTime.getText().toString()
+                    );
+
+                    final Intent intent = new Intent();
+                    intent.putExtra("newFlight", flight);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
             }
         });
     }
