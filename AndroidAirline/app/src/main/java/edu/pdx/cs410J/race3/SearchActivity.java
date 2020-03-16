@@ -105,11 +105,25 @@ public class SearchActivity extends Activity {
         String searchAirline = airlineSpinner.getSelectedItem().toString();
         String searchSrc = s1.getSelectedItem().toString();
         String searchDest = s2.getSelectedItem().toString();
-        if(flights.size() < 1) {
+        searchResults(searchAirline, searchSrc, searchDest);
+        if(flights.size() > 0) {
             ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, flights);
             ListView listView = (ListView) findViewById(R.id.searchListView);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
+        }
+    }
+
+    private void searchResults(String searchAirline, String searchSrc, String searchDest) {
+        flights = new ArrayList<>();
+        for(Airline airline : airlineList) {
+            if(airline.getName().equals(searchAirline)) {
+                for(Flight flight : airline.getFlights()) {
+                    if((flight.getSource().equals(searchSrc)) && (flight.getDestination().equals(searchDest))) {
+                        flights.add(flight);
+                    }
+                }
+            }
         }
     }
 }
