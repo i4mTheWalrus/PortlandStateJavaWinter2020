@@ -172,8 +172,6 @@ public class AddFlightActivity extends Activity {
             }
         };
 
-
-
         // Submit button
         addFlight = findViewById(R.id.submitNewFlight);
         addFlight.setOnClickListener(new View.OnClickListener() {

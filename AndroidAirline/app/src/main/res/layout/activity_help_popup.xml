@@ -24,4 +24,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/clearDataButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear_data"
+        app:layout_constraintBottom_toBottomOf="@+id/helpText"
+        app:layout_constraintEnd_toEndOf="@+id/helpText"
+        app:layout_constraintStart_toStartOf="@+id/helpText" />
 </androidx.constraintlayout.widget.ConstraintLayout>

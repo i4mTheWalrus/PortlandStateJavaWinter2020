@@ -70,6 +70,10 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        if(getIntent().hasExtra("resetFlag")) {
+            getIntent().removeExtra("resetFlag");
+            deleteAirlineFile();
+        }
         try {
             airlineList = readFromFile(this);
         } catch (IOException e) {
@@ -97,6 +101,8 @@ public class MainActivity extends Activity {
         };
 
         listView.setOnItemClickListener(messageClickedHandler);
+
+        writeToFile(airlineList, this);
     }
 
     @Override
@@ -138,15 +144,17 @@ public class MainActivity extends Activity {
         ObjectInputStream input;
         String filename = "airlines.txt";
         ArrayList<Airline> airlines = null;
+        File data = new File(getFilesDir(), filename);
+        if(!(data.exists())) {
+            data.createNewFile();
+        }
         try {
-            input = new ObjectInputStream(new FileInputStream(new File(new File(getFilesDir(),"")+File.separator+filename)));
+            input = new ObjectInputStream(new FileInputStream(data));
             airlines = (ArrayList<Airline>) input.readObject();
             input.close();
         } catch (StreamCorruptedException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
