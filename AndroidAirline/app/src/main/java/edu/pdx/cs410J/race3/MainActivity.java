@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
         // search button
         Button searchButton = findViewById(R.id.searchButton);
-        helpButton.setOnClickListener(new View.OnClickListener() {
+        searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, SearchActivity.class));

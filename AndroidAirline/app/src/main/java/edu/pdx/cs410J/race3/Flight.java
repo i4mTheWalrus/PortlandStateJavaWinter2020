@@ -83,9 +83,10 @@ public class Flight implements Serializable {
      */
     Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
         this.airline = airline;
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
         // Time should be in ##:## format
-        if(!arriveTime.matches("([0-9]{1,2}):([0-9]{1,2})")) {
+        if(!arriveTime.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
             throw new IllegalArgumentException("Arrive time is not in correct format. (##:##). Found to be " + arriveTime);
         }
         this.arriveTime = arriveTime;
@@ -101,9 +102,9 @@ public class Flight implements Serializable {
             throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
         }
         this.dest = dest;
-
+        
         // Time should be in ##:## format
-        if(!departTime.matches("([0-9]{1,2}):([0-9]{1,2})")) {
+        if(!departTime.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
             throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");
         }
         this.departTime = departTime;

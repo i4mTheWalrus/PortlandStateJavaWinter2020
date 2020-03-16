@@ -22,7 +22,7 @@ public class AirportNames {
      * Creates a new <code>AirportNames</code> and fills in all of the
      * names.
      */
-    private AirportNames() {
+    AirportNames() {
         Map<String, String> names = new java.util.TreeMap<String, String>();
 
         names.put("ABE", "Allentown, PA");
@@ -343,6 +343,16 @@ public class AirportNames {
         }
 
         return airportNames.names.get(code);
+    }
+
+    public static List<String> getCodes() {
+        if (airportNames == null) {
+            airportNames = new AirportNames();
+        }
+
+        List<String> list = new ArrayList<String>(airportNames.names.keySet());
+        //String[] stringArr = list.toArray( new String[] {} );
+        return list;
     }
 
     /**

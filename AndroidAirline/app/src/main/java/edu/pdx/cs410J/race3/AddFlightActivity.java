@@ -22,7 +22,10 @@ import androidx.annotation.RequiresApi;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 public class AddFlightActivity extends Activity {
     TextView departDate, arriveDate, departTime, arriveTime, flightNumView;
@@ -44,10 +47,16 @@ public class AddFlightActivity extends Activity {
         final Airline airline = (Airline)getIntent().getSerializableExtra("Airline");
         airlineTextView.setText(airline.getName());
 
+
+        List<String> airportCodes = AirportNames.getCodes();
+        List<String> srcItems = new ArrayList<>();
+        srcItems.add("Select Airport");
+        for(String str : airportCodes) {
+            srcItems.add(str);
+        }
+        String[] srcSpinnerItems = srcItems.toArray( new String[] {} );
+
         // src spinner
-        final String[] srcSpinnerItems = new String[] {
-                "[SRC]", "BOI", "NYC", "PDX", "ORD", "SFC"
-        };
         s1 = (Spinner)findViewById(R.id.srcSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, srcSpinnerItems);
@@ -124,14 +133,18 @@ public class AddFlightActivity extends Activity {
                     AddFlightActivity.this,
                     android.R.style.Theme_Holo_Dialog_MinWidth,
                     departTimeListener,
-                    hour, minute, false);
+                    hour, minute, true);
             dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             dialog.show();
         }});
         departTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+                String newMinute = String.valueOf(minute);
+                if(minute < 10) {
+                    newMinute = "0" + minute;
+                }
+                String time = String.valueOf(hourOfDay) + ":" + newMinute;
                 departTime.setText(time);
             }
         };
@@ -148,14 +161,18 @@ public class AddFlightActivity extends Activity {
                         AddFlightActivity.this,
                         android.R.style.Theme_Holo_Dialog_MinWidth,
                         arriveTimeListener,
-                        hour, minute, false);
+                        hour, minute, true);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
             }});
         arriveTimeListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                String time = String.valueOf(hourOfDay) + ":" + String.valueOf(minute);
+                String newMinute = String.valueOf(minute);
+                if(minute < 10) {
+                    newMinute = "0" + minute;
+                }
+                String time = String.valueOf(hourOfDay) + ":" + newMinute;
                 arriveTime.setText(time);
             }
         };
@@ -168,11 +185,10 @@ public class AddFlightActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
-                //
-                if(flightNumView.getText().toString().matches("") | s1.getSelectedItem().toString().equals("[SRC]") |
+                if(flightNumView.getText().toString().matches("") | s1.getSelectedItem().toString().equals("Select Airport") |
                         (departDate.getText().toString().matches("Depart Date")) | (departTime.getText().toString().matches("Depart Time")) |
                         (arriveDate.getText().toString().matches("Arrive Date")) | (arriveTime.getText().toString().matches("Arrive Time")) |
-                        s2.getSelectedItem().toString().equals("[SRC]")) {
+                        s2.getSelectedItem().toString().equals("Select Airport")) {
                     Toast.makeText(AddFlightActivity.this, "All Fields Required", Toast.LENGTH_SHORT).show();
                 }
                 else {

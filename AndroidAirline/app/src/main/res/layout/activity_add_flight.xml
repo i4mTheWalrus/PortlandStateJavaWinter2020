@@ -123,25 +123,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/airlineNameText" />
 
+    <TextView
+        android:id="@+id/sourceTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/source_airport"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightNumberTextbox" />
+
+    <TextView
+        android:id="@+id/destinationTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginRight="32dp"
+        android:text="@string/destination_airport"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/flightNumberTextbox" />
+
     <Spinner
         android:id="@+id/srcSpinner"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flightNumberTextbox" />
+        app:layout_constraintTop_toBottomOf="@+id/sourceTextView" />
 
     <Spinner
         android:id="@+id/destSpinner"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flightNumberTextbox" />
+        app:layout_constraintTop_toBottomOf="@+id/destinationTextView" />
 
     <TextView
         android:id="@+id/arriveDate"
