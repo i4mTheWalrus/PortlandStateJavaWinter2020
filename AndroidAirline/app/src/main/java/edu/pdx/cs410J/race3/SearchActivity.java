@@ -95,23 +95,15 @@ public class SearchActivity extends Activity {
         });
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        updateSearchResults();
-    }
-
     protected void updateSearchResults() {
         String searchAirline = airlineSpinner.getSelectedItem().toString();
         String searchSrc = s1.getSelectedItem().toString();
         String searchDest = s2.getSelectedItem().toString();
         searchResults(searchAirline, searchSrc, searchDest);
-        if(flights.size() > 0) {
-            ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, flights);
-            ListView listView = (ListView) findViewById(R.id.searchListView);
-            listView.setAdapter(adapter);
-            adapter.notifyDataSetChanged();
-        }
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, flights);
+        ListView listView = (ListView) findViewById(R.id.searchListView);
+        listView.setAdapter(adapter);
     }
 
     private void searchResults(String searchAirline, String searchSrc, String searchDest) {
