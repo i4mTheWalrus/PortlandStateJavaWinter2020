@@ -48,13 +48,8 @@ public class MainActivity extends Activity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> airlineArrayList = new ArrayList<>();
-                for(Airline air : airlineList) {
-                    airlineArrayList.add(air.getName());
-                }
-                String[] airlines = airlineArrayList.toArray( new String[] {} );
                 Intent intent = new Intent(MainActivity.this, SearchActivity.class);
-                intent.putExtra("airlineList", airlines);
+                intent.putExtra("airlineList", airlineList);
                 startActivity(intent);
             }
         });
