@@ -43,7 +43,6 @@ public class AddFlightActivity extends Activity {
         final Airline airline = (Airline)getIntent().getSerializableExtra("Airline");
         airlineTextView.setText(airline.getName());
 
-
         List<String> airportCodes = AirportNames.getCodes();
         List<String> srcItems = new ArrayList<>();
         srcItems.add("Select Airport");
