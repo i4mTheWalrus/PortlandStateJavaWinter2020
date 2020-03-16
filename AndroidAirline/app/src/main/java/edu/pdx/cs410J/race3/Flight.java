@@ -102,7 +102,7 @@ public class Flight implements Serializable {
             throw new IllegalArgumentException("Airport code is not a 3 character letter-only code.");
         }
         this.dest = dest;
-        
+
         // Time should be in ##:## format
         if(!departTime.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
             throw new IllegalArgumentException("Depart time is not in correct format. (##:##)");

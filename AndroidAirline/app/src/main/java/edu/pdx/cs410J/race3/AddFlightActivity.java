@@ -8,7 +8,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -20,12 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 
 public class AddFlightActivity extends Activity {
     TextView departDate, arriveDate, departTime, arriveTime, flightNumView;

@@ -14,7 +14,7 @@ public class SearchActivity extends Activity {
         setContentView(R.layout.activity_search);
 
         // Help button
-        Button helpButton = findViewById(R.id.helpButton);
+        Button helpButton = findViewById(R.id.helpButton3);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

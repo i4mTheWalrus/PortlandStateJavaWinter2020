@@ -23,4 +23,5 @@
     <string name="search_airline">Search Airline</string>
     <string name="destination_airport">Destination Airport</string>
     <string name="source_airport">Source Airport</string>
+    <string name="airline">Airline</string>
 </resources>

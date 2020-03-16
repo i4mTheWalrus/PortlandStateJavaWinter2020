@@ -55,7 +55,7 @@ public class FlightList extends Activity {
         // get new flight from extra and add to airline
         if(flights.size() != 0) {
             adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, flights);
-            ListView listView = (ListView) findViewById(R.id.flightListView);
+            ListView listView = (ListView) findViewById(R.id.searchListView);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
