@@ -20,6 +20,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MainActivity extends Activity {
 
@@ -84,6 +85,8 @@ public class MainActivity extends Activity {
             airlineList.add(airline);
             getIntent().removeExtra("newAirline");
         }
+
+        Collections.sort(airlineList);
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airlineList);
         ListView listView = (ListView) findViewById(R.id.airlineListView);

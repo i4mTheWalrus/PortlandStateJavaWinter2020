@@ -85,6 +85,7 @@ public class Flight extends AbstractFlight {
    */
   Flight(String airline, String flightNumber, String src, String departDate, String departTime, String dest, String arriveDate, String arriveTime) {
     this.airline = airline;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
 
     // Time should be in ##:## format
     if(!arriveTime.matches("([0-9]{1,2}):([0-9]{1,2})")) {
@@ -115,6 +116,20 @@ public class Flight extends AbstractFlight {
       throw new IllegalArgumentException("Depart date is not in correct format. (##/##/####)");
     }
     this.departDate = departDate;
+
+    // Try to build arrival date
+    try {
+      arrival = sdf.parse(arriveDate + " " + arriveTime);
+    } catch (ParseException e) {
+      e.getStackTrace();
+    }
+
+    // Try to build departure date
+    try {
+      departure = sdf.parse(departDate + " " + departTime);
+    } catch (ParseException e) {
+      e.getStackTrace();
+    }
 
     // src should be 3 characters! (no numbers or special characters)
     if(src.length() != 3 || Pattern.compile("[^a-zA-Z]").matcher(src).find()) {

@@ -13,7 +13,7 @@ import java.util.Collection;
  * Flights are modelled with an arraylist.
  * @author Tyler Race
  */
-public class Airline implements Serializable {
+public class Airline implements Serializable, Comparable<Airline> {
     /**
      * Name of the airline.
      */
@@ -58,7 +58,7 @@ public class Airline implements Serializable {
         flights.add(abstractFlight);
 
         // Always sort after adding a flight
-        //flights.sort(new SortFlights());
+        flights.sort(new SortFlights());
     }
 
     /**
@@ -97,5 +97,10 @@ public class Airline implements Serializable {
      */
     public final String toString() {
         return this.airlineName;
+    }
+
+    @Override
+    public int compareTo(Airline o) {
+        return (this.getName().compareTo(o.getName()));
     }
 }

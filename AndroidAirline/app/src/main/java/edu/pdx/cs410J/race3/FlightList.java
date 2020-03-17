@@ -18,6 +18,7 @@ public class FlightList extends Activity {
     ArrayAdapter adapter;
     ArrayList<Flight> flights;
     Airline airline;
+    SortFlights sorter;
     private static final int REQUEST_CODE_NEWFLIGHT = 2;
 
     @Override
