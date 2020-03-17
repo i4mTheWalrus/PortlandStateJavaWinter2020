@@ -27,6 +27,8 @@ public class MainActivity extends Activity {
     private static final int REQUEST_CODE_SELECT_AIRLINNE = 1;
     ArrayList<Airline> airlineList;
     protected int airlinePos;
+    Boolean saveOnly;
+    ListView listView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         airlineList = new ArrayList<>();
+        saveOnly = false;
 
         // Help button
         Button helpButton = findViewById(R.id.helpButton);
@@ -66,6 +69,20 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView parent, View v, int position, long id) {
+                // Pass the airline to the next activity
+                Intent intent = new Intent(MainActivity.this, FlightList.class);
+                intent.putExtra("Airline", airlineList.get(position));
+                airlinePos = airlineList.indexOf(airlineList.get(position));
+                startActivityForResult(intent, REQUEST_CODE_SELECT_AIRLINNE);
+            }
+        };
+
+        listView = (ListView) findViewById(R.id.airlineListView);
+        listView.setOnItemClickListener(messageClickedHandler);
+
     }
 
     @Override
@@ -84,28 +101,20 @@ public class MainActivity extends Activity {
             Airline airline = (Airline) getIntent().getSerializableExtra("newAirline");
             airlineList.add(airline);
             getIntent().removeExtra("newAirline");
+            writeToFile(airlineList, this);
+        }
+
+        if(saveOnly) {
+            Intent intent = new Intent(MainActivity.this, FlightList.class);
+            intent.putExtra("Airline", airlineList.get(airlinePos));
+            startActivityForResult(intent, REQUEST_CODE_SELECT_AIRLINNE);
         }
 
         Collections.sort(airlineList);
 
         ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, airlineList);
-        ListView listView = (ListView) findViewById(R.id.airlineListView);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-        AdapterView.OnItemClickListener messageClickedHandler = new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView parent, View v, int position, long id) {
-                // Pass the airline to the next activity
-                Intent intent = new Intent(MainActivity.this, FlightList.class);
-                intent.putExtra("Airline", airlineList.get(position));
-                airlinePos = airlineList.indexOf(airlineList.get(position));
-                startActivityForResult(intent, REQUEST_CODE_SELECT_AIRLINNE);
-            }
-        };
-
-        listView.setOnItemClickListener(messageClickedHandler);
-
-        writeToFile(airlineList, this);
     }
 
     @Override
@@ -124,6 +133,10 @@ public class MainActivity extends Activity {
                 data.removeExtra("updatedAirline");
                 airlineList.set(airlinePos, updatedAirline);
                 writeToFile(airlineList, this);
+            }
+            if(data.hasExtra("saveOnly") && (data.getBooleanExtra("saveOnly", false))) {
+                saveOnly = true;
+                data.removeExtra("saveOnly");
             }
         }
     }

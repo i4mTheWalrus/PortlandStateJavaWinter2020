@@ -18,7 +18,7 @@ public class FlightList extends Activity {
     ArrayAdapter adapter;
     ArrayList<Flight> flights;
     Airline airline;
-    SortFlights sorter;
+
     private static final int REQUEST_CODE_NEWFLIGHT = 2;
 
     @Override
@@ -74,6 +74,14 @@ public class FlightList extends Activity {
                     Flight newFlight = (Flight) data.getSerializableExtra("newFlight");
                     data.removeExtra("newFlight");
                     airline.addFlight(newFlight);
+
+                    // somehow sve the data in the parent
+                    Intent intent = new Intent();
+                    intent.putExtra("updatedAirline", airline);
+                    intent.putExtra("saveOnly", true);
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                    //startActivity(intent);
                 }
             } else {
                 // AnotherActivity was not successful. No data to retrieve.
