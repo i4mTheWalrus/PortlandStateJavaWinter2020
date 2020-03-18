@@ -19,9 +19,13 @@ import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class AddFlightActivity extends Activity {
     TextView departDate, arriveDate, departTime, arriveTime, flightNumView;
@@ -30,6 +34,9 @@ public class AddFlightActivity extends Activity {
     Button addFlight;
     Calendar cal;
     Spinner s1, s2;
+    SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy HH:mm", Locale.getDefault());
+    Date depart, arrive;
+    Boolean departAfterArrivalError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,11 +185,24 @@ public class AddFlightActivity extends Activity {
             @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onClick(View v) {
+                departAfterArrivalError = false;
+                if(!(departDate.getText().toString().matches("Depart Date")) && !(departTime.getText().toString().matches("Depart Time"))) {
+                    try {
+                        depart = sdf.parse(departDate.getText().toString() + " " + departTime.getText().toString());
+                        arrive = sdf.parse(arriveDate.getText().toString() + " " + arriveTime.getText().toString());
+                    } catch (ParseException e) {
+                        // Ignore exception
+                    }
+                }
+                departAfterArrivalError = flightDepartsAfterArrival(depart, arrive);
                 if(flightNumView.getText().toString().matches("") | s1.getSelectedItem().toString().equals("Select Airport") |
                         (departDate.getText().toString().matches("Depart Date")) | (departTime.getText().toString().matches("Depart Time")) |
                         (arriveDate.getText().toString().matches("Arrive Date")) | (arriveTime.getText().toString().matches("Arrive Time")) |
                         s2.getSelectedItem().toString().equals("Select Airport")) {
                     Toast.makeText(AddFlightActivity.this, "All Fields Required", Toast.LENGTH_SHORT).show();
+                }
+                else if (departAfterArrivalError) {
+                    Toast.makeText(AddFlightActivity.this, "Arrival must be after departure!", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     // build the flight
@@ -205,5 +225,14 @@ public class AddFlightActivity extends Activity {
                 }
             }
         });
+    }
+
+    private Boolean flightDepartsAfterArrival(Date depart, Date arrive) {
+        if(depart.compareTo(arrive) > -1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

@@ -105,6 +105,7 @@ public class MainActivity extends Activity {
         }
 
         if(saveOnly) {
+            saveOnly = false;
             Intent intent = new Intent(MainActivity.this, FlightList.class);
             intent.putExtra("Airline", airlineList.get(airlinePos));
             startActivityForResult(intent, REQUEST_CODE_SELECT_AIRLINNE);
